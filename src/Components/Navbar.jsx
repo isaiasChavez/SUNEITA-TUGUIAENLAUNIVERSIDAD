@@ -28,7 +28,7 @@ const Navbar = ({ setpaginaEnPrincipal }) => {
   return (
     <>
       <div
-        class="modal fade"
+        class="modal fade min-vw-100"
         id="staticBackdrop"
         data-backdrop="static"
         data-keyboard="false"
@@ -36,7 +36,7 @@ const Navbar = ({ setpaginaEnPrincipal }) => {
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="staticBackdropLabel">
@@ -51,7 +51,7 @@ const Navbar = ({ setpaginaEnPrincipal }) => {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body  ">
             <About
             handleDejarConsejo={handleDejarConsejo}/>
             </div>
@@ -88,7 +88,7 @@ const Navbar = ({ setpaginaEnPrincipal }) => {
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse offset-lg-7 " id="navbarNav">
+        <div class="collapse navbar-collapse offset-lg-7 border-bottom " id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item active">
               <a class="nav-link pb-3" href="#" onClick={handleInicio}>

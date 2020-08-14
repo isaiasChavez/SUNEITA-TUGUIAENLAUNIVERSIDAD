@@ -1,50 +1,85 @@
 import React from "react";
 
 const Consejo = ({ datos }) => {
+  console.log(datos);
   const {
     nombre,
+    tipo,
     semestre,
     carrera,
     instagram,
     fecha,
+    titulo,
     consejo,
-    vivir,
-    visitar,
-    comer,
-    datosVivir,
+    datosRenta,
   } = datos;
+  let background = "";
+  let textColor = ''
+  let textColorSecondary = 'text-muted'
+  switch (tipo) {
+    case "rentar":
+      background = "bg-dark";
+      textColor='text-white'
+      textColorSecondary = 'text-secondary'
+      break;
+    case "visitar":
+      background = "bg-light";
+      textColor='text-dark'
+      break;
+    case "comer":
+      background = "bg-white";
+      textColor='text-dark'
+      break;
+    case "simple":
+      background = "bg-secondary";
+      textColor='text-white'
+      textColorSecondary = 'text-white'
+      break;
+    default:
+      break;
+  }
 
-  return (
-    <div class="card mb-5 m-2 col-md-5 col-lg-5">
-      <div class="card-header p-3 mt-3"> Me hubiera gustado saber...</div>
-      <div class="card-body">
+  
+  if (titulo) {
+    
+  }
+  return (    
+    <div
+      class={`card  m-2 col-sm-12 col-md-5 col-lg-5  ${background}`}
+    >
+        
+      <div class="card-header p-1 pl-3 mt-3 rounded d-flex flex-column">
+      
+        <cite title="Source Title" className={`${textColor}`}>{nombre}</cite>
+        
+        <p class="card-text " >
+          <small  className={`${textColorSecondary}`}>
+            {semestre}° Semestre | {carrera}
+          </small>
+        </p>
+      </div>
+      <div class={`card-body p-0 ${textColor}`}>
         <blockquote class="blockquote mb-0">
-          {consejo ? 
-          <div>
-          <p class="card-text font-weight-light font-italic">"{consejo}"</p>
-          
-          </div>
-          :null}
           <ul class="list-group list-group-flush ">
-            {vivir ? (
-              <li class="list-group-item bg-light">
-                Lugares donde recomiendo vivir:
-                <p class="card-text font-weight-light">{vivir}</p>
+            {tipo == "rentar" ? (
+              <li class={`list-group-item ${background} p-2`}>
+                {titulo}  
+                <p class="card-text font-weight-light text-consejo p-1 pt-3  ">
+                  {consejo}
+                </p>
                 <div class="accordion" id="accordionExample">
                   <div class="card">
-                    <div class="card-header" id="headingTwo">
+                    <div class="card-header p-0" id="headingTwo">
                       <h2 class="mb-0">
                         <button
-                          class="btn btn-link btn-block text-left  collapsed"
+                          class="btn btn-link btn-block btn-light p-2 w-100  text-center  collapsed"
                           type="button"
                           data-toggle="collapse"
                           data-target={`#${nombre}`}
                           aria-expanded="false"
                           aria-controls={`#${nombre}`}
                         >
-
                           Ver informacion
-                          
                         </button>
                       </h2>
                     </div>
@@ -58,28 +93,29 @@ const Consejo = ({ datos }) => {
                       <ul class="list-group list-group-flush font-weight-light">
                         <li class="list-group-item">
                           <span className="text-info">
-                            Nombre o apodo del lugar: 
-                          </span>{datosVivir.nombre}
+                            Nombre o apodo del lugar:
+                          </span>
+                          {datosRenta.nombre}
                         </li>
                         <li class="list-group-item ">
                           <span className="text-info">
                             Número de contacto:{" "}
                           </span>{" "}
-                          {datosVivir.contacto}
+                          {datosRenta.contacto}
                         </li>
                         <li class="list-group-item">
                           <span className="text-info">Dirección:</span>{" "}
-                          {datosVivir.direccion}{" "}
+                          {datosRenta.direccion}{" "}
                         </li>
                         <li class="list-group-item">
                           <span className="text-info"> Referencia: </span>{" "}
-                          {datosVivir.referencia}{" "}
+                          {datosRenta.referencia}{" "}
                         </li>
                         <li class="list-group-item">
                           <span className="text-info">
                             Rango de precios estimado:
                           </span>{" "}
-                          {datosVivir.rango_precios}{" "}
+                          {datosRenta.rango_precios}{" "}
                         </li>
                       </ul>
                     </div>
@@ -87,26 +123,32 @@ const Consejo = ({ datos }) => {
                 </div>
               </li>
             ) : null}
-            {visitar ? (
-              <li class="list-group-item">
-                Lugares que recomiendo visitar:
-                <p className="card-text font-weight-light">{visitar}</p>
+            {tipo === "visitar" ? (
+              <li class={`list-group-item ${background} p-2`}>
+                {titulo}
+                <p className="card-text font-weight-light text-consejo p-1 pt-3 ">
+                  {consejo}
+                </p>
               </li>
             ) : null}
-            {comer ? (
-              <li class="list-group-item">
-                Lugares donde recomiendo ir a comer:
-                <p className="card-text font-weight-light">{comer}</p>
+            {tipo == "comer" ? (
+              <li class={`list-group-item ${background} p-2`}>
+                {titulo}
+                <p className="card-text font-weight-light text-consejo p-1 pt-3">
+                  {consejo}
+                </p>
+              </li>
+            ) : null}
+            {tipo == "simple" ? (
+              <li class={`list-group-item ${background} p-2`}>
+                {titulo}
+                <p className="card-text font-weight-light text-consejo p-1 pt-3">
+                  {consejo}
+                </p>
               </li>
             ) : null}
           </ul>
           <footer class="blockquote-footer mb-4">
-            <cite title="Source Title">{nombre}</cite>
-            <p class="card-text">
-              <small class="text-muted">
-                {semestre}° Semestre | {carrera}
-              </small>
-            </p>
             <a class=" text-monospace text-dark">
               <a href={`https://www.instagram.com/${instagram}/`}>
                 <small>Instagram </small>
@@ -119,7 +161,8 @@ const Consejo = ({ datos }) => {
         </blockquote>
       </div>
     </div>
-  );
+    
+  ); 
 };
 
 export default Consejo;

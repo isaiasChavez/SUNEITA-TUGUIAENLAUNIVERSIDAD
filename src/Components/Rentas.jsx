@@ -40,6 +40,11 @@ const Rentas = () => {
 
   return (
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3  ">
+      <div className="row">
+        <p>Recuerda que estos son aportes de Utemitas, las condiciones pueden variar cuando contactes al locatario.</p>
+        <p className='text-muted'> En un futuro tendremos información de primera mano</p>
+        
+      </div>
       {rentas.map(renta => (
         <Zoom>
 
