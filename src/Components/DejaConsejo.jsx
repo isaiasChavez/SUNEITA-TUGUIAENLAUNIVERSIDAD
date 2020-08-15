@@ -8,6 +8,39 @@ const DejaConsejo = () => {
     divertirse: false,
   });
 
+
+  const [datos, setDatos] = useState({
+    nombre:'',
+    carrera:'',
+    email:'',
+    instagram:'',
+    titulo : '',
+    rentar:'',
+    comer:'',
+    divertirse:'',
+    simple:'',
+    direccion:'',
+    distancia:'',
+    precio1: 0,
+    precio2:0,
+    servicios:'',
+    numero1:'',
+    numero2:''
+  })
+  const handleDatos = (e)=>{
+    
+    setDatos({
+      ...datos,
+      [e.target.name]:e.target.value
+    })
+
+  }
+  const handleSubmitConsejos = (e)=>{
+      e.preventDefault()
+  }
+
+
+
   const handleDivertirse = () => {
     setTipoConsejo({
       renta: false,
@@ -47,10 +80,11 @@ const DejaConsejo = () => {
         </div>
 
         <form
-          className="col-lg-8  mb-5 bg-light pt-5 rounded"
+          className="col-lg-8  mb-5 bg-light p-4 pt-5  rounded"
           name="contact"
           method="POST"
           data-netlify="true"
+          onSubmit={handleSubmitConsejos}
         >
           <input type="hidden" name="form-name" value="contact" />
           <div class="form-group">
@@ -61,6 +95,7 @@ const DejaConsejo = () => {
               id="nombre"
               aria-describedby="emailHelp"
               name="name"
+              onChange={handleDatos}
             />
             <div class="form-group form-check">
               <input
@@ -84,6 +119,7 @@ const DejaConsejo = () => {
               id="carrera"
               aria-describedby="emailHelp"
               name="carrera"
+              onChange={handleDatos}
               required
             />
           </div>
@@ -95,6 +131,7 @@ const DejaConsejo = () => {
               id="email"
               aria-describedby="emailHelp"
               name="email"
+              onChange={handleDatos}
               required
             />
             <small id="emailHelp" class="form-text text-muted">
@@ -112,6 +149,7 @@ const DejaConsejo = () => {
               name="instagram"
             />
           </div>
+
           <div className="btn-group d-flex ">
             <button
               className="btn btn-outline-dark  mt-4 mb-4"
@@ -133,23 +171,27 @@ const DejaConsejo = () => {
             </button>
           </div>
           {tipoConsejo.renta ? (
-            <div class="form-group bg-secondary rounded p-4 text-white lead">
+            <div class="form-group bg-dark rounded p-4 text-white lead">
               <label for="rentar">Titulo </label>
               <input
                 type="text"
                 class="form-control d-inline"
-                id="direccion"
+                id="Titulo"
                 aria-describedby="emailHelp"
-                name="direccion"
-                placeholder="Ejem: el pastel"
+                name="Titulo"
+                placeholder=""
+                onChange={handleDatos}
+                
               />
               <label for="rentar">Reseña </label>
               <textarea
                 class="form-control"
+                
                 id="rentar"
                 rows="5"
                 name="rentar"
                 placeholder="Son muy amables y me hicieron descuento en la pandemia"
+                onChange={handleDatos}
               ></textarea>
               <label for="direccion" className="font-weight-light d-block">
                 Dirección
@@ -160,6 +202,7 @@ const DejaConsejo = () => {
                 id="direccion"
                 aria-describedby="emailHelp"
                 name="direccion"
+                onChange={handleDatos}
               />
               <label for="rango_precios" className="font-weight-light d-block">
                 Rango de precios
@@ -167,16 +210,18 @@ const DejaConsejo = () => {
               <input
                 type="number"
                 class="form-control w-50 d-inline"
-                id="rango_precios"
+                id="precio1"
                 aria-describedby="emailHelp"
-                name="rango_precios"
+                name="precio1"
+                onChange={handleDatos}
               />
               <input
                 type="number"
                 class="form-control w-50 d-inline"
-                id="rango_precios2"
+                id="precio2"
                 aria-describedby="emailHelp"
-                name="rango_precios2"
+                name="precio2"
+                onChange={handleDatos}
               />
               <label for="servicios" className="font-weight-light ">
                 Servicios que he visto
@@ -187,6 +232,7 @@ const DejaConsejo = () => {
                 id="servicios"
                 aria-describedby="emailHelp"
                 name="servicios"
+                onChange={handleDatos}
               />
               <label for="contacto" className="font-weight-light ">
                 Número de contacto
@@ -194,9 +240,10 @@ const DejaConsejo = () => {
               <input
                 type="number"
                 class="form-control"
-                id="contacto"
+                id="numero1"
                 aria-describedby="emailHelp"
-                name="message"
+                name="contacto"
+                onChange={handleDatos}
               />
               <label for="contacto2" className="font-weight-light ">
                 Número de contacto 2 (opcional)
@@ -204,9 +251,10 @@ const DejaConsejo = () => {
               <input
                 type="number"
                 class="form-control"
-                id="contacto2"
+                id="numero2"
                 aria-describedby="emailHelp"
-                name="message"
+                name="contacto2"
+                onChange={handleDatos}
               />
               <small id="emailHelp" class="form-text text-muted">
                 No olvides dejar una dirección, números de los caseros, rango de
@@ -217,118 +265,48 @@ const DejaConsejo = () => {
           ) : null}
 
           {tipoConsejo.divertirse ? (
-            <div class="form-group bg-secondary rounded p-4 text-white lead">
+            <div class="form-group bg-info rounded p-4 text-white lead">
               <label for="rentar">Titulo </label>
               <input
                 type="text"
                 class="form-control d-inline"
-                id="direccion"
+                id="Titulo"
                 aria-describedby="emailHelp"
-                name="direccion"
-                placeholder="Ejem: el pastel"
+                name="Titulo"
+                placeholder=""
               />
               <label for="rentar">Consejo </label>
               <textarea
                 class="form-control"
-                id="rentar"
+                id="divertirse"
                 rows="3"
-                name="rentar"
-                placeholder="Son muy amables y me hicieron descuento en la pandemia"
+                name="divertirse"
+                
               ></textarea>
-              <label for="direccion" className="font-weight-light d-block">
-                Dirección
-              </label>
-              <input
-                type="text"
-                class="form-control d-inline"
-                id="direccion"
-                aria-describedby="emailHelp"
-                name="direccion"
-              />
-              <label for="servicios" className="font-weight-light ">
-                Servicios que ofrecen
-              </label>
-              <input
-                type="text"
-                class="form-control"
-                id="servicios"
-                aria-describedby="emailHelp"
-                name="servicios"
-              />
-              <label for="contacto" className="font-weight-light ">
-                Número de contacto
-              </label>
-              <input
-                type="number"
-                class="form-control"
-                id="contacto"
-                aria-describedby="emailHelp"
-                name="message"
-              />
-
-              <small id="emailHelp" class="form-text text-muted">
-                No olvides dejar una dirección, números de los caseros, rango de
-                precios (o el tuyo) y los servicios que ofrecen. Estoy seguro
-                que existe un utemita que te lo agradecerá.
-              </small>
+              
             </div>
           ) : null}
 
           {tipoConsejo.comer ? (
-            <div class="form-group bg-secondary rounded p-4 text-white lead">
+            <div class="form-group bg-danger rounded p-4 text-white lead">
               <label for="rentar">Titulo </label>
               <input
                 type="text"
                 class="form-control d-inline"
-                id="direccion"
+                id="titulo"
                 aria-describedby="emailHelp"
-                name="direccion"
-                placeholder="Ejem: el pastel"
+                name="titulo"
+                placeholder=""
               />
-              <label for="rentar">Consejo </label>
+              <label for="comer">Consejo </label>
               <textarea
                 class="form-control"
-                id="rentar"
+                id="comer"
                 rows="3"
-                name="rentar"
-                placeholder="Son muy amables y me hicieron descuento en la pandemia"
+                name="comer"
+               
               ></textarea>
-              <label for="direccion" className="font-weight-light d-block">
-                Dirección
-              </label>
-              <input
-                type="text"
-                class="form-control d-inline"
-                id="direccion"
-                aria-describedby="emailHelp"
-                name="direccion"
-              />
-              <label for="servicios" className="font-weight-light ">
-                Servicios que ofrecen
-              </label>
-              <input
-                type="text"
-                class="form-control"
-                id="servicios"
-                aria-describedby="emailHelp"
-                name="servicios"
-              />
-              <label for="contacto" className="font-weight-light ">
-                Número de contacto
-              </label>
-              <input
-                type="number"
-                class="form-control"
-                id="contacto"
-                aria-describedby="emailHelp"
-                name="message"
-              />
-
-              <small id="emailHelp" class="form-text text-muted">
-                No olvides dejar una dirección, números de los caseros, rango de
-                precios (o el tuyo) y los servicios que ofrecen. Estoy seguro
-                que existe un utemita que te lo agradecerá.
-              </small>
+          
             </div>
           ) : null}
 
@@ -338,29 +316,18 @@ const DejaConsejo = () => {
               <input
                 type="text"
                 class="form-control d-inline"
-                id="direccion"
+                id="titulo"
                 aria-describedby="emailHelp"
-                name="direccion"
-                placeholder="Ejem: el pastel"
+                name="titulo"
+                placeholder=""
               />
               <label for="rentar">Consejo </label>
               <textarea
                 class="form-control"
-                id="rentar"
+                id="simple"
                 rows="3"
-                name="rentar"
-                placeholder="Son muy amables y me hicieron descuento en la pandemia"
+                name="simple"
               ></textarea>
-              <label for="direccion" className="font-weight-light d-block">
-                Dirección
-              </label>
-              <input
-                type="text"
-                class="form-control d-inline"
-                id="direccion"
-                aria-describedby="emailHelp"
-                name="direccion"
-              />
             </div>
           ) : null}
 
@@ -376,7 +343,7 @@ const DejaConsejo = () => {
             </label>
           </div>
 
-          <a type="submit" class="btn btn-outline-info btn-block p-3 mt-5 ">
+          <a type="submit" class="btn btn-outline-info btn-block p-3 m-auto  ">
             <span className="h3 font-weight-light">Aportar</span>
           </a>
         </form>
