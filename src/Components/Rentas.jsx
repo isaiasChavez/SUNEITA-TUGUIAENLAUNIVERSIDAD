@@ -21,22 +21,7 @@ const Rentas = () => {
     },
     
   ]);
-  //{
-  //    titulo: "Complejo Amarillo",
-  //    descripcion:
-  //      "'Los mejores cuartos que he probado, seguros, grandes, a buen precio.'",
-  //    contacto1: "951 513 4378",
-  //    direccion: "Nardos 103, Acatlima, Huajuapan de Leon",
-  //    rango_precios: "900 - 1000",
-  //    servicios: [
-  //      "Luz",
-  //      "Agua caliente",
-  //      "colchon",
-  //      "muebles",
-  //      "Baño completo",
-  //    ],
-  //    mascotas:'No'
-  //  }
+ 
 
   return (
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3  ">

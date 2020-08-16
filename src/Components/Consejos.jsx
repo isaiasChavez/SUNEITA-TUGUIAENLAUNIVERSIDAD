@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Consejo from "./Consejo";
 import "./Consejos.css";
 import Fade from "react-reveal/Fade";
+import consejosContext from "../State/consejosContext";
+const Consejos = () => {
+  const { consejos } = useContext(consejosContext);
 
-const Consejos = ({ informacion, setInformacion,setpaginaEnPrincipal }) => {
-  const [consejos, setConsejos] = useState([]);
+  const [info, setInfo] = useState([]);
 
   useEffect(() => {
-    setConsejos(informacion);
+    setInfo(consejos);
   }, []);
 
   const handleRenta = () => {
-    const nuevosDatos = informacion.filter((info) => {
+    const nuevosDatos = consejos.filter((info) => {
       let nuevo = {};
       if (info.tipo === "rentar") {
         const {
@@ -36,15 +38,13 @@ const Consejos = ({ informacion, setInformacion,setpaginaEnPrincipal }) => {
         };
         return nuevo;
       }
-
-      
     });
 
-    setConsejos(nuevosDatos);
+    setInfo(nuevosDatos);
   };
 
   const handleDiversion = () => {
-    const nuevosDatos = informacion.filter((info) => {
+    const nuevosDatos = consejos.filter((info) => {
       let nuevo = {};
       if (info.tipo === "visitar") {
         const {
@@ -69,15 +69,13 @@ const Consejos = ({ informacion, setInformacion,setpaginaEnPrincipal }) => {
         };
         return nuevo;
       }
-
-      
     });
 
-    setConsejos(nuevosDatos);
+    setInfo(nuevosDatos);
   };
 
   const handleComida = () => {
-    const nuevosDatos = informacion.filter((info) => {
+    const nuevosDatos = consejos.filter((info) => {
       let nuevo = {};
       if (info.tipo === "comer") {
         const {
@@ -102,14 +100,12 @@ const Consejos = ({ informacion, setInformacion,setpaginaEnPrincipal }) => {
         };
         return nuevo;
       }
-
-      
     });
 
-    setConsejos(nuevosDatos);
+    setInfo(nuevosDatos);
   };
   const handleTodo = () => {
-    setConsejos(informacion);
+    setInfo(consejos);
   };
 
   return (
@@ -152,21 +148,12 @@ const Consejos = ({ informacion, setInformacion,setpaginaEnPrincipal }) => {
       </div>
       <Fade>
         <div className=" row  justify-content-around align-items">
-          {consejos.map((datos) => (
+          {info.map((datos) => (
             <Consejo datos={datos} />
           ))}
         </div>
         <div className="row p-5">
-          <button className="btn btn-outline-dark m-auto btn-lg btn-block"
-            onClick={()=>{
-              setpaginaEnPrincipal({
-                consejos: false,
-                rentas: false,
-                dejarConsejo: true,
-              })
-            }}
-           >
-            {" "}
+          <button className="btn btn-outline-dark m-auto btn-lg btn-block">
             Has un aporte
           </button>
         </div>

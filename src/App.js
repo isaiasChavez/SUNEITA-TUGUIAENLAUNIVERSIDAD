@@ -1,95 +1,81 @@
-import React, { useState } from "react";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
-import Navbar from "./Components/Navbar";
-import Consejos from "./Components/Consejos";
+import Inicio from "./Components/Inicio";
 import Footer from "./Components/Footer";
 import Rentas from "./Components/Rentas";
-import Slider from "./Components/Slider";
 import DejaConsejo from "./Components/DejaConsejo";
-
-import Hero from "./Components/Hero";
-
+import ConsejosState from "./State/consejosState";
 function App() {
-  const [paginaEnPrincipal, setpaginaEnPrincipal] = useState({
-    consejos: true,
-    rentas: false,
-    dejarConsejo: false,
-  });
-  
-
-  const [informacion, setInformacion] = useState([
-    {
-      nombre: "Javier",
-      tipo:'rentar',
-      semestre: "5",
-      carrera: " Ingeniería en computación",
-      instagram: "soyisaiaschavez",
-      fecha: "11/08/2020",
-      titulo:"Lorem ipsum dolor,",
-      consejo:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatibus, fugit",
-      datosRenta: {
-        nombre: "Profesor Jesus González Acevedo",
-        contacto: "951 513 4378",
-        direccion: "Nardos 103, Acatlima, Huajuapan de Leon",
-        referencia: "",
-        rango_precios: "900 - 1000",
-        mascotas: "no",
-      },
-    
-    },
-    {
-      nombre: "Isaías",
-      tipo: "visitar",
-      semestre: "5",
-      carrera: " Ingeniería en computación",
-      instagram: "soyisaiaschavez",
-      fecha: "11/08/2020",
-      titulo:"Consejo de visita,",
-      consejo:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatibus, fugit",
-    },
-    {
-      nombre: "Isaías",
-      tipo:'comer',
-      semestre: "5",
-      carrera: " Ingeniería en computación",
-      instagram: "soyisaiaschavez",
-      fecha: "11/08/2020",  
-      titulo:"Consejo de lugar para comer,",  
-      consejo:
-        " Normalmente en la universidad siempre voy a comer a bambú, pero si no tienes tiempo en la cafetería mi amigo isidro es muy amable",
-    },
-    {
-      nombre: "Isaías",
-      tipo:'simple',
-      semestre: "5",
-      carrera: " Ingeniería en computación",
-      instagram: "soyisaiaschavez",
-      fecha: "11/08/2020",
-      titulo:"Un simple consejo",
-      consejo: "No te lleves demasiadas cosas si te gustaría mudarte seguido",
-    },
-  ]);
-
   return (
     <>
-      <Navbar setpaginaEnPrincipal={setpaginaEnPrincipal} />
+      <ConsejosState>
+        <Router>
+          <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top ">
+            <a class="navbar-brand" href="#">
+              <Link to={"/"} className="nav-link  pb-3">
+                <p className="display-5 text-dark">UTEMITA</p>
+              </Link>
+            </a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div
+              class="collapse navbar-collapse offset-lg-7 border-bottom "
+              id="navbarNav"
+            >
+              <ul class="navbar-nav">
+                <li class="nav-item active">
+                  <Link to={"/"} className="nav-link pb-3">
+                    Inicio
+                  </Link>
+                </li>
+                <li class="nav-item ">
+                  <Link to={"/rentas"} className="nav-link  pb-3">
+                    Renta un cuarto
+                  </Link>
+                </li>
 
-      {paginaEnPrincipal.consejos === true ? (
-        <Slider informacion={informacion} setpaginaEnPrincipal={setpaginaEnPrincipal} />
-      ) : null}
-      {paginaEnPrincipal.consejos === true ? <Hero setpaginaEnPrincipal={setpaginaEnPrincipal} /> : null}
+                <li class="nav-item ">
+                  <a
+                    class="nav-link  pb-3"
+                    data-toggle="modal"
+                    data-target="#staticBackdrop"
+                    href="#"
+                  >
+                    Acerca de
+                  </a>
+                </li>
 
-      <div className="App container-fluid min-vh-100 pt-5">
-        {paginaEnPrincipal.consejos === true ? (
-          <Consejos informacion={informacion} setInformacion={setInformacion} setpaginaEnPrincipal={setpaginaEnPrincipal} />
-        ) : null}
+                <li class="nav-item">
+                  <Link
+                    to={"/dejar-consejo"}
+                    className="btn btn-dark w-100 mb-2"
+                  >
+                    Deja un consejo
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </nav>
 
-        {paginaEnPrincipal.rentas === true ? <Rentas /> : null}
-        {paginaEnPrincipal.dejarConsejo === true ? <DejaConsejo /> : null}
-        <Footer />
-      </div>
+          <Switch>
+            <Route exact path="/" component={Inicio} />
+            <div className="App container-fluid ">
+              <Route exact path="/rentas" component={Rentas} />
+              <Route exact path="/dejar-consejo" component={DejaConsejo} />
+            </div>
+          </Switch>
+        </Router>
+      </ConsejosState>
     </>
   );
 }
