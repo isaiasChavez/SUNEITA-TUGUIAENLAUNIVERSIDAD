@@ -1,11 +1,10 @@
 import React from "react";
 
 const Consejo = ({ datos }) => {
-  console.log(datos);
   const {
     nombre,
     tipo,
-    semestre,
+  semestre,
     carrera,
     instagram,
     fecha,
@@ -39,10 +38,6 @@ const Consejo = ({ datos }) => {
       break;
   }
 
-  
-  if (titulo) {
-    
-  }
   return (    
     <div
       class={`card  m-2 col-sm-12 col-md-5 col-lg-5  ${background}`}
@@ -61,7 +56,7 @@ const Consejo = ({ datos }) => {
       <div class={`card-body p-0 ${textColor}`}>
         <blockquote class="blockquote mb-0">
           <ul class="list-group list-group-flush ">
-            {tipo == "rentar" ? (
+            {tipo === "rentar" ? (
               <li class={`list-group-item ${background} p-2`}>
                 {titulo}  
                 <p class="card-text font-weight-light text-consejo p-1 pt-3  ">
@@ -131,7 +126,7 @@ const Consejo = ({ datos }) => {
                 </p>
               </li>
             ) : null}
-            {tipo == "comer" ? (
+            {tipo === "comer" ? (
               <li class={`list-group-item ${background} p-2`}>
                 {titulo}
                 <p className="card-text font-weight-light text-consejo p-1 pt-3">
@@ -139,7 +134,7 @@ const Consejo = ({ datos }) => {
                 </p>
               </li>
             ) : null}
-            {tipo == "simple" ? (
+            {tipo === "simple" ? (
               <li class={`list-group-item ${background} p-2`}>
                 {titulo}
                 <p className="card-text font-weight-light text-consejo p-1 pt-3">
@@ -149,11 +144,11 @@ const Consejo = ({ datos }) => {
             ) : null}
           </ul>
           <footer class="blockquote-footer mb-4">
-            <a class=" text-monospace text-dark">
+            <p class=" text-monospace text-dark">
               <a href={`https://www.instagram.com/${instagram}/`}>
                 <small>Instagram </small>
               </a>
-            </a>
+            </p>
             <p class="card-text">
               <small class="text-muted">{fecha} </small>
             </p>

@@ -1,30 +1,61 @@
-body{
+@font-face {
+  font-family: Cereal;
+  src: url("./Fonts/AirbnbCereal-Light.ttf");
+}
+body {
   width: 100%;
   margin: 0;
   padding: 0;
+  font-family: Cereal !important;
 }
-.App{
+button{
+  border: none;
+}
+.App {
   padding: 0;
   background-size: cover;
 }
+.navigation {
+}
+.icon {
+  font-size: 2em;
+  padding: 0.8em;
+}
+.logo {
+  width: 45px;
+  height: 45px;
+}
 
-.text-smaller{
+.card-inicio {
+  min-height: 18em;
+  max-height: 19em;
+  font-family: Cereal;
+}
+
+.text-smaller {
   font-size: 0.8em;
 }
+.text-rent {
+  line-height: 0.4em;
+}
+.hero {
+  height: 75vh;
 
-.hero{
-  height: 120vh;
-  background-image: url('./img/fondo2.jpg');
+  background-image: url("./img/fondo2.jpg");
   background-size: cover;
 }
-.hero-message{
+.hero-message {
   padding-top: 5em;
   height: 100%;
 }
-.text-consejo{
+.text-consejo {
   font-size: 0.7em;
 }
 
-.modal-w{
+.modal-w {
   width: 75vh;
+}
+
+.isSlider {
+  height: 110vh;
 }

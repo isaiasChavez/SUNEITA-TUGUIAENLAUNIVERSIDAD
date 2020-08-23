@@ -1,56 +1,39 @@
 import React from "react";
 import imagen from "../img/jesus.jpg";
+import { Link } from "react-router-dom";
 const Renta = ({ renta }) => {
   const {
     titulo,
+    tipo,
+    publicante,
     descripcion,
     contacto1,
     direccion,
     rango_precios,
     servicios,
-    mascotas
+    mascotas,
+    zona,
   } = renta;
-  return (
-    <div class="col mt-4 mb-4">
-      <div class="card">
-        <img src={imagen} class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">{titulo}</h5>
-          <p class="card-text">{descripcion}</p>
-        </div>
-        <div class="card-footer">
-          <p class="card-text">
-            Número de contacto:
-            <span className="font-weight-light text-dark">{contacto1} </span>
-          </p>
-          <p class="card-text">
-            Dirección:
-            <span className="font-weight-light text-dark">{direccion}</span>
-          </p>
-          <p class="card-text">
-            Rango de precios:
-            <span className="font-weight-light text-dark ml-3">
-              {rango_precios}
-            </span>
-          </p>
-          <p class="card-text">
-            <span className="">Servicios:</span>
-            <ul class="list-group list-group-flush">
-              {servicios.map(servicio =>(
-                <li class="list-group-item p-2">{servicio}</li>
-              ))}
 
-             
-            </ul>
-          </p>
-          <p class="card-text">
-            Aceptan mascotas:
-            <span className="font-weight-light text-dark ml-3">
-              {mascotas}
-            </span>
-          </p>
+  const badgeColor =
+    publicante === "Arrendatario" ? "badge-danger" : "badge-info";
+
+  return (
+    <div class="col col-lg-4 pb-0 my-3 ">
+      <Link>
+        <div class="card  border-0">
+          <div className={`badge ${badgeColor} w-25`}>{publicante}</div>
+
+          <img src={imagen} class="card-img-top  rounded" alt="..." />
+          <div class="card-body font-weight-light h6 text-muted text-smaller text-rent">
+            <p class="text-rent">
+              {tipo} | {zona}
+            </p>
+            <p className="text-rent">{descripcion}</p>
+            <p class="font-weight-bold text-rent">{rango_precios} al mes</p>
+          </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 };

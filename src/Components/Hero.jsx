@@ -1,28 +1,28 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const Hero = ({setpaginaEnPrincipal}) => {
+const Hero = ({clase,principal,secondary,textButton,textButton2,button,link}) => {
   return (
-    <div class="jumbotron d-md-none m-0 min-vh-100 pt-5 mt-5 bg-light rounded-0 d-flex flex-column justify-content-start align-items-center hero ">
-      <div className="d-flex flex-column align-items-center hero-message">
-        <h1 class="display-4 m-3 text-center text-white">
-          Busca un cuarto,{" "}
-          <span className="text-primary">recibe un consejo</span>
+    <div class={` ${clase} jumbotron m-0  pt-5 mt-5 bg-light rounded-0 d-flex flex-column justify-content-start align-items-end hero`}>
+      <div className="d-flex flex-column align-items-end hero-message">
+        <h1 class="display-4 m-3  text-white">
+         {principal}
+          
         </h1>
-        <p class="lead m-3 text-center text-white">
-          La información que todo utemita necesita, centralizada.
+        <p class="lead m-3  text-white">
+         {secondary}
         </p>
         <hr class="my-4" />
-        <button className="btn btn-outline-light rounded-0 btn-lg w-50 font-weight-light"
-        onClick={()=>{
-          setpaginaEnPrincipal({
-            consejos: false,
-            rentas: true,
-            dejarConsejo: false,
-          });
-        }}>
-          {" "}
-          Busca un cuarto{" "}
-        </button>
+        <p class="lead  text-white text-smaller">
+          {textButton}
+   <span className="text-primary"> {textButton2}</span>
+        </p>
+        <Link
+          to={`/${link}`}
+          className="btn btn-outline-light rounded-0 btn-lg w-50 font-weight-light  "
+        >
+          {button}
+        </Link>
       </div>
     </div>
   );

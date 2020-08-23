@@ -1,71 +1,100 @@
 import React, { useState } from "react";
-import Consejo from "./Consejo";
+import FormInputRentas from "./secondary/FormInputRentas";
+import FormInputDivertirse from "./secondary/FormInputDivertirse";
+import FormInputComer from "./secondary/FormInputComer";
+import FormInputSimple from "./secondary/FormInputSimple";
+import { db } from "../Firebase";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const DejaConsejo = () => {
+  const initialValue = {
+    renta: false,
+    simple: false,
+    comer: false,
+    divertirse: false,
+  };
+
   const [tipoConsejo, setTipoConsejo] = useState({
     renta: true,
     simple: false,
     comer: false,
     divertirse: false,
   });
+  const [switchAlert, setSwitchAlert] = useState(false);
 
-
-  const [datos, setDatos] = useState({
-    nombre:'',
-    carrera:'',
-    email:'',
-    instagram:'',
-    titulo : '',
-    rentar:'',
-    comer:'',
-    divertirse:'',
-    simple:'',
-    direccion:'',
-    distancia:'',
+  const initialState = {
+    nombre: "",
+    carrera: "",
+    email: "",
+    instagram: "",
+    titulo: "",
+    resena: "",
+    rentar: false,
+    comer: false,
+    divertirse: false,
+    simple: false,
+    direccion: "",
+    servicios: "",
     precio1: 0,
-    precio2:0,
-    servicios:'',
-    numero1:'',
-    numero2:''
-  })
-  const handleDatos = (e)=>{
-    
+    precio2: 0,
+    contacto: "",
+    distancia: "",
+  };
+
+  const [datos, setDatos] = useState(initialState);
+
+  const { nombre, carrera, email, instagram } = datos;
+
+  const handleDatos = (e) => {
     setDatos({
       ...datos,
-      [e.target.name]:e.target.value
-    })
+      [e.target.name]: e.target.value,
+    });
+  };
+  const handleSubmitConsejos = async (e) => {
+    e.preventDefault();
 
-  }
-  const handleSubmitConsejos = (e)=>{
-      e.preventDefault()
-  }
+    if (tipoConsejo.comer) datos.comer = true;
+    else if (tipoConsejo.divertirse) datos.divertirse = true;
+    else if (tipoConsejo.renta) datos.rentar = true;
+    else datos.simple = true;
 
+    try {
+      const data = await db.collection("consejosRentas").doc().set(datos);
+      getLinks();
+      toast("Listo, Recomendación agregada!", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+      setDatos(initialState);
+    } catch (error) {
+      toast.error("Ha ocurrido un error interno! Por favor intenta de nuevo", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    }
+  };
 
-
-  const handleDivertirse = () => {
-    setTipoConsejo({
-      renta: false,
-      simple: false,
-      comer: false,
-      divertirse: true,
+  const getLinks = () => {
+    db.collection("consejosRentas").onSnapshot((querySnapshot) => {
+      const docs = [];
+      querySnapshot.forEach((doc) => {
+        docs.push({ ...doc.data(), id: doc.id });
+        console.log(docs);
+      });
     });
   };
 
-  const handleComer = () => {
-    setTipoConsejo({
-      renta: false,
-      simple: false,
-      comer: true,
-      divertirse: false,
-    });
-  };
-
-  const handleSimple = () => {
-    setTipoConsejo({
-      renta: false,
-      simple: true,
-      comer: false,
-      divertirse: false,
-    });
+  const handleButtonsForms = (e) => {
+    setTipoConsejo({ ...initialValue, [e.target.name]: true });
   };
 
   return (
@@ -94,15 +123,16 @@ const DejaConsejo = () => {
               class="form-control"
               id="nombre"
               aria-describedby="emailHelp"
-              name="name"
+              name="nombre"
               onChange={handleDatos}
+              value={nombre}
             />
             <div class="form-group form-check">
               <input
                 type="checkbox"
                 class="form-check-input"
-                id="avisoprivacidad"
-                name="avisoprivacidad"
+                id="anonimo"
+                name="anonimo"
               />
               <label class="form-check-label" for="avisoprivacidad">
                 <small class="form-text text-muted">Anonimo</small>
@@ -120,6 +150,7 @@ const DejaConsejo = () => {
               aria-describedby="emailHelp"
               name="carrera"
               onChange={handleDatos}
+              value={carrera}
               required
             />
           </div>
@@ -133,6 +164,7 @@ const DejaConsejo = () => {
               name="email"
               onChange={handleDatos}
               required
+              value={email}
             />
             <small id="emailHelp" class="form-text text-muted">
               Nunca compartiremos tu email con nadie
@@ -147,189 +179,50 @@ const DejaConsejo = () => {
               aria-describedby="emailHelp"
               placeholder="@"
               name="instagram"
+              onChange={handleDatos}
+              value={instagram}
             />
           </div>
 
           <div className="btn-group d-flex ">
             <button
               className="btn btn-outline-dark  mt-4 mb-4"
-              onClick={handleDivertirse}
+              name="divertirse"
+              onClick={handleButtonsForms}
             >
               Donde divertirte
             </button>
             <button
               className="btn btn-outline-dark border-left-0  mt-4 mb-4"
-              onClick={handleComer}
+              name="comer"
+              onClick={handleButtonsForms}
             >
               Donde comer
             </button>
             <button
-              className="btn btn-outline-dark border-left-0  mt-4 mb-4"
-              onClick={handleSimple}
+              className="btn btn-outline-dark border-left-0  mt-4 mb-4 "
+              name="simple"
+              onClick={handleButtonsForms}
             >
               Un simple consejo
             </button>
+            <button
+              className="btn btn-outline-dark border-left-0  mt-4 mb-4"
+              name="renta"
+              onClick={handleButtonsForms}
+            >
+              Rentas
+            </button>
           </div>
           {tipoConsejo.renta ? (
-            <div class="form-group bg-dark rounded p-4 text-white lead">
-              <label for="rentar">Titulo </label>
-              <input
-                type="text"
-                class="form-control d-inline"
-                id="Titulo"
-                aria-describedby="emailHelp"
-                name="Titulo"
-                placeholder=""
-                onChange={handleDatos}
-                
-              />
-              <label for="rentar">Reseña </label>
-              <textarea
-                class="form-control"
-                
-                id="rentar"
-                rows="5"
-                name="rentar"
-                placeholder="Son muy amables y me hicieron descuento en la pandemia"
-                onChange={handleDatos}
-              ></textarea>
-              <label for="direccion" className="font-weight-light d-block">
-                Dirección
-              </label>
-              <input
-                type="text"
-                class="form-control d-inline"
-                id="direccion"
-                aria-describedby="emailHelp"
-                name="direccion"
-                onChange={handleDatos}
-              />
-              <label for="rango_precios" className="font-weight-light d-block">
-                Rango de precios
-              </label>
-              <input
-                type="number"
-                class="form-control w-50 d-inline"
-                id="precio1"
-                aria-describedby="emailHelp"
-                name="precio1"
-                onChange={handleDatos}
-              />
-              <input
-                type="number"
-                class="form-control w-50 d-inline"
-                id="precio2"
-                aria-describedby="emailHelp"
-                name="precio2"
-                onChange={handleDatos}
-              />
-              <label for="servicios" className="font-weight-light ">
-                Servicios que he visto
-              </label>
-              <input
-                type="text"
-                class="form-control"
-                id="servicios"
-                aria-describedby="emailHelp"
-                name="servicios"
-                onChange={handleDatos}
-              />
-              <label for="contacto" className="font-weight-light ">
-                Número de contacto
-              </label>
-              <input
-                type="number"
-                class="form-control"
-                id="numero1"
-                aria-describedby="emailHelp"
-                name="contacto"
-                onChange={handleDatos}
-              />
-              <label for="contacto2" className="font-weight-light ">
-                Número de contacto 2 (opcional)
-              </label>
-              <input
-                type="number"
-                class="form-control"
-                id="numero2"
-                aria-describedby="emailHelp"
-                name="contacto2"
-                onChange={handleDatos}
-              />
-              <small id="emailHelp" class="form-text text-muted">
-                No olvides dejar una dirección, números de los caseros, rango de
-                precios (o el tuyo) y los servicios que ofrecen. Estoy seguro
-                que existe un utemita que te lo agradecerá.
-              </small>
-            </div>
+            <FormInputRentas datos={datos} handleDatos={handleDatos} />
           ) : null}
 
-          {tipoConsejo.divertirse ? (
-            <div class="form-group bg-info rounded p-4 text-white lead">
-              <label for="rentar">Titulo </label>
-              <input
-                type="text"
-                class="form-control d-inline"
-                id="Titulo"
-                aria-describedby="emailHelp"
-                name="Titulo"
-                placeholder=""
-              />
-              <label for="rentar">Consejo </label>
-              <textarea
-                class="form-control"
-                id="divertirse"
-                rows="3"
-                name="divertirse"
-                
-              ></textarea>
-              
-            </div>
-          ) : null}
+          {tipoConsejo.divertirse ? <FormInputDivertirse /> : null}
 
-          {tipoConsejo.comer ? (
-            <div class="form-group bg-danger rounded p-4 text-white lead">
-              <label for="rentar">Titulo </label>
-              <input
-                type="text"
-                class="form-control d-inline"
-                id="titulo"
-                aria-describedby="emailHelp"
-                name="titulo"
-                placeholder=""
-              />
-              <label for="comer">Consejo </label>
-              <textarea
-                class="form-control"
-                id="comer"
-                rows="3"
-                name="comer"
-               
-              ></textarea>
-          
-            </div>
-          ) : null}
+          {tipoConsejo.comer ? <FormInputComer /> : null}
 
-          {tipoConsejo.simple ? (
-            <div class="form-group bg-secondary rounded p-4 text-white lead">
-              <label for="rentar">Titulo </label>
-              <input
-                type="text"
-                class="form-control d-inline"
-                id="titulo"
-                aria-describedby="emailHelp"
-                name="titulo"
-                placeholder=""
-              />
-              <label for="rentar">Consejo </label>
-              <textarea
-                class="form-control"
-                id="simple"
-                rows="3"
-                name="simple"
-              ></textarea>
-            </div>
-          ) : null}
+          {tipoConsejo.simple ? <FormInputSimple /> : null}
 
           <div class="form-group form-check">
             <input
@@ -343,9 +236,12 @@ const DejaConsejo = () => {
             </label>
           </div>
 
-          <a type="submit" class="btn btn-outline-info btn-block p-3 m-auto  ">
+          <button
+            type="submit"
+            class="btn btn-outline-info btn-block p-3 m-auto"
+          >
             <span className="h3 font-weight-light">Aportar</span>
-          </a>
+          </button>
         </form>
       </div>
     </>
