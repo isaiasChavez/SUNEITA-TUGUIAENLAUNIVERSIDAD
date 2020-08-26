@@ -40,7 +40,7 @@ const Consejo = ({ datos }) => {
 
   return (    
     <div
-      class={`card  m-2 col-sm-12 col-md-5 col-lg-5  ${background}`}
+      class={`card  mt-2 col-sm-12 col-md-5 col-lg-5 m-3  ${background}`}
     >
         
       <div class="card-header p-1 pl-3 mt-3 rounded d-flex flex-column">

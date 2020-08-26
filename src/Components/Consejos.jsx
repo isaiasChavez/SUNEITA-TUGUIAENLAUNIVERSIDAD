@@ -118,7 +118,7 @@ const Consejos = () => {
         button='Dejar una recomendación'
         link='dejarconsejo'
       />
-      <div className=" container-fluid pt-5 contenerdor-principal ">
+      <div className=" container-fluid pt-5  ">
         
 
         <div className="row justify-content-around py-5">
@@ -160,7 +160,7 @@ const Consejos = () => {
           </div>
         </div>
         <Fade>
-          <div className=" row  justify-content-around align-items">
+          <div className="row d-flex justify-content-around">
             {info.map((datos) => (
               <Consejo datos={datos} />
             ))}

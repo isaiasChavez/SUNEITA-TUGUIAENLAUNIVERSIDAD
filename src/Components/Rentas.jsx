@@ -1,86 +1,14 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useContext } from "react";
 import Renta from "./Renta";
 import Footer from "./Footer";
 import Hero from "./Hero";
+import rentasContext from "../State/rentasContext";
+
 import { Link } from "react-router-dom";
 
 const Rentas = () => {
-  const [rentas, setRentas] = useState([
-    {
-      titulo: "Habitación",
-      tipo: "Departamento",
-      publicante: "Recomendado",
-      descripcion: "Agradable Habitación con todos los servicios",
-      contacto1: "951 513 4378",
-      zona: "Centro de Acatlima",
-      direccion: "Nardos 103, Acatlima, Huajuapan de Leon",
-      rango_precios: "900 - 1000",
-      servicios: [
-        "Luz",
-        "Agua caliente",
-        "colchon",
-        "muebles",
-        "Baño completo",
-      ],
-      mascotas: "No",
-    },
-    {
-      titulo: "Departamento",
-      tipo: "Casa",
-      publicante: "Arrendatario",
-      descripcion: "Cuarto Céntrico y con todos los servicios",
-      contacto1: "951 513 4378",
-      zona: "Nucleo Rural",
-      direccion: "Nardos 103, Acatlima, Huajuapan de Leon",
-      rango_precios: "900 - 1000",
-      servicios: [
-        "Luz",
-        "Agua caliente",
-        "colchon",
-        "muebles",
-        "Baño completo",
-      ],
-      mascotas: "No",
-    },
-    {
-      titulo: "Habitación",
-      tipo: "Habitacion",
-
-      publicante: "Recomendado",
-      descripcion: "Cuarto protegido, camaras de seguridad",
-      contacto1: "951 513 4378",
-      zona: "Frente de la universidad",
-      direccion: "Nardos 103, Acatlima, Huajuapan de Leon",
-      rango_precios: "900 - 1000",
-      servicios: [
-        "Luz",
-        "Agua caliente",
-        "colchon",
-        "muebles",
-        "Baño completo",
-      ],
-      mascotas: "No",
-    },
-    {
-      titulo: "Habitación",
-      tipo: "Departamento",
-      publicante: "Arrendatario",
-      titular: "",
-      descripcion: "Habitación economica",
-      contacto1: "951 513 4378",
-      zona: "Centro de Huajuapan",
-      direccion: "Nardos 103, Acatlima, Huajuapan de Leon",
-      rango_precios: "900 - 1000",
-      servicios: [
-        "Luz",
-        "Agua caliente",
-        "colchon",
-        "muebles",
-        "Baño completo",
-      ],
-      mascotas: "No",
-    },
-  ]);
+  
+  const { rentas } = useContext(rentasContext);
 
   return (
     <Fragment>
@@ -91,15 +19,13 @@ const Rentas = () => {
         textButton="¿No estás seguro?"
         textButton2="Lee los recomendaciones publicadas"
         button="Ir a recomendaciones"
-        link='consejos'
+        link="consejos"
       />
 
       <div className="infoInicio row d-flex justify-content-around text-center p-4 m-5">
         <button className=" lead col-lg-3 m-4 shadow p-3 mb-5 bg-white rounded-lg">
-          
-            <span class="material-icons  text-dark icon">house</span>
-            <p className=" text-dark">Casas completas</p>
-         
+          <span class="material-icons  text-dark icon">house</span>
+          <p className=" text-dark">Casas completas</p>
         </button>
         <button className=" lead col-lg-3 m-4 shadow p-3 mb-5 bg-white rounded-lg">
           <span class="material-icons icon">domain</span>

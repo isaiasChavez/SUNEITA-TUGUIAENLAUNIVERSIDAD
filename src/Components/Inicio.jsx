@@ -82,7 +82,7 @@ const Inicio = () => {
               <div class="col-md-7">
                 <div class="card-body d-flex flex-column align-items-end  h-75 justify-content-around">
                   <h5 class="card-title display-4 mx-4 text-muted text-right">
-                    Publica un consejo para tu Utemita del pasado
+                    Publica una recomendación para tu Suneita del pasado
                   </h5>
                   <p class="card-text text-right lead text-muted">
                     Publica el lugar donde recomiendas vivir, consejos de

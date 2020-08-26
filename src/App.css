@@ -15,6 +15,10 @@ button{
   padding: 0;
   background-size: cover;
 }
+.card-publication{
+  padding-top: 5em;
+  height: 100%;
+}
 .navigation {
 }
 .icon {
@@ -31,12 +35,20 @@ button{
   max-height: 19em;
   font-family: Cereal;
 }
-
+p{
+  margin: 0;
+  padding:0;
+}
+.margin-for-nav{
+  padding-top: 8em;
+}
 .text-smaller {
   font-size: 0.8em;
 }
 .text-rent {
-  line-height: 0.4em;
+  line-height: 1em;
+  margin-top: 0;
+  padding-top: 0;
 }
 .hero {
   height: 75vh;
