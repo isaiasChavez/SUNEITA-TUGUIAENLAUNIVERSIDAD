@@ -1,17 +1,17 @@
 import React from "react";
-
+import {Link} from 'react-router-dom'
 const Footer = () => {
   return (
     <footer className="bg-dark text-white container-fluid justify-content-center ">
       <p className="lead p-3 pr-5 row text-center"> Links de interes</p>
       <div className="row row-cols-lg-2 text-center ">
         <div class="list-group col">
-          <a
-            href="#!"
-            class="list-group-item list-group-item-action bg-dark border-0 disabled"
+          <Link
+            to='/about'
+            class="list-group-item list-group-item-action active bg-dark border-0 "
           >
-            BLOG
-          </a>
+            Acerca De
+          </Link>
           <a
             href="#!"
             class="list-group-item list-group-item-action active bg-dark border-0"

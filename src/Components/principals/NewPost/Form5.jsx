@@ -1,6 +1,9 @@
 import React, { Fragment } from "react";
+import { Link, useRouteMatch } from "react-router-dom";
 
 const Form4 = () => {
+  let match = useRouteMatch();
+
   return (
     <Fragment>
       <div className="container min-vh-100  d-flex flex-column justify-content-center w-100 ">
@@ -36,7 +39,7 @@ const Form4 = () => {
             </form>
 
             <div className="form-group pt-5">
-              <button className="btn btn-dark ">Continuar</button>
+            <Link to={`${match.url}/cp-5`}>Continuar</Link>
             </div>
           </div>
         </div>

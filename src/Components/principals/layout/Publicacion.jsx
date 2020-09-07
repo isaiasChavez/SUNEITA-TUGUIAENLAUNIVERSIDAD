@@ -1,18 +1,21 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment, useContext } from "react";
+import { Link, useRouteMatch, useParams } from "react-router-dom";
 import img from "../../../img/jesus.jpg";
 import img2 from "../../../img/studentBackground.jpg";
 import img3 from "../../../img/studentBackground2.jpg";
 import img4 from "../../../img/info.jpg";
 import img5 from "../../../img/studentBackground3.jpg";
 import Footer from "../../Footer";
-import { useParams } from "react-router-dom";
 import rentasContext from "../../../State/rentasContext";
+
 const Publicacion = () => {
-  const { rentas } = useContext(rentasContext);
+  let match = useRouteMatch();
+
+  const { datosRentas } = useContext(rentasContext);
   const { idpublicacion } = useParams();
 
   const getInfoPublication = (id) => {
-    const datos = rentas.filter((renta) => {
+    const datos = datosRentas.rentas.filter((renta) => {
       if (renta.id == id) {
         return renta;
       }
@@ -22,6 +25,8 @@ const Publicacion = () => {
 
   const {
     titulo,
+    username,
+    localizacion,
     descripcion,
     arrendador,
     tipo,
@@ -162,11 +167,27 @@ const Publicacion = () => {
                 </div>
 
                 <div class="card-body text-dark">
-                  <button className="btn btn-dark btn-block btn-lg ">
+                  <Link
+                    from={`${match.url}/`}
+                    to={`${match.url}/contacto/${username}`}
+                    className="btn btn-dark btn-block btn-lg "
+                  >
                     Contactar al arrendador
-                  </button>
+                  </Link>
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="row d-flex flex-column">
+            <h2 className="lead py-4 h1 font-weight-bold">Ubicacion</h2>
+            <div className="row">
+              <div className="col  col-lg-4">
+                <p>Calle: {localizacion.calle} # {localizacion.numero}</p>
+                <p></p>
+                <p>{localizacion.ciudad}</p>
+                <p>{localizacion.estado}</p>
+              </div>
+              <div className="col bg-primary col-lg-8">algo</div>
             </div>
           </div>
           <div className="row py-5 d-flex flex-column">

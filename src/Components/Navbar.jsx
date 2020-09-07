@@ -1,7 +1,15 @@
-import React from "react";
+import React,{useContext} from "react";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../img/logo.png";
+import AuthContext from "../State/authContext";
+
 const Navbar = () => {
+  const { authData } = useContext(AuthContext);
+
+  const cerrarSesion=()=>{
+    authData.cerrarSesion()
+  }
+ 
   return (
     <>
       <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top pb-0 navigation ">
@@ -19,7 +27,7 @@ const Navbar = () => {
         <Link to={"/"} className="nav-link  "></Link>
 
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-toggle="collapse"
           data-target="#navbarNav"
@@ -27,11 +35,11 @@ const Navbar = () => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse " id="navbarNav">
-          <ul class="navbar-nav ml-auto">
-            <li class="px-1">
+        <div className="collapse navbar-collapse " id="navbarNav">
+          <ul className="navbar-nav ml-auto">
+            <li className="px-1">
               <NavLink
                 to={"/rentas"}
                 className="nav-link pb-3"
@@ -50,24 +58,60 @@ const Navbar = () => {
                 Recomendaciones
               </NavLink>
             </li>
-            <li class="px-1">
-              <NavLink
-                to={"/profile"}
-                className="nav-link  pb-3"
-                activeClassName="active"
-              >
-                Perfil
-              </NavLink>
-            </li>
-            <li class="px-1">
-              <NavLink
-                to={"/dejarconsejo"}
-                className="btn btn-dark w-100 mb-2"
-                activeClassName="active"
-              >
-                Recomendar
-              </NavLink>
-            </li>
+            {authData.isLogged ? (
+              <div className="d-flex">
+                <li class="px-1">
+                  <NavLink
+                    to={"/profile"}
+                    className="nav-link  pb-3"
+                    activeClassName="active"
+                  >
+                    Perfil
+                  </NavLink>
+                </li>
+                <li class="px-1">
+                  <NavLink
+                    to={"/crearPublicacion"}
+                    className="btn btn-dark w-100 mb-2"
+                    activeClassName="active"
+                  >
+                    Publicar
+                  </NavLink>
+                </li>
+                <li class="px-1">
+                  <NavLink
+                    to={"/"}
+                    className="btn px-0  w-100 mb-2"
+                    activeClassName="active"
+                    onClick={cerrarSesion}
+                  >
+                    Cerrar Sesión
+                  </NavLink>
+                </li>
+              </div>
+            ) : (
+              <div className="d-flex">
+                <li class="px-1">
+                  <NavLink
+                    to={"/ingresar"}
+                    className="btn  w-100 mb-2"
+                    activeClassName="active"
+                    
+                  >
+                    Ingresar
+                  </NavLink>
+                </li>
+                <li class="px-1">
+                  <NavLink
+                    to={"/registrarse"}
+                    className="btn  w-100 mb-2"
+                    activeClassName="active"
+                  >
+                    Registrarse
+                  </NavLink>
+                </li>
+              </div>
+            )}
           </ul>
         </div>
       </nav>

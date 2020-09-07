@@ -44,7 +44,7 @@ const Form4 = () => {
             </form>
 
             <div className="form-group pt-5">
-              <Link to={`${match.url}/cp-f`}>Continuar</Link>
+              <Link from={`${match.url}`} to={`/`}>Terminar</Link>
             </div>
           </div>
         </div>

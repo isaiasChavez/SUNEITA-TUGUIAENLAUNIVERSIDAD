@@ -1,6 +1,9 @@
 import React, { Fragment } from "react";
+import { Link, useRouteMatch } from "react-router-dom";
 
 const Form2 = () => {
+  let match = useRouteMatch();
+
   return (
     <Fragment>
       <div className="container min-vh-100  d-flex flex-column justify-content-center w-100 ">
@@ -11,7 +14,9 @@ const Form2 = () => {
             </div>
             <div className="row">
               <span className="badge badge-light rounded-0"> paso 2 </span>
-              <p className="lead d-block w-100 pt-4">¿Con que puede contar un estudiante al rentar contigo?</p>
+              <p className="lead d-block w-100 pt-4">
+                ¿Con que puede contar un estudiante al rentar contigo?
+              </p>
             </div>
 
             <div class="custom-control custom-checkbox mr-sm-2 mt-2">
@@ -77,7 +82,7 @@ const Form2 = () => {
             </div>
 
             <div className="form-group pt-5">
-              <button className="btn btn-dark ">Continuar</button>
+            <Link to={`${match.url}/cp-2`}>Continuar</Link>
             </div>
           </div>
         </div>

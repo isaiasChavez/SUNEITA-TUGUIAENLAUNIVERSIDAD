@@ -5,10 +5,19 @@ const rentasState = (props) => {
   const rentas = [
     {
       id: 1,
+      username: "juan",
+      tipo: "departamento",
+      status: "active",
       titulo: "Habitaciónes de Los mochis",
       arrendador: "Juan juarez",
+      descripcion: "Agradable Habitación con todos los servicios",
+      contacto: "951 513 4378",
+      zona: "Centro de Acatlima",
+      mascotas: "No",
+      precio: 1500,
+
       localizacion: {
-        calle: "",
+        calle: "Quiechapa",
         numero: "",
         cp: "",
         estado: "",
@@ -32,27 +41,71 @@ const rentasState = (props) => {
         camaras: true,
         luzincluida: true,
         cocina: true,
+        tipo: "Departamento",
       },
-      precio: 1500,
-      tipo: "Departamentos los garcía",
-      publicante: "Recomendado",
-      descripcion: "Agradable Habitación con todos los servicios",
-      contacto1: "951 513 4378",
-      zona: "Centro de Acatlima",
-      direccion: "Nardos 103, Acatlima, Huajuapan de Leon",
-      rango_precios: "900 - 1000",
-      mascotas: "No",
     },
     {
       id: 2,
-      titulo: "Complejo Amarillo",
-      tipo: "Casa",
-      arrendador: "Marco Aurelio",
-      descripcion: "Cuarto Céntrico y con todos los servicios",
-      contacto1: "951 513 4378",
+      status: "active",
+      tipo: "habitación",
+      username: "gabriel",
+      titulo: "Cuarto centrico y seguro",
+      arrendador: "Gabriel Perez",
+      descripcion: "Cuarto centrico junto a los servicios",
+      contacto: "951 513 4378",
       zona: "Nucleo Rural",
-      direccion: "Nardos 103, Acatlima, Huajuapan de Leon",
-      rango_precios: "900 - 1000",
+      mascotas: "Si",
+      precio: 1200,
+
+      localizacion: {
+        calle: "Nardos",
+        numero: "13",
+        cp: "71250",
+        estado: "Oaxaca",
+        ciudad: "Huajuapan",
+      },
+      servicios: {
+        wifi: true,
+        banopro: true,
+        ganchos: false,
+        cocina: false,
+        muebles: false,
+        colchon: true,
+      },
+      datos: {
+        banopro: true,
+        medidas: {
+          ancho: 20,
+          largo: 25,
+        },
+        soloestudiantes: true,
+        camaras: false,
+        luzincluida: true,
+        cocina: false,
+        tipo: "Habitación",
+      },
+    },
+    {
+      id: 2,
+      status: "active",
+      tipo: "departamento",
+
+      username: "gabriel",
+      titulo: "Habitaciónes al frente de la universidad",
+      arrendador: "Gabriel Perez",
+      descripcion: "Agradable Habitación justo al cruzar la universidad",
+      contacto: "951 513 4378",
+      zona: "Frente de la universidad",
+      mascotas: "Si",
+      precio: 2200,
+
+      localizacion: {
+        calle: "Nogales",
+        numero: "12",
+        cp: "71728",
+        estado: "Oaxaca",
+        ciudad: "Huajuapan",
+      },
       servicios: {
         wifi: true,
         banopro: true,
@@ -64,29 +117,36 @@ const rentasState = (props) => {
       datos: {
         banopro: true,
         medidas: {
-          ancho: 15,
-          largo: 15,
+          ancho: 20,
+          largo: 20,
         },
         soloestudiantes: true,
         camaras: true,
         luzincluida: true,
         cocina: true,
+        tipo: "departamento",
       },
-      mascotas: "No",
-      precio: 900,
     },
     {
       id: 3,
-      titulo: "Habitaciónes los perez",
-      tipo: "Habitacion",
-
-      publicante: "Recomendado",
-      arrendador: "John Smith",
-      descripcion: "Cuarto protegido, camaras de seguridad",
-      contacto1: "951 513 4378",
+      username: "juarez",
+      tipo: "casa",
+      status: "active",
+      titulo: "Casa para 3 estudiantes",
+      arrendador: "Juan Juarez",
+      descripcion: "Casa en zona centrica para estudiantes",
+      contacto: "951 513 4378",
       zona: "Frente de la universidad",
-      direccion: "Nardos 103, Acatlima, Huajuapan de Leon",
-      rango_precios: "900 - 1000",
+      mascotas: "Si",
+      precio: 3500,
+
+      localizacion: {
+        calle: "Almendros",
+        numero: "20",
+        cp: "71728",
+        estado: "Oaxaca",
+        ciudad: "Huajuapan",
+      },
       servicios: {
         wifi: true,
         banopro: true,
@@ -98,28 +158,37 @@ const rentasState = (props) => {
       datos: {
         banopro: true,
         medidas: {
-          ancho: 15,
-          largo: 15,
+          ancho: 20,
+          largo: 20,
         },
         soloestudiantes: true,
-        camaras: true,
+        camaras: false,
         luzincluida: true,
         cocina: true,
+        tipo: "casa",
       },
-      mascotas: "No",
-      precio: 1200,
     },
     {
-      id: 4,
-      titulo: "Habitación numero 6",
-      tipo: "Departamento",
-      publicante: "Arrendatario",
-      titular: "",
-      descripcion: "Habitación economica",
-      contacto1: "951 513 4378",
-      zona: "Centro de Huajuapan",
-      direccion: "Nardos 103, Acatlima, Huajuapan de Leon",
-      rango_precios: "900 - 1000",
+      id: 3,
+      username: "juarez",
+      status: "active",
+      titulo: "Casa para 3 estudiantes",
+      arrendador: "Juan Juarez",
+      descripcion: "Casa en zona centrica para estudiantes",
+      contacto: "951 513 4378",
+      zona: "Frente de la universidad",
+      mascotas: "Si",
+      tipo: "casa",
+
+      precio: 3500,
+
+      localizacion: {
+        calle: "Almendros",
+        numero: "20",
+        cp: "71728",
+        estado: "Oaxaca",
+        ciudad: "Huajuapan",
+      },
       servicios: {
         wifi: true,
         banopro: true,
@@ -131,26 +200,224 @@ const rentasState = (props) => {
       datos: {
         banopro: true,
         medidas: {
-          ancho: 15,
-          largo: 15,
+          ancho: 20,
+          largo: 20,
         },
         soloestudiantes: true,
-        camaras: true,
+        camaras: false,
         luzincluida: true,
         cocina: true,
+        tipo: "Casa",
       },
-      mascotas: "No",
-      precio: 750,
+    },
+    {
+      id: 3,
+      username: "juarez",
+      status: "active",
+      titulo: "Casa para 3 estudiantes",
+      tipo: "casa",
+
+      arrendador: "Juan Juarez",
+      descripcion: "Casa en zona centrica para estudiantes",
+      contacto: "951 513 4378",
+      zona: "Frente de la universidad",
+      mascotas: "Si",
+      precio: 3500,
+
+      localizacion: {
+        calle: "Almendros",
+        numero: "20",
+        cp: "71728",
+        estado: "Oaxaca",
+        ciudad: "Huajuapan",
+      },
+      servicios: {
+        wifi: true,
+        banopro: true,
+        ganchos: true,
+        cocina: true,
+        muebles: true,
+        colchon: true,
+      },
+      datos: {
+        banopro: true,
+        medidas: {
+          ancho: 20,
+          largo: 20,
+        },
+        soloestudiantes: true,
+        camaras: false,
+        luzincluida: true,
+        cocina: true,
+        tipo: "Casa",
+      },
+    },
+    {
+      id: 3,
+      username: "juarez",
+      tipo: "casa",
+
+      status: "inactive",
+      titulo: "Casa para 3 estudiantes",
+      arrendador: "Juan Juarez",
+      descripcion: "Casa en zona centrica para estudiantes",
+      contacto: "951 513 4378",
+      zona: "Frente de la universidad",
+      mascotas: "Si",
+      precio: 3500,
+
+      localizacion: {
+        calle: "Almendros",
+        numero: "20",
+        cp: "71728",
+        estado: "Oaxaca",
+        ciudad: "Huajuapan",
+      },
+      servicios: {
+        wifi: true,
+        banopro: true,
+        ganchos: true,
+        cocina: true,
+        muebles: true,
+        colchon: true,
+      },
+      datos: {
+        banopro: true,
+        medidas: {
+          ancho: 20,
+          largo: 20,
+        },
+        soloestudiantes: true,
+        camaras: false,
+        luzincluida: true,
+        cocina: true,
+        tipo: "Casa",
+      },
+    },
+    {
+      id: 3,
+      username: "juarez",
+      status: "inactive",
+      tipo: "casa",
+      titulo: "Casa para 3 estudiantes",
+      arrendador: "Juan Juarez",
+      descripcion: "Casa en zona centrica para estudiantes",
+      contacto: "951 513 4378",
+      zona: "Frente de la universidad",
+      mascotas: "Si",
+      precio: 3500,
+
+      localizacion: {
+        calle: "Almendros",
+        numero: "20",
+        cp: "71728",
+        estado: "Oaxaca",
+        ciudad: "Huajuapan",
+      },
+      servicios: {
+        wifi: true,
+        banopro: true,
+        ganchos: true,
+        cocina: true,
+        muebles: true,
+        colchon: true,
+      },
+      datos: {
+        banopro: true,
+        medidas: {
+          ancho: 20,
+          largo: 20,
+        },
+        soloestudiantes: true,
+        camaras: false,
+        luzincluida: true,
+        cocina: true,
+        tipo: "Casa",
+      },
+    },
+    {
+      id: 3,
+      username: "juarez",
+      status: "inactive",
+
+      titulo: "Casa para 3 estudiantes",
+      arrendador: "Juan Juarez",
+      descripcion: "Casa en zona centrica para estudiantes",
+      tipo:'habitacion',
+      contacto: "951 513 4378",
+      zona: "Frente de la universidad",
+      mascotas: "Si",
+      precio: 3500,
+
+      localizacion: {
+        calle: "Almendros",
+        numero: "20",
+        cp: "71728",
+        estado: "Oaxaca",
+        ciudad: "Huajuapan",
+      },
+      servicios: {
+        wifi: true,
+        banopro: true,
+        ganchos: true,
+        cocina: true,
+        muebles: true,
+        colchon: true,
+      },
+      datos: {
+        banopro: true,
+        medidas: {
+          ancho: 20,
+          largo: 20,
+        },
+        soloestudiantes: true,
+        camaras: false,
+        luzincluida: true,
+        cocina: true,
+        tipo:'habitacion'
+      },
     },
   ];
 
+  const getRentasByUser = (user) => {
+    const rentasDeUsuario = rentas.filter((renta) => {
+      if (renta.username === user) {
+        return renta;
+      }
+    });
+    return rentasDeUsuario;
+  };
+  const getRentasByType = (type) => {
+    const rentasDeUsuario = rentas.filter((renta) => {
+      if (renta.tipo === type) {
+        return renta;
+      }
+    });
+    return rentasDeUsuario;
+  };
+
+  const deleteRentsByUserAndId = (user, id) => {
+      console.log('Voy a eliminar algo')
+  };
+  const pauseRentsByUserAndId = (user, id) => {
+    console.log('Voy pausar')
+  };
+  const editRentsByUserAndId = (user, id,newData) => {
+    console.log('Voy editar algo')
+  };
+
   const initialState = {
     rentas,
+    getRentasByUser,
+    getRentasByType,
+    deleteRentsByUserAndId,
+    pauseRentsByUserAndId,
+    editRentsByUserAndId
   };
   return (
     <rentasContext.Provider
       value={{
-        rentas: initialState.rentas,
+        datosRentas: initialState,
       }}
     >
       {props.children}

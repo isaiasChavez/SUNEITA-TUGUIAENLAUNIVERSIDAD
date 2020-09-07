@@ -1,14 +1,12 @@
 import React, { Fragment } from "react";
 import Hero from "./Hero";
 import Slider from "./Slider";
-import Consejos from "./Consejos";
 import Footer from "./Footer";
-import img from "../img/background.jpg";
 import imgJumbotron from "../img/studentBackground.jpg";
 
-import studentBackground from '../img/jesus.jpg'
+import studentBackground from "../img/jesus.jpg";
 
-import studentBackground2 from '../img/studentBackground2.jpg'
+import studentBackground2 from "../img/studentBackground2.jpg";
 import { Link } from "react-router-dom";
 const Inicio = () => {
   return (
@@ -42,13 +40,15 @@ const Inicio = () => {
 
         <div className="container-fluid pt-5 contenerdor-principal ">
           <div className="row d-flex justify-content-around my-5 ">
-            <div class="card  text-white col-12 mt-3 col-lg-4 text-center shadow p-2"> 
+            <div class="card  text-white col-12 mt-3 col-lg-4 text-center shadow p-2">
               <Link to={"/consejos"}>
-                <img src={studentBackground} class="card-img img-fluid card-inicio imagep " alt="..." />
+                <img
+                  src={studentBackground}
+                  class="card-img img-fluid card-inicio imagep "
+                  alt="..."
+                />
                 <div class="card-body text-dark">
-                  <h5 class="card-title lead">
-                    Publicaciones de estudiantes
-                  </h5>
+                  <h5 class="card-title lead">Publicaciones de estudiantes</h5>
                   <p class="card-text">
                     Recibe datos de la experiencia de los estudiantes en los
                     diversos alojamientos y muchas cosas más que puedes hacer en
@@ -59,11 +59,13 @@ const Inicio = () => {
             </div>
             <div class="card text-white  col-12  mt-3 col-lg-4 text-center shadow p-2">
               <Link to={"/rentas"}>
-                <img src={studentBackground2} class="card-img img-fluid card-inicio imagep" alt="..." />
+                <img
+                  src={studentBackground2}
+                  class="card-img img-fluid card-inicio imagep"
+                  alt="..."
+                />
                 <div class="card-body text-dark ">
-                  <h5 class="card-title lead ">
-                    Publicaciones de vivienda
-                  </h5>
+                  <h5 class="card-title lead ">Publicaciones de vivienda</h5>
                   <p class="card-text">
                     Recibe información de directamente de las personas que
                     rentan cuartos cerca de la universidad
@@ -77,7 +79,11 @@ const Inicio = () => {
           <div class="card mb-3 mt-5 pt-5 border-0">
             <div class="row no-gutters">
               <div class="col-md-5">
-                <img src={imgJumbotron} class="card-img shadow img-thumbnail" alt="..." />
+                <img
+                  src={imgJumbotron}
+                  class="card-img shadow img-thumbnail"
+                  alt="..."
+                />
               </div>
               <div class="col-md-7">
                 <div class="card-body d-flex flex-column align-items-end  h-75 justify-content-around">

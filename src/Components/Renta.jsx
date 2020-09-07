@@ -5,14 +5,10 @@ const Renta = ({ renta}) => {
   const {
     id,
     titulo,
+    datos,
     tipo,
     publicante,
     descripcion,
-    contacto1,
-    direccion,
-    rango_precios,
-    servicios,
-    mascotas,
     zona,
     precio
   } = renta;

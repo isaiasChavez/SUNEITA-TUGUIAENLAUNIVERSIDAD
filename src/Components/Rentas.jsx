@@ -1,14 +1,28 @@
-import React, { useState, Fragment, useContext } from "react";
+import React, { Fragment, useContext, useEffect,useState } from "react";
 import Renta from "./Renta";
 import Footer from "./Footer";
 import Hero from "./Hero";
 import rentasContext from "../State/rentasContext";
 
-import { Link } from "react-router-dom";
 
-const Rentas = () => {
+const Rentas = () => {  
+
+  const { datosRentas } = useContext(rentasContext);
+  const [listaPubliaciones, setListaPubliaciones] = useState([])
   
-  const { rentas } = useContext(rentasContext);
+  useEffect(() => {
+    setListaPubliaciones(datosRentas.rentas)
+  }, [])
+
+  const getCasas = ()=>{
+    setListaPubliaciones(datosRentas.getRentasByType('casa'))
+  }
+  const getDepartamentos = ()=>{
+    setListaPubliaciones(datosRentas.getRentasByType('departamento'))
+  }
+  const getHabitaciones = ()=>{
+    setListaPubliaciones(datosRentas.getRentasByType('habitacion'))
+  }
 
   return (
     <Fragment>
@@ -23,15 +37,15 @@ const Rentas = () => {
       />
 
       <div className="infoInicio row d-flex justify-content-around text-center p-4 m-5">
-        <button className=" lead col-lg-3 m-4 shadow p-3 mb-5 bg-white rounded-lg">
+        <button className=" lead col-lg-3 m-4 shadow p-3 mb-5 bg-white rounded-lg" onClick={getCasas}>
           <span class="material-icons  text-dark icon">house</span>
           <p className=" text-dark">Casas completas</p>
         </button>
-        <button className=" lead col-lg-3 m-4 shadow p-3 mb-5 bg-white rounded-lg">
+        <button className=" lead col-lg-3 m-4 shadow p-3 mb-5 bg-white rounded-lg" onClick={getDepartamentos}>
           <span class="material-icons icon">domain</span>
           <p>Departamentos</p>
         </button>
-        <button className=" lead col-lg-3 m-4 shadow p-3 mb-5 bg-white rounded-lg">
+        <button className=" lead col-lg-3 m-4 shadow p-3 mb-5 bg-white rounded-lg" onClick={getHabitaciones}>
           <span class="material-icons icon">check_box_outline_blank</span>
           <p>Habitaciones</p>
         </button>
@@ -42,7 +56,7 @@ const Rentas = () => {
           Ultimos lugares publicados
         </div>
         <div class=" row d-flex">
-          {rentas.map((renta) => (
+          {listaPubliaciones.map((renta) => (
             <Renta renta={renta} />
           ))}
         </div>

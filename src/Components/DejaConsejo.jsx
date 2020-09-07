@@ -20,7 +20,6 @@ const DejaConsejo = () => {
     comer: false,
     divertirse: false,
   });
-  const [switchAlert, setSwitchAlert] = useState(false);
 
   const initialState = {
     nombre: "",
