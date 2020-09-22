@@ -1,29 +1,16 @@
 import React, { Fragment, useContext } from "react";
 import img from "../../../img/fondo.jpg";
-import Footer from "../../Footer";
-import rentasContext from "../../../State/rentasContext";
+import Footer from "../layout/Footer";
+import rentasContext from "../../../State/rentas/rentasContext";
 import PublicationProfile from "./PublicationProfile";
-import AuthContext from "../../../State/authContext";
+import AuthContext from "../../../State/autenticacion/authContext";
 
 const Profile = () => {
   const { authData } = useContext(AuthContext);
   const { dataUser } = authData;
-  const { datosRentas } = useContext(rentasContext);
 
-  const publicacionesDeEsteUsuario = datosRentas.getRentasByUser(
-    dataUser.username
-  );
-
-  const publicacionesActivas = publicacionesDeEsteUsuario.filter(
-    (publicacion) => {
-      if (publicacion.status === "active") return publicacion;
-    }
-  );
-  const publicacionesInactivas = publicacionesDeEsteUsuario.filter(
-    (publicacion) => {
-      if (publicacion.status === "inactive") return publicacion;
-    }
-  );
+  const publicacionesActivas = [];
+  const publicacionesInactivas = [];
 
   return (
     <Fragment>
@@ -50,8 +37,6 @@ const Profile = () => {
           </div>
         </div>
         <hr />
-
-
 
         {publicacionesActivas.length != 0 ? (
           <Fragment>

@@ -1,24 +1,22 @@
-import React, { Fragment, useState, useContext } from "react";
-import AuthContext from "../../../State/authContext";
-import Footer from "../../Footer";
+import React, { Fragment, useState, useContext, useEffect } from "react";
+import Footer from "../layout/Footer";
+import AuthContext from "../../../State/autenticacion/authContext";
 
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+const Login = (props) => {
+  const authContext = useContext(AuthContext);
 
-const Login = () => {
-  const { authData } = useContext(AuthContext);
-  const configNotification = {
-    position: "top-right",
-    autoClose: 3500,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-  };
+  const { autenticado } = authContext;
+  useEffect(() => {
+    if (autenticado) {
+      props.history.push("/profile");
+    }
+  }, [autenticado, props.history]);
+
+  console.log(authContext);
 
   const [datosLogin, setDatosLogin] = useState({
-    correo: "",
-    contrasena: "",
+    email: "",
+    password: "",
   });
 
   const oninputChange = (e) => {
@@ -27,13 +25,8 @@ const Login = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const { correo, contrasena } = datosLogin;
-    
-    if (correo.trim() === '' || contrasena.trim() ==='') {
-      toast("Ingresa campos validos!", configNotification);
-      return
-    }
-    authData.ingresarConCorreo(correo, contrasena);
+
+    authContext.iniciarSesion(datosLogin);
   };
 
   return (
@@ -52,18 +45,20 @@ const Login = () => {
             class="form-control col-sm-11 offset-sm-1 col-lg-4 rounded-0 offset-lg-4 p-2 mt-3 bg-outline-dark text-dark "
             id="Titulo"
             aria-describedby=""
-            name="correo"
+            name="email"
             placeholder="Correo"
             onChange={oninputChange}
+            value={datosLogin.email}
           />
           <input
             type="password"
             class="form-control col-sm-11 offset-sm-1   col-lg-4 rounded-0 offset-lg-4 my-2 mt-3 p-2 bg-outline-dark text-dark"
             id="Titulo"
             aria-describedby="emailHelp"
-            name="contrasena"
+            name="password"
             placeholder="Contraseña"
             onChange={oninputChange}
+            value={datosLogin.password}
           />
           <input
             type="submit"

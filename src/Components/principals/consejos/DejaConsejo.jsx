@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import FormInputRentas from "./secondary/FormInputRentas";
-import FormInputDivertirse from "./secondary/FormInputDivertirse";
-import FormInputComer from "./secondary/FormInputComer";
-import FormInputSimple from "./secondary/FormInputSimple";
-import { db } from "../Firebase";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import FormInputDivertirse from "../../secondary/FormInputDivertirse";
+import FormInputComer from "../../secondary/FormInputComer";
+import FormInputSimple from "../../secondary/FormInputSimple";
 const DejaConsejo = () => {
   const initialValue = {
     renta: false,
@@ -57,39 +54,6 @@ const DejaConsejo = () => {
     else if (tipoConsejo.divertirse) datos.divertirse = true;
     else if (tipoConsejo.renta) datos.rentar = true;
     else datos.simple = true;
-
-    try {
-      const data = await db.collection("consejosRentas").doc().set(datos);
-      getLinks();
-      toast("Listo, Recomendación agregada!", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
-      setDatos(initialState);
-    } catch (error) {
-      toast.error("Ha ocurrido un error interno! Por favor intenta de nuevo", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
-    }
-  };
-
-  const getLinks = () => {
-    db.collection("consejosRentas").onSnapshot((querySnapshot) => {
-      const docs = [];
-      querySnapshot.forEach((doc) => {
-        docs.push({ ...doc.data(), id: doc.id });
-        console.log(docs);
-      });
-    });
   };
 
   const handleButtonsForms = (e) => {

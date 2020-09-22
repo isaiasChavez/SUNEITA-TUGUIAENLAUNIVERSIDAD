@@ -1,12 +1,12 @@
 import React, { Fragment } from "react";
-import Hero from "./Hero";
-import Slider from "./Slider";
-import Footer from "./Footer";
-import imgJumbotron from "../img/studentBackground.jpg";
+import Hero from "../layout/Hero";
+import Slider from "../layout/Slider";
+import Footer from "../layout/Footer";
+import imgJumbotron from "../../../img/studentBackground.jpg";
 
-import studentBackground from "../img/jesus.jpg";
+import studentBackground from "../../../img/jesus.jpg";
 
-import studentBackground2 from "../img/studentBackground2.jpg";
+import studentBackground2 from "../../../img/studentBackground2.jpg";
 import { Link } from "react-router-dom";
 const Inicio = () => {
   return (

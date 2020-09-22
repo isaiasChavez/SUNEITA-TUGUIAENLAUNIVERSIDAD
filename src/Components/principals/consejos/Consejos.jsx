@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useContext, Fragment } from "react";
 import Consejo from "./Consejo";
-import "./Consejos.css";
 import Fade from "react-reveal/Fade";
-import consejosContext from "../State/consejosContext";
+import consejosContext from "../../../State/consejos/consejosContext";
 
-import Hero from "./Hero";
+import Hero from "../layout/Hero";
 
 const Consejos = () => {
   const { consejos } = useContext(consejosContext);
@@ -113,14 +112,13 @@ const Consejos = () => {
 
   return (
     <Fragment>
-      <Hero principal='Siempre hay algo que aprender'
-        secondary='O quizá puedas enseñar algo que le ahorre mucha vida a alguien más'
-        button='Dejar una recomendación'
-        link='dejarconsejo'
+      <Hero
+        principal="Siempre hay algo que aprender"
+        secondary="O quizá puedas enseñar algo que le ahorre mucha vida a alguien más"
+        button="Dejar una recomendación"
+        link="dejarconsejo"
       />
       <div className=" container-fluid pt-5  ">
-        
-
         <div className="row justify-content-around py-5">
           <h2 className="lead display-5  ">
             Ultimos recomendaciones de <span>Estudiantes</span>

@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 
-const Form4 = () => {
+const Form4 = ({ onDataChange, dataFormulario }) => {
   let match = useRouteMatch();
 
   return (
@@ -38,13 +38,21 @@ const Form4 = () => {
                 </div>
                 <div class="form-group col-md-2">
                   <label for="inputZip">Codigo Postal</label>
-                  <input type="text" class="form-control" id="inputZip" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inputZip"
+                    name="direccion"
+                    onChange={onDataChange}
+                  />
                 </div>
               </div>
             </form>
 
             <div className="form-group pt-5">
-              <Link from={`${match.url}`} to={`/`}>Terminar</Link>
+              <Link from={`${match.url}`} to={`/`}>
+                Terminar
+              </Link>
             </div>
           </div>
         </div>

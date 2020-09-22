@@ -1,27 +1,29 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import { Link, useRouteMatch, useParams } from "react-router-dom";
 import img from "../../../img/jesus.jpg";
 import img2 from "../../../img/studentBackground.jpg";
 import img3 from "../../../img/studentBackground2.jpg";
 import img4 from "../../../img/info.jpg";
 import img5 from "../../../img/studentBackground3.jpg";
-import Footer from "../../Footer";
-import rentasContext from "../../../State/rentasContext";
+import Footer from "../layout/Footer";
+import rentasContext from "../../../State/rentas/rentasContext";
 
 const Publicacion = () => {
   let match = useRouteMatch();
 
-  const { datosRentas } = useContext(rentasContext);
+  const { rentaSeleccionada, guardarRentaActual } = useContext(rentasContext);
+
   const { idpublicacion } = useParams();
 
-  const getInfoPublication = (id) => {
-    const datos = datosRentas.rentas.filter((renta) => {
-      if (renta.id == id) {
-        return renta;
-      }
-    });
-    return datos[0];
-  };
+  useEffect(() => {
+    guardarRentaActual(idpublicacion);
+  }, [idpublicacion]);
+
+  if (!rentaSeleccionada) {
+    return null;
+  } else {
+    console.log(rentaSeleccionada, "asdfaf");
+  }
 
   const {
     titulo,
@@ -34,8 +36,8 @@ const Publicacion = () => {
     datos,
     servicios,
     precio,
-  } = getInfoPublication(idpublicacion);
-  console.log(datos);
+  } = rentaSeleccionada;
+  console.log(rentaSeleccionada);
 
   return (
     <Fragment>
@@ -182,7 +184,9 @@ const Publicacion = () => {
             <h2 className="lead py-4 h1 font-weight-bold">Ubicacion</h2>
             <div className="row">
               <div className="col  col-lg-4">
-                <p>Calle: {localizacion.calle} # {localizacion.numero}</p>
+                <p>
+                  Calle: {localizacion.calle} # {localizacion.numero}
+                </p>
                 <p></p>
                 <p>{localizacion.ciudad}</p>
                 <p>{localizacion.estado}</p>

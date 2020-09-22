@@ -1,10 +1,15 @@
 import React from "react";
-import img from "../img/info.jpg";
+import img from "../../../img/info.jpg";
 const About = ({ handleDejarConsejo }) => {
   return (
     <div class="jumbotron">
       <div class="card bg-transparent border-0">
-        <img src={img} class="card-img-top img-fluid rounded-lg"  style={{ height: '20em' }} alt="..." />
+        <img
+          src={img}
+          class="card-img-top img-fluid rounded-lg"
+          style={{ height: "20em" }}
+          alt="..."
+        />
         <div class="card-body">
           <h1 class="display-4">
             La información <span className="text-primary">Centralizada</span>{" "}

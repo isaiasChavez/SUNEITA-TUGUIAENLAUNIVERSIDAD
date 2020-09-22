@@ -1,5 +1,5 @@
 import React from "react";
-import img from "../img/fondo.jpg";
+import img from "../../../img/fondo.jpg";
 import CarrouselItem from "./CarrouselItem";
 import { Link } from "react-router-dom";
 

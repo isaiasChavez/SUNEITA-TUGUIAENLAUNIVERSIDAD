@@ -1,28 +1,29 @@
-import React, { Fragment, useContext, useEffect,useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import Renta from "./Renta";
-import Footer from "./Footer";
-import Hero from "./Hero";
-import rentasContext from "../State/rentasContext";
+import Footer from "../layout/Footer";
+import Hero from "../layout/Hero";
+import rentasContext from "../../../State/rentas/rentasContext";
 
-
-const Rentas = () => {  
-
-  const { datosRentas } = useContext(rentasContext);
-  const [listaPubliaciones, setListaPubliaciones] = useState([])
-  
+const Rentas = () => {
   useEffect(() => {
-    setListaPubliaciones(datosRentas.rentas)
-  }, [])
+    obtenerRentas();
+  }, []);
 
-  const getCasas = ()=>{
-    setListaPubliaciones(datosRentas.getRentasByType('casa'))
-  }
-  const getDepartamentos = ()=>{
-    setListaPubliaciones(datosRentas.getRentasByType('departamento'))
-  }
-  const getHabitaciones = ()=>{
-    setListaPubliaciones(datosRentas.getRentasByType('habitacion'))
-  }
+  const {
+    rentasSeleccionadas,
+    obtenerRentasPorTipo,
+    obtenerRentas,
+  } = useContext(rentasContext);
+
+  const getCasas = () => {
+    obtenerRentasPorTipo("casa");
+  };
+  const getDepartamentos = () => {
+    obtenerRentasPorTipo("departamento");
+  };
+  const getHabitaciones = () => {
+    obtenerRentasPorTipo("habitacion");
+  };
 
   return (
     <Fragment>
@@ -37,15 +38,24 @@ const Rentas = () => {
       />
 
       <div className="infoInicio row d-flex justify-content-around text-center p-4 m-5">
-        <button className=" lead col-lg-3 m-4 shadow p-3 mb-5 bg-white rounded-lg" onClick={getCasas}>
+        <button
+          className=" lead col-lg-3 m-4 shadow p-3 mb-5 bg-white rounded-lg"
+          onClick={getCasas}
+        >
           <span class="material-icons  text-dark icon">house</span>
           <p className=" text-dark">Casas completas</p>
         </button>
-        <button className=" lead col-lg-3 m-4 shadow p-3 mb-5 bg-white rounded-lg" onClick={getDepartamentos}>
+        <button
+          className=" lead col-lg-3 m-4 shadow p-3 mb-5 bg-white rounded-lg"
+          onClick={getDepartamentos}
+        >
           <span class="material-icons icon">domain</span>
           <p>Departamentos</p>
         </button>
-        <button className=" lead col-lg-3 m-4 shadow p-3 mb-5 bg-white rounded-lg" onClick={getHabitaciones}>
+        <button
+          className=" lead col-lg-3 m-4 shadow p-3 mb-5 bg-white rounded-lg"
+          onClick={getHabitaciones}
+        >
           <span class="material-icons icon">check_box_outline_blank</span>
           <p>Habitaciones</p>
         </button>
@@ -56,7 +66,7 @@ const Rentas = () => {
           Ultimos lugares publicados
         </div>
         <div class=" row d-flex">
-          {listaPubliaciones.map((renta) => (
+          {rentasSeleccionadas.map((renta) => (
             <Renta renta={renta} />
           ))}
         </div>

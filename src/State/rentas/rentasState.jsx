@@ -1,10 +1,20 @@
-import React from "react";
-import rentasContext from "./rentasContext";
+import React, { useReducer, useState } from "react";
+import {
+  AGREGAR_RENTA,
+  ELIMINAR_RENTA,
+  LIMPIAR_RENTA,
+  OBTENER_RENTAS,
+  RENTA_ACTUAL,
+  VALIDAR_RENTA,
+  OBTENER_RENTAS_TIPO,
+} from "../../types";
+import RentasContext from "./rentasContext";
+import RentasReducer from "./rentasReducer";
 
-const rentasState = (props) => {
+const RentasState = (props) => {
   const rentas = [
     {
-      id: 1,
+      _id: 1,
       username: "juan",
       tipo: "departamento",
       status: "active",
@@ -45,7 +55,7 @@ const rentasState = (props) => {
       },
     },
     {
-      id: 2,
+      _id: 2,
       status: "active",
       tipo: "habitación",
       username: "gabriel",
@@ -86,7 +96,7 @@ const rentasState = (props) => {
       },
     },
     {
-      id: 2,
+      _id: 3,
       status: "active",
       tipo: "departamento",
 
@@ -128,7 +138,7 @@ const rentasState = (props) => {
       },
     },
     {
-      id: 3,
+      _id: 4,
       username: "juarez",
       tipo: "casa",
       status: "active",
@@ -169,7 +179,7 @@ const rentasState = (props) => {
       },
     },
     {
-      id: 3,
+      id: 5,
       username: "juarez",
       status: "active",
       titulo: "Casa para 3 estudiantes",
@@ -211,7 +221,7 @@ const rentasState = (props) => {
       },
     },
     {
-      id: 3,
+      _id: 6,
       username: "juarez",
       status: "active",
       titulo: "Casa para 3 estudiantes",
@@ -253,7 +263,7 @@ const rentasState = (props) => {
       },
     },
     {
-      id: 3,
+      _id: 7,
       username: "juarez",
       tipo: "casa",
 
@@ -295,7 +305,7 @@ const rentasState = (props) => {
       },
     },
     {
-      id: 3,
+      _id: 8,
       username: "juarez",
       status: "inactive",
       tipo: "casa",
@@ -336,14 +346,14 @@ const rentasState = (props) => {
       },
     },
     {
-      id: 3,
+      _id: 9,
       username: "juarez",
       status: "inactive",
 
       titulo: "Casa para 3 estudiantes",
       arrendador: "Juan Juarez",
       descripcion: "Casa en zona centrica para estudiantes",
-      tipo:'habitacion',
+      tipo: "habitacion",
       contacto: "951 513 4378",
       zona: "Frente de la universidad",
       mascotas: "Si",
@@ -374,55 +384,71 @@ const rentasState = (props) => {
         camaras: false,
         luzincluida: true,
         cocina: true,
-        tipo:'habitacion'
+        tipo: "habitacion",
       },
     },
   ];
 
-  const getRentasByUser = (user) => {
-    const rentasDeUsuario = rentas.filter((renta) => {
-      if (renta.username === user) {
-        return renta;
-      }
-    });
-    return rentasDeUsuario;
-  };
-  const getRentasByType = (type) => {
-    const rentasDeUsuario = rentas.filter((renta) => {
-      if (renta.tipo === type) {
-        return renta;
-      }
-    });
-    return rentasDeUsuario;
-  };
-
-  const deleteRentsByUserAndId = (user, id) => {
-      console.log('Voy a eliminar algo')
-  };
-  const pauseRentsByUserAndId = (user, id) => {
-    console.log('Voy pausar')
-  };
-  const editRentsByUserAndId = (user, id,newData) => {
-    console.log('Voy editar algo')
-  };
-
   const initialState = {
     rentas,
-    getRentasByUser,
-    getRentasByType,
-    deleteRentsByUserAndId,
-    pauseRentsByUserAndId,
-    editRentsByUserAndId
+    rentasUsuario: [],
+    errorRenta: null,
+    rentaSeleccionada: null,
+    rentasSeleccionadas: [],
   };
+
+  const [state, dispatch] = useReducer(RentasReducer, initialState);
+
+  const obtenerRentas = () => {
+    dispatch({
+      type: OBTENER_RENTAS,
+      payload: rentas,
+    });
+  };
+  const obtenerRentasPorTipo = (tipo) => {
+    dispatch({ type: OBTENER_RENTAS_TIPO, payload: tipo });
+  };
+  const agregarRenta = (renta) => {
+    dispatch({ type: AGREGAR_RENTA, payload: renta });
+  };
+
+  const validarRentas = () => {
+    dispatch({ type: VALIDAR_RENTA });
+  };
+  const eliminarRenta = (id) => {
+    dispatch({
+      type: ELIMINAR_RENTA,
+      payload: id,
+    });
+  };
+  const guardarRentaActual = (id) => {
+    dispatch({ type: RENTA_ACTUAL, payload: id });
+  };
+
+  const limpiarRenta = () => {
+    dispatch({ type: LIMPIAR_RENTA });
+  };
+
   return (
-    <rentasContext.Provider
+    <RentasContext.Provider
       value={{
-        datosRentas: initialState,
+        rentas: state.rentas,
+        rentasUsuario: state.rentasUsuario,
+        errorRenta: state.errorRenta,
+        rentaSeleccionada: state.rentaSeleccionada,
+        rentasSeleccionadas: state.rentasSeleccionadas,
+        obtenerRentas,
+        obtenerRentasPorTipo,
+        agregarRenta,
+        validarRentas,
+        eliminarRenta,
+        guardarRentaActual,
+        limpiarRenta,
       }}
     >
       {props.children}
-    </rentasContext.Provider>
+    </RentasContext.Provider>
   );
 };
 
-export default rentasState;
+export default RentasState;

@@ -1,15 +1,11 @@
-import React, { Fragment, useState,useContext } from "react";
-import Footer from "../../Footer";
-import AuthContext from "../../../State/authContext";
-import { toast } from "react-toastify";
+import React, { Fragment, useState } from "react";
+import Footer from "../layout/Footer";
 import "react-toastify/dist/ReactToastify.css";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const Registrarse = () => {
-  const { authData } = useContext(AuthContext);
-
   const [datosRegistro, setDatosRegistro] = useState({
     usuario: "",
     nombre: "",
@@ -20,27 +16,16 @@ const Registrarse = () => {
     telefono: "",
   });
 
-  
-
   const onChangeDate = (date) => {
-    setDatosRegistro({...datosRegistro, fecha_nacimiento: date });
+    setDatosRegistro({ ...datosRegistro, fecha_nacimiento: date });
   };
 
   const oninputChange = (e) => {
     setDatosRegistro({ ...datosRegistro, [e.target.name]: e.target.value });
   };
 
-
-  
-
   const onSubmit = async (e) => {
     e.preventDefault();
-    const { correo, contrasena } = datosRegistro;
-    authData.crearUsuarioEIngresar(correo,contrasena,datosRegistro)
-    
-
-
-    
   };
 
   return (
