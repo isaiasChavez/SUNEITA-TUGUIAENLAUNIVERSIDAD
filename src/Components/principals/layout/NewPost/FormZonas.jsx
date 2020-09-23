@@ -1,5 +1,6 @@
 import React, { Fragment, useRef } from "react";
 import { useRouteMatch } from "react-router-dom";
+import img from "../../../../img/innovation_.svg";
 
 const Form3 = ({ onDataChange, dataFormulario, route }) => {
   let match = useRouteMatch();
@@ -9,7 +10,8 @@ const Form3 = ({ onDataChange, dataFormulario, route }) => {
   const zcRef = useRef();
   const ztRef = useRef();
   const cochRef = useRef();
-
+  const cocinaRef = useRef();
+  const balconRef = useRef();
   const nextPage = (e) => {
     e.preventDefault();
     console.log(route);
@@ -29,12 +31,12 @@ const Form3 = ({ onDataChange, dataFormulario, route }) => {
         "¿Estas seguro que no cuentas con ningúna zona? La publicación será colocada como 'Solo la construccion'"
       );
       if (respuesta) {
-        route.replace(`${match.url}/cp-3`);
+        route.replace(`${match.url}/medidas`);
       } else {
         return;
       }
     }
-    route.push(`${match.url}/cp-3`);
+    route.push(`${match.url}/medidas`);
   };
 
   const saltar = () => {
@@ -44,6 +46,8 @@ const Form3 = ({ onDataChange, dataFormulario, route }) => {
       zcRef: zcRef.current.checked,
       ztRef: ztRef.current.checked,
       cochRef: cochRef.current.checked,
+      cocinaRef: cocinaRef.current.checked,
+      balconRef: balconRef.current.checked,
     };
     const zonas = {
       target: {
@@ -58,7 +62,7 @@ const Form3 = ({ onDataChange, dataFormulario, route }) => {
     <Fragment>
       <div className="container min-vh-100  d-flex flex-column justify-content-center w-100 ">
         <div className="row ">
-          <div className="col-lg-8 ">
+          <div className="col-lg-7 ">
             <div className="row w-100">
               <h2>¿Con que zonas cuenta?</h2>
             </div>
@@ -140,6 +144,34 @@ const Form3 = ({ onDataChange, dataFormulario, route }) => {
                   Cochera
                 </label>
               </div>
+              <div class="custom-control custom-checkbox mr-sm-2 mt-2">
+                <input
+                  type="checkbox"
+                  class="custom-control-input"
+                  id="cocina"
+                  name="cocina"
+                  ref={cocinaRef}
+                  onChange={saltar}
+                  checked={dataFormulario.zonasDelCuarto.cocinaRef}
+                />
+                <label class="custom-control-label" for="cocina">
+                  Cocina
+                </label>
+              </div>
+              <div class="custom-control custom-checkbox mr-sm-2 mt-2">
+                <input
+                  type="checkbox"
+                  class="custom-control-input"
+                  id="balcon"
+                  name="balcon"
+                  ref={balconRef}
+                  onChange={saltar}
+                  checked={dataFormulario.zonasDelCuarto.balconRef}
+                />
+                <label class="custom-control-label" for="balcon">
+                  Balcón
+                </label>
+              </div>
 
               <div className="form-group pt-5">
                 <button type="submit" className="btn btn-outline-dark">
@@ -147,6 +179,9 @@ const Form3 = ({ onDataChange, dataFormulario, route }) => {
                 </button>
               </div>
             </form>
+          </div>
+          <div className="col-lg-5">
+            <img src={img} alt="" className="img-fluid" />
           </div>
         </div>
       </div>

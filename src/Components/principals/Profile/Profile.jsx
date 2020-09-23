@@ -6,12 +6,16 @@ import PublicationProfile from "./PublicationProfile";
 import AuthContext from "../../../State/autenticacion/authContext";
 
 const Profile = () => {
-  const { authData } = useContext(AuthContext);
-  const { dataUser } = authData;
-
+  const authContext = useContext(AuthContext);
+  console.log(authContext);
+  console.log(authContext);
+  const { usuario, cargando } = authContext;
   const publicacionesActivas = [];
   const publicacionesInactivas = [];
 
+  if (cargando) {
+    return null;
+  }
   return (
     <Fragment>
       <div className="container min-vh-100 margin-for-nav pb-5">
@@ -27,10 +31,10 @@ const Profile = () => {
               </div>
               <div class=" col-sm-11 col-md-8 col-lg-8 d-flex align-items-center align-items-center ">
                 <div class="card-body ">
-                  <div className="lead text-muted">Bienvenido...</div>
-                  <h5 class="card-title text-center display-4">
-                    {dataUser.nombre} {dataUser.apellido}
-                  </h5>
+                  <div className="lead text-muted">
+                    Bienvenido {usuario.name}
+                  </div>
+                  <h5 class="card-title text-center display-4"></h5>
                 </div>
               </div>
             </div>

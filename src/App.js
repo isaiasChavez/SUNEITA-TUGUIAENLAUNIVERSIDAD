@@ -21,7 +21,7 @@ import Publicacion from "./Components/principals/rentas/Publicacion";
 import FormularioNuevaPublicacion from "./Components/principals/layout/NewPost/FormularioNuevaPublicacion";
 import Profile from "./Components/principals/Profile/Profile";
 import Contacto from "./Components/principals/Profile/Contacto";
-import Nothing from "./Components/routes/Nothing";
+import RutaPrivada from "./Components/routes/RutaPrivada";
 function App() {
   return (
     <>
@@ -49,11 +49,11 @@ function App() {
                 <div className="App">
                   <Route exact path="/rentas" component={Rentas} />
                   <Route exact path="/consejos" component={Consejos} />
-                  <Route exact path="/profile" component={Profile} />
+                  <RutaPrivada exact path="/profile" component={Profile} />
 
                   <Route exact path="/registrarse" component={Registrarse} />
                   <Route exact path="/ingresar" component={Login} />
-                  <Route exact path="#" component={Nothing} />
+
                   <Route
                     exact
                     path="/publicacion/:idpublicacion"
@@ -65,7 +65,7 @@ function App() {
                     path="/publicacion/:idpublicacion/contacto/:username"
                     component={Contacto}
                   />
-                  <Route
+                  <RutaPrivada
                     path="/crearPublicacion"
                     type="private"
                     name="publicacion"

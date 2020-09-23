@@ -1,24 +1,36 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useContext, useEffect } from "react";
 import Footer from "../layout/Footer";
-import "react-toastify/dist/ReactToastify.css";
+import AuthContext from "../../../State/autenticacion/authContext";
 
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const Registrarse = () => {
-  const [datosRegistro, setDatosRegistro] = useState({
-    usuario: "",
-    nombre: "",
-    apellido: "",
-    fecha_nacimiento: new Date(),
-    correo: "",
-    contrasena: "",
-    telefono: "",
-  });
+const Registrarse = (props) => {
+  const authContext = useContext(AuthContext);
 
-  const onChangeDate = (date) => {
-    setDatosRegistro({ ...datosRegistro, fecha_nacimiento: date });
+  useEffect(() => {
+    if (authContext.autenticado) {
+      props.history.push("/");
+    }
+  }, [authContext.autenticado, props.history]);
+
+  const initialState = {
+    username: "",
+    name: "",
+    lastname: "",
+    email: "",
+    password: "",
+    passwordConfirmar: "",
   };
+  const [datosRegistro, setDatosRegistro] = useState(initialState);
+
+  const {
+    username,
+    name,
+    lastname,
+    email,
+    password,
+    passwordConfirmar,
+  } = datosRegistro;
 
   const oninputChange = (e) => {
     setDatosRegistro({ ...datosRegistro, [e.target.name]: e.target.value });
@@ -26,6 +38,36 @@ const Registrarse = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    if (
+      username.trim() === "" ||
+      name.trim() === "" ||
+      lastname.trim() === "" ||
+      email.trim() === "" ||
+      password.trim() === "" ||
+      passwordConfirmar.trim() === ""
+    ) {
+      alert("No puedes dejar campos vacios");
+      return;
+    }
+    if (password.length < 6) {
+      alert("Password debe ser de al menos 6 caracteres");
+      return;
+    }
+    if (password !== passwordConfirmar) {
+      alert("Las contraseñas no coinciden");
+    }
+
+    try {
+      const { passwordConfirmar, lastname, ...rest } = datosRegistro;
+      const ok = await authContext.registrarUsuario(rest);
+      console.log(ok);
+      if (ok) {
+        setDatosRegistro(initialState);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -44,68 +86,61 @@ const Registrarse = () => {
             class="form-control col-sm-11 offset-sm-1 col-lg-4 rounded-0 offset-lg-4 p-2 mt-3 bg-outline-dark text-dark "
             id="Titulo"
             aria-describedby=""
-            name="usuario"
+            name="username"
             placeholder="@nombredeusuario"
             onChange={oninputChange}
+            value={datosRegistro.username}
           />
           <input
             type="text"
             class="form-control col-sm-11 offset-sm-1 col-lg-4 rounded-0 offset-lg-4 p-2 mt-3 bg-outline-dark text-dark "
             id="Titulo"
             aria-describedby=""
-            name="nombre"
+            name="name"
             placeholder="Nombre"
             onChange={oninputChange}
+            value={datosRegistro.name}
           />
           <input
             type="text"
             class="form-control col-sm-11 offset-sm-1 col-lg-4 rounded-0 offset-lg-4 p-2 mt-3 bg-outline-dark text-dark "
             id="Titulo"
             aria-describedby=""
-            name="apellido"
+            name="lastname"
             placeholder="apellido"
             onChange={oninputChange}
+            value={datosRegistro.lastname}
           />
-          <DatePicker
-            className="form-control col-sm-11 offset-sm-1 col-lg-4 rounded-0 offset-lg-4 p-2 mt-3 "
-            selected={datosRegistro.fecha_Nacimiento}
-            onChange={onChangeDate}
-          />
-          <input
-            type="number"
-            class="form-control col-sm-11 offset-sm-1   col-lg-4 rounded-0 offset-lg-4 my-2 mt-3 p-2 bg-outline-dark text-dark"
-            id="telefono"
-            aria-describedby="emailHelp"
-            name="telefono"
-            placeholder="Telefono"
-            onChange={oninputChange}
-          />
+
           <input
             type="email"
             class="form-control col-sm-11 offset-sm-1 col-lg-4 rounded-0 offset-lg-4 p-2 mt-3 bg-outline-dark text-dark "
             id="correo"
             aria-describedby=""
-            name="correo"
+            name="email"
             placeholder="Correo"
             onChange={oninputChange}
+            value={datosRegistro.email}
           />
           <input
             type="password"
             class="form-control col-sm-11 offset-sm-1   col-lg-4 rounded-0 offset-lg-4 my-2 mt-3 p-2 bg-outline-dark text-dark"
             id="pass"
             aria-describedby="emailHelp"
-            name="contrasena"
+            name="password"
             placeholder="Contraseña"
             onChange={oninputChange}
+            value={datosRegistro.password}
           />
           <input
             type="password"
             class="form-control col-sm-11 offset-sm-1   col-lg-4 rounded-0 offset-lg-4 my-2 mt-3 p-2 bg-outline-dark text-dark"
             id="pass"
             aria-describedby="emailHelp"
-            name="contrasena"
+            name="passwordConfirmar"
             placeholder="Repita la contraseña"
             onChange={oninputChange}
+            value={datosRegistro.passwordConfirmar}
           />
           <input
             type="submit"

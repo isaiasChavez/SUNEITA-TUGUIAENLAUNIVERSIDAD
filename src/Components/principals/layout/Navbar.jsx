@@ -1,15 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../../../img/logo.png";
 import AuthContext from "../../../State/autenticacion/authContext";
 
-const Navbar = () => {
-  const { authData } = useContext(AuthContext);
-
-  const cerrarSesion = () => {
-    authData.cerrarSesion();
-  };
-
+const Navbar = (props) => {
+  const authContext = useContext(AuthContext);
+  const { autenticado, cerrarSesion } = authContext;
+  useEffect(() => {}, [autenticado]);
   return (
     <>
       <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top pb-0 navigation ">
@@ -58,58 +55,59 @@ const Navbar = () => {
                 Bazar
               </NavLink>
             </li>
-
-            <div className="d-flex">
-              <li class="px-1">
-                <NavLink
-                  to={"/profile"}
-                  className="nav-link  pb-3"
-                  activeClassName="active"
-                >
-                  Perfil
-                </NavLink>
-              </li>
-              <li class="px-1">
-                <NavLink
-                  to={"/crearPublicacion"}
-                  className="btn btn-dark w-100 mb-2"
-                  activeClassName="active"
-                >
-                  Publicar
-                </NavLink>
-              </li>
-              <li class="px-1">
-                <NavLink
-                  to={"/"}
-                  className="btn px-0  w-100 mb-2"
-                  activeClassName="active"
-                  onClick={cerrarSesion}
-                >
-                  Cerrar Sesión
-                </NavLink>
-              </li>
-            </div>
-
-            <div className="d-flex">
-              <li class="px-1">
-                <NavLink
-                  to={"/ingresar"}
-                  className="btn  w-100 mb-2"
-                  activeClassName="active"
-                >
-                  Ingresar
-                </NavLink>
-              </li>
-              <li class="px-1">
-                <NavLink
-                  to={"/registrarse"}
-                  className="btn  w-100 mb-2"
-                  activeClassName="active"
-                >
-                  Registrarse
-                </NavLink>
-              </li>
-            </div>
+            {autenticado ? (
+              <div className="d-flex">
+                <li class="px-1">
+                  <NavLink
+                    to={"/profile"}
+                    className="nav-link  pb-3"
+                    activeClassName="active"
+                  >
+                    Perfil
+                  </NavLink>
+                </li>
+                <li class="px-1">
+                  <NavLink
+                    to={"/crearPublicacion"}
+                    className="btn btn-dark w-100 mb-2"
+                    activeClassName="active"
+                  >
+                    Publicar
+                  </NavLink>
+                </li>
+                <li class="px-1">
+                  <NavLink
+                    onClick={cerrarSesion}
+                    to={"/"}
+                    className="btn px-0  w-100 mb-2"
+                    activeClassName="active"
+                  >
+                    Cerrar Sesión
+                  </NavLink>
+                </li>
+              </div>
+            ) : (
+              <div className="d-flex">
+                <li class="px-1">
+                  <NavLink
+                    to={"/ingresar"}
+                    className="btn  w-100 mb-2"
+                    activeClassName="active"
+                  >
+                    Ingresar
+                  </NavLink>
+                </li>
+                <li class="px-1">
+                  <NavLink
+                    to={"/registrarse"}
+                    className="btn  w-100 mb-2"
+                    activeClassName="active"
+                  >
+                    Registrarse
+                  </NavLink>
+                </li>
+              </div>
+            )}
           </ul>
         </div>
       </nav>

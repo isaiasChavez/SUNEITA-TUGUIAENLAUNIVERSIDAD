@@ -8,14 +8,21 @@ body {
   padding: 0;
   font-family: Cereal !important;
 }
-button{
+button {
   border: none;
+}
+
+/* Quita los controles a los imputs number */
+input[type="number"] {
+  -webkit-appearance: textfield !important;
+  margin: 0;
+  -moz-appearance: textfield !important;
 }
 .App {
   padding: 0;
   background-size: cover;
 }
-.card-publication{
+.card-publication {
   padding-top: 5em;
   height: 100%;
 }
@@ -35,11 +42,11 @@ button{
   max-height: 19em;
   font-family: Cereal;
 }
-p{
+p {
   margin: 0;
-  padding:0;
+  padding: 0;
 }
-.margin-for-nav{
+.margin-for-nav {
   padding-top: 8em;
 }
 .text-smaller {

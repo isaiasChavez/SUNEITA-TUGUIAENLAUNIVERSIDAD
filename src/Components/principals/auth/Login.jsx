@@ -12,8 +12,6 @@ const Login = (props) => {
     }
   }, [autenticado, props.history]);
 
-  console.log(authContext);
-
   const [datosLogin, setDatosLogin] = useState({
     email: "",
     password: "",

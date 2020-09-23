@@ -1,18 +1,24 @@
 import React from "react";
 import { useState } from "react";
 import { useHistory, Route, useRouteMatch } from "react-router-dom";
-import Form1 from "./Form1";
-import Form2 from "./Form2";
-import Form3 from "./Form3";
-import Form4 from "./Form4";
-import Form5 from "./Form5";
-import Form6 from "./Form6";
+import FormTipoCuarto from "./Form1";
+import FormServicios from "./FormServicios";
+import FormZonas from "./FormZonas";
+import FormMedidasCuarto from "./FormMedidasCuarto";
+import FormDescripcion from "./FormDescripcion";
+import FormBano from "./FormBano";
+import FormPrecontra from "./FormPrecontra";
+import FormDireccion from "./FormDireccion";
 
 const FormularioNuevaPublicacion = () => {
   let match = useRouteMatch();
   const route = useHistory();
 
   const [dataFormulario, setdataFormulario] = useState({
+    titulo: "",
+    descripcion: "",
+    activa: true,
+    publicante: "",
     tipoCuarto: "",
     servicios: {
       aguaCRef: false,
@@ -28,13 +34,36 @@ const FormularioNuevaPublicacion = () => {
       zcRef: false,
       ztRef: false,
       cochRef: false,
+      cocinaRef: false,
+      balconRef: false,
     },
+    reglasedificio: {
+      mascotas: false,
+      fiestas: false,
+    },
+    soloestudiantes: null,
+    mascotas: null,
     tipobano: "",
-    precio: 0,
+    medidascuarto: {
+      largo: null,
+      ancho: null,
+    },
+    seguridad: {
+      camaras: false,
+    },
+    luzincluida: null,
+    precio: null,
+    deposito: null,
     tipocontrato: "",
     direccion: "",
+    asentamiento: "",
+    numerointerior: null,
+    numeroexterior: null,
     ciudad: "",
     estado: "",
+    referencias: "",
+    contacto: "",
+
     codigopostal: "",
   });
 
@@ -45,43 +74,66 @@ const FormularioNuevaPublicacion = () => {
   return (
     <>
       <Route exact path={`${match.url}/`}>
-        <Form1
+        <FormTipoCuarto
           onDataChange={onDataChange}
           dataFormulario={dataFormulario}
           route={route}
         />
       </Route>
 
-      <Route exact path={`${match.url}/cp-1`}>
-        <Form2
+      <Route exact path={`${match.url}/servicios`}>
+        <FormServicios
           onDataChange={onDataChange}
           dataFormulario={dataFormulario}
           route={route}
         />
       </Route>
-      <Route exact path={`${match.url}/cp-1/cp-2`}>
-        <Form3
+      <Route exact path={`${match.url}/servicios/zonas`}>
+        <FormZonas
           onDataChange={onDataChange}
           dataFormulario={dataFormulario}
           route={route}
         />
       </Route>
-      <Route exact path={`${match.url}/cp-1/cp-2/cp-3`}>
-        <Form4
+
+      <Route exact path={`${match.url}/servicios/zonas/medidas`}>
+        <FormMedidasCuarto
           onDataChange={onDataChange}
           dataFormulario={dataFormulario}
           route={route}
         />
       </Route>
-      <Route exact path={`${match.url}/cp-1/cp-2/cp-3/cp-4`}>
-        <Form5
+
+      <Route exact path={`${match.url}/servicios/zonas/medidas/bano`}>
+        <FormBano
           onDataChange={onDataChange}
           dataFormulario={dataFormulario}
           route={route}
         />
       </Route>
-      <Route exact path={`${match.url}/cp-1/cp-2/cp-3/cp-4/cp-5`}>
-        <Form6
+      <Route exact path={`${match.url}/servicios/zonas/medidas/bano/precontra`}>
+        <FormPrecontra
+          onDataChange={onDataChange}
+          dataFormulario={dataFormulario}
+          route={route}
+        />
+      </Route>
+      <Route
+        exact
+        path={`${match.url}/servicios/zonas/medidas/bano/precontra/direccion`}
+      >
+        <FormDireccion
+          setdataFormulario={setdataFormulario}
+          onDataChange={onDataChange}
+          dataFormulario={dataFormulario}
+          route={route}
+        />
+      </Route>
+      <Route
+        exact
+        path={`${match.url}/servicios/zonas/medidas/bano/precontra/direccion/descripcion`}
+      >
+        <FormDescripcion
           onDataChange={onDataChange}
           dataFormulario={dataFormulario}
           route={route}

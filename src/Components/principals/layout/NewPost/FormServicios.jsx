@@ -1,4 +1,7 @@
 import React, { Fragment } from "react";
+
+import img from "../../../../img/reading.svg";
+
 import { useRef } from "react";
 import { useRouteMatch } from "react-router-dom";
 
@@ -28,12 +31,12 @@ const Form2 = ({ onDataChange, dataFormulario, route }) => {
         "¿Estas seguro que no cuentas con ningún servicio? La publicación será colocada como 'Solo la construccion'"
       );
       if (respuesta) {
-        route.push(`${match.url}/cp-2`);
+        route.push(`${match.url}/zonas`);
       } else {
         return;
       }
     }
-    route.push(`${match.url}/cp-2`);
+    route.push(`${match.url}/zonas`);
   };
 
   const onchange = () => {
@@ -58,7 +61,7 @@ const Form2 = ({ onDataChange, dataFormulario, route }) => {
     <Fragment>
       <div className="container min-vh-100  d-flex flex-column justify-content-center w-100 ">
         <div className="row ">
-          <div className="col-lg-8 ">
+          <div className="col-lg-7 ">
             <div className="row w-100">
               <h2>¿Qué servicios ofreces?</h2>
             </div>
@@ -157,6 +160,9 @@ const Form2 = ({ onDataChange, dataFormulario, route }) => {
                 </button>
               </div>
             </form>
+          </div>
+          <div className="col-lg-5">
+            <img src={img} alt="" className="img-fluid" />
           </div>
         </div>
       </div>

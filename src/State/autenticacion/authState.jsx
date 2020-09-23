@@ -25,15 +25,20 @@ const AuthState = (props) => {
 
   const registrarUsuario = async (datos) => {
     try {
-      const respuesta = await clienteAxios.post("/api/usuarios", datos);
+      const respuesta = await clienteAxios.post("/api/users", datos);
       console.log(respuesta.data);
       dispatch({ type: REGISTRO_EXITOSO, payload: respuesta.data });
+      return true;
     } catch (error) {
-      console.log(error.response.data.msg);
+      console.log(error.response.data.msg, "mensaje");
+      alert(error.response.data.msg);
+      return false;
     }
   };
 
-  const cerrarSesion = () => {};
+  const cerrarSesion = () => {
+    dispatch({ type: CERRAR_SESION });
+  };
 
   const usuarioAutenticado = async () => {
     const token = localStorage.getItem("token");
@@ -49,6 +54,7 @@ const AuthState = (props) => {
         type: OBTENER_USUARIO,
         payload: respuesta.data.usuario,
       });
+      console.log(state);
     } catch (error) {
       console.log(error);
     }
@@ -73,6 +79,8 @@ const AuthState = (props) => {
         usuario: state.usuario,
         registrarUsuario,
         iniciarSesion,
+        usuarioAutenticado,
+        cerrarSesion,
       }}
     >
       {props.children}

@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import img from "../../../../img/great-idea.svg";
 import { useRouteMatch } from "react-router-dom";
 const Form1 = ({ onDataChange, dataFormulario, route }) => {
   let match = useRouteMatch();
@@ -8,7 +9,7 @@ const Form1 = ({ onDataChange, dataFormulario, route }) => {
     if (dataFormulario.tipoCuarto === "") {
       alert("No puedes avanzar sin seleccionar");
     } else {
-      route.push(`${match.url}/cp-1`);
+      route.push(`${match.url}/servicios`);
     }
   };
 
@@ -16,7 +17,7 @@ const Form1 = ({ onDataChange, dataFormulario, route }) => {
     <Fragment>
       <div className="container min-vh-100  d-flex flex-column justify-content-center w-100 ">
         <div className="row ">
-          <div className="col-lg-8 ">
+          <div className="col-lg-7 ">
             <div className="row w-100">
               <h2>Hola, vamos a crear el anuncio</h2>
             </div>
@@ -72,6 +73,9 @@ const Form1 = ({ onDataChange, dataFormulario, route }) => {
                 </button>
               </div>
             </form>
+          </div>
+          <div className="col-lg-5">
+            <img src={img} alt="" />
           </div>
         </div>
       </div>
