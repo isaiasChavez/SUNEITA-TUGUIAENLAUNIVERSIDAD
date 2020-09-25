@@ -1,9 +1,12 @@
-import React, { useReducer } from "react";
+import React, { useContext, useReducer } from "react";
 import clienteAxios from "../../config/axios";
 import TokenAuth from "../../config/token";
 
 import AuthContext from "./authContext";
 import AuthReducer from "./authReducer";
+
+import AlertasContext from "../alertas/alertasContext";
+
 import {
   REGISTRO_EXITOSO,
   REGISTRO_ERROR,
@@ -14,6 +17,7 @@ import {
 } from "../../types/index";
 
 const AuthState = (props) => {
+  const { mostrarAlerta } = useContext(AlertasContext);
   const initialState = {
     autenticado: false,
     mensaje: "",
@@ -26,12 +30,11 @@ const AuthState = (props) => {
   const registrarUsuario = async (datos) => {
     try {
       const respuesta = await clienteAxios.post("/api/users", datos);
-      console.log(respuesta.data);
+
       dispatch({ type: REGISTRO_EXITOSO, payload: respuesta.data });
       return true;
     } catch (error) {
-      console.log(error.response.data.msg, "mensaje");
-      alert(error.response.data.msg);
+      mostrarAlerta(error.response.data.msg, "error");
       return false;
     }
   };
@@ -49,25 +52,29 @@ const AuthState = (props) => {
 
     try {
       const respuesta = await clienteAxios.get("/api/auth");
-      console.log(respuesta);
       dispatch({
         type: OBTENER_USUARIO,
         payload: respuesta.data.usuario,
       });
-      console.log(state);
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data.msg);
+      dispatch({
+        type: LOGIN_ERROR,
+      });
+      return false;
     }
   };
 
   const iniciarSesion = async (datos) => {
     try {
-      console.log(datos);
       const respuesta = await clienteAxios.post("/api/auth", datos);
       console.log("Respuesta aut", respuesta);
       dispatch({ type: LOGIN_EXITOSO, payload: respuesta.data });
       usuarioAutenticado();
-    } catch (error) {}
+    } catch (error) {
+      mostrarAlerta(error.response.data.msg, "error");
+      return false;
+    }
   };
 
   return (

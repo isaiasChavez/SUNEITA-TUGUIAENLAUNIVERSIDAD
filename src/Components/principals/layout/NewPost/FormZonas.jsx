@@ -1,9 +1,13 @@
-import React, { Fragment, useRef } from "react";
+import React, { Fragment, useRef, useContext } from "react";
 import { useRouteMatch } from "react-router-dom";
+import AlertasContext from "../../../../State/alertas/alertasContext";
+
 import img from "../../../../img/innovation_.svg";
 
 const Form3 = ({ onDataChange, dataFormulario, route }) => {
   let match = useRouteMatch();
+  const alertasContext = useContext(AlertasContext);
+  const { mostrarAlerta } = alertasContext;
 
   const zlrRef = useRef();
   const zltRef = useRef();
@@ -27,14 +31,8 @@ const Form3 = ({ onDataChange, dataFormulario, route }) => {
     }
     //Se da la oportunidad de dejar sola la publicación
     if (zonasDelCuarto === 0) {
-      const respuesta = window.confirm(
-        "¿Estas seguro que no cuentas con ningúna zona? La publicación será colocada como 'Solo la construccion'"
-      );
-      if (respuesta) {
-        route.replace(`${match.url}/medidas`);
-      } else {
-        return;
-      }
+      mostrarAlerta("Por favor selecciona al menos un campo", "warning");
+      return;
     }
     route.push(`${match.url}/medidas`);
   };

@@ -1,9 +1,13 @@
 import React, { Fragment, useState, useContext, useEffect } from "react";
 import Footer from "../layout/Footer";
+import Alert from "../../utilities/Alert";
 import AuthContext from "../../../State/autenticacion/authContext";
-
+import AlertasContext from "../../../State/alertas/alertasContext";
 const Login = (props) => {
   const authContext = useContext(AuthContext);
+  const alertasContext = useContext(AlertasContext);
+
+  const { mostrarAlerta } = alertasContext;
 
   const { autenticado } = authContext;
   useEffect(() => {
@@ -24,6 +28,14 @@ const Login = (props) => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
+    if (datosLogin.email.trim() === "") {
+      mostrarAlerta("El email está vacio", "error");
+      return;
+    }
+    if (datosLogin.password.trim() === "") {
+      mostrarAlerta("El password está vacio", "error");
+      return;
+    }
     authContext.iniciarSesion(datosLogin);
   };
 

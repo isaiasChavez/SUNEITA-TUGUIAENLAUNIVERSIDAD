@@ -8,6 +8,7 @@ import {
   OBTENER_RENTAS_TIPO,
   RENTA_ACTUAL,
   VALIDAR_RENTA,
+  OBTENER_RENTAS_USUARIO,
 } from "../../types/index";
 
 export default (state, action) => {
@@ -22,14 +23,22 @@ export default (state, action) => {
       return {
         ...state,
         rentasSeleccionadas: state.rentas.filter(
-          (renta) => renta.tipo === action.payload
+          (renta) => renta.tipoCuarto === action.payload
         ),
       };
+    case OBTENER_RENTAS_USUARIO:
+      return {
+        ...state,
+        rentasUsuario: action.payload,
+        errortarea: false,
+      };
+
     case AGREGAR_RENTA:
       return {
         ...state,
         rentasUsuario: [...state.rentasUsuario, action.payload],
         //falta jalarlos al state de todas las rentas
+        rentas: [...state.rentas, action.payload],
         errortarea: false,
       };
     case VALIDAR_RENTA:
@@ -42,17 +51,18 @@ export default (state, action) => {
         ),
       };
     case RENTA_ACTUAL:
-      return {
+      console.log(state.rentas, "°°°°°");
+      const data = {
         ...state,
         rentaSeleccionada: state.rentas.filter((renta) => {
-          console.log(typeof renta._id, renta._id);
-          console.log(typeof action.payload, action.payload);
-
-          if (parseInt(renta._id) === parseInt(action.payload)) {
+          console.log("hasdfasdfiojasdfpoisadfpsadfoh");
+          if (renta._id === action.payload) {
             return renta;
           }
         })[0],
       };
+      return data;
+
     case LIMPIAR_RENTA:
       return { ...state, rentaSeleccionada: null };
     default:

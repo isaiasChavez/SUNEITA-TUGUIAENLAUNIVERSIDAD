@@ -1,9 +1,24 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import { useRouteMatch } from "react-router-dom";
+import {
+  MES,
+  BIMESTRE,
+  TRIMESTRE,
+  SEMESTRE,
+  ANUAL,
+  SIN_CONTRATO,
+  MES_DEPOSITO,
+  SIN_DEPOSITO,
+  MEDIOMES_DEPOSITO,
+} from "../../../../types";
+import AlertasContext from "../../../../State/alertas/alertasContext";
+
 import img from "../../../../img/great-idea.svg";
 
 const Form4 = ({ onDataChange, dataFormulario, route }) => {
   let match = useRouteMatch();
+  const alertasContext = useContext(AlertasContext);
+  const { mostrarAlerta } = alertasContext;
 
   const nextPage = (e) => {
     console.log("Está pasando");
@@ -15,16 +30,18 @@ const Form4 = ({ onDataChange, dataFormulario, route }) => {
       dataFormulario.precio < 400 ||
       dataFormulario.deposito === null
     ) {
-      alert("Por favor coloca datos validos");
+      mostrarAlerta("Por favor coloca datos validos", "warning");
       return;
     }
 
     if (dataFormulario.tipocontrato === "") {
       alert("No puedes dejar este campo vacio");
+      mostrarAlerta("Coloca un contrato", "warning");
       return;
     }
     if (dataFormulario.deposito === "") {
-      alert("No puedes dejar este campo vacio");
+      mostrarAlerta("Coloca un deposito", "warning");
+
       return;
     }
     route.push(`${match.url}/direccion`);
@@ -65,12 +82,12 @@ const Form4 = ({ onDataChange, dataFormulario, route }) => {
                       value={dataFormulario.tipocontrato}
                     >
                       <option selected>Escoje</option>
-                      <option value="mes">Por mes</option>
-                      <option value="bimestre">Por bimestre</option>
-                      <option value="trimestre">Por trimestre</option>
-                      <option value="semestre">Por semestre</option>
-                      <option value="año">Por año</option>
-                      <option value="sin contrato">Sin contrato</option>
+                      <option value={MES}>Por mes</option>
+                      <option value={BIMESTRE}>Por bimestre</option>
+                      <option value={TRIMESTRE}>Por trimestre</option>
+                      <option value={SEMESTRE}>Por semestre</option>
+                      <option value={ANUAL}>Por año</option>
+                      <option value={SIN_CONTRATO}>Sin contrato</option>
                     </select>
                   </div>
                 </div>
@@ -87,9 +104,11 @@ const Form4 = ({ onDataChange, dataFormulario, route }) => {
                       value={dataFormulario.deposito}
                     >
                       <option selected>Escoje</option>
-                      <option value="sin deposito">Sin depósito</option>
-                      <option value="medio mes">Medio mes de renta</option>
-                      <option value="Un mes de renta">Mes de renta</option>
+                      <option value={SIN_DEPOSITO}>Sin depósito</option>
+                      <option value={MEDIOMES_DEPOSITO}>
+                        Medio mes de renta
+                      </option>
+                      <option value={MES_DEPOSITO}>Mes de renta</option>
                     </select>
                   </div>
                 </div>

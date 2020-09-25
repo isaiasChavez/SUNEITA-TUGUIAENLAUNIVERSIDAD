@@ -1,11 +1,13 @@
-import React, { Fragment } from "react";
-import { useEffect } from "react";
+import React, { Fragment, useContext } from "react";
+import AlertasContext from "../../../../State/alertas/alertasContext";
+
 import { useRouteMatch } from "react-router-dom";
 import img from "../../../../img/city.svg";
 import axios from "axios";
 const Form4 = ({ onDataChange, dataFormulario, route, setdataFormulario }) => {
   let match = useRouteMatch();
-
+  const alertasContext = useContext(AlertasContext);
+  const { mostrarAlerta } = alertasContext;
   const traerInfoCP = async () => {
     try {
       const data = await axios(
@@ -37,7 +39,7 @@ const Form4 = ({ onDataChange, dataFormulario, route, setdataFormulario }) => {
       dataFormulario.numeroexterior === "" ||
       dataFormulario.numeroexterior === null
     ) {
-      alert("Hay campos invalidos");
+      mostrarAlerta("Faltan datos", "warning");
       return;
     }
     route.push(`${match.url}/descripcion`);
@@ -67,7 +69,7 @@ const Form4 = ({ onDataChange, dataFormulario, route, setdataFormulario }) => {
               </div>
               <div className="form-row">
                 <div class="form-group col-md-3 d-block">
-                  <label for="numerointerior">Número Interior</label>
+                  <label for="numerointerior">Número Interior </label>
                   <input
                     type="number"
                     class="form-control "
@@ -76,6 +78,9 @@ const Form4 = ({ onDataChange, dataFormulario, route, setdataFormulario }) => {
                     value={dataFormulario.numerointerior}
                     onChange={onDataChange}
                   />
+                  <span className="text-muted mt-2 text-smaller">
+                    (opcional)
+                  </span>
                 </div>
                 <div class="form-group col-md-3 d-block">
                   <label for="numeroexterior">Número exterior</label>

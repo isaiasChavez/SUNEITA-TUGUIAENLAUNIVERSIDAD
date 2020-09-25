@@ -1,4 +1,6 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
+import ScrollToTopOnMount from "../../routes/ScrollToTopOnMount";
+import { CASA, DEPARTAMENTO, HABITACION } from "../../../types";
 import Renta from "./Renta";
 import Footer from "../layout/Footer";
 import Hero from "../layout/Hero";
@@ -16,17 +18,18 @@ const Rentas = () => {
   } = useContext(rentasContext);
 
   const getCasas = () => {
-    obtenerRentasPorTipo("casa");
+    obtenerRentasPorTipo(CASA);
   };
   const getDepartamentos = () => {
-    obtenerRentasPorTipo("departamento");
+    obtenerRentasPorTipo(DEPARTAMENTO);
   };
   const getHabitaciones = () => {
-    obtenerRentasPorTipo("habitacion");
+    obtenerRentasPorTipo(HABITACION);
   };
 
   return (
     <Fragment>
+      <ScrollToTopOnMount />
       <Hero
         principal="Escoje lo que se adapte a ti"
         secondary=" Busca el cuarto que se adapte a tus necesidades, estarás aquí un buen tiempo."
@@ -39,25 +42,33 @@ const Rentas = () => {
 
       <div className="infoInicio row d-flex justify-content-around text-center p-4 m-5">
         <button
-          className=" lead col-lg-3 m-4 shadow p-3 mb-5 bg-white rounded-lg"
+          className=" lead col-lg-2 m-4 shadow p-3 mb-5 bg-white rounded-lg"
           onClick={getCasas}
         >
           <span class="material-icons  text-dark icon">house</span>
           <p className=" text-dark">Casas completas</p>
         </button>
+
         <button
-          className=" lead col-lg-3 m-4 shadow p-3 mb-5 bg-white rounded-lg"
+          className=" lead col-lg-2 m-4 shadow p-3 mb-5 bg-white rounded-lg"
           onClick={getDepartamentos}
         >
           <span class="material-icons icon">domain</span>
           <p>Departamentos</p>
         </button>
         <button
-          className=" lead col-lg-3 m-4 shadow p-3 mb-5 bg-white rounded-lg"
+          className=" lead col-lg-2 m-4 shadow p-3 mb-5 bg-white rounded-lg"
           onClick={getHabitaciones}
         >
           <span class="material-icons icon">check_box_outline_blank</span>
           <p>Habitaciones</p>
+        </button>
+        <button
+          className=" lead col-lg-2 m-4 shadow p-3 mb-5 bg-white rounded-lg"
+          onClick={obtenerRentas}
+        >
+          <span class="material-icons  text-dark icon">house</span>
+          <p className=" text-dark">Todas</p>
         </button>
       </div>
       <div className="container">
@@ -65,9 +76,14 @@ const Rentas = () => {
           {" "}
           Ultimos lugares publicados
         </div>
+
+        {/* LISTA DE RENTAS */}
         <div class=" row d-flex">
           {rentasSeleccionadas.map((renta) => (
-            <Renta renta={renta} />
+            <>
+              {console.log(renta, "Del map")}
+              <Renta renta={renta} />
+            </>
           ))}
         </div>
       </div>

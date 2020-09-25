@@ -1,28 +1,42 @@
-import React, { Fragment, useContext } from "react";
-import img from "../../../img/fondo.jpg";
+import React, { Fragment, useContext, useEffect } from "react";
+import ScrollToTopOnMount from "../../routes/ScrollToTopOnMount";
+
+import img from "../../../img/logo.png";
 import Footer from "../layout/Footer";
-import rentasContext from "../../../State/rentas/rentasContext";
+import Modal from "../../utilities/Modal";
+import RentasContext from "../../../State/rentas/rentasContext";
 import PublicationProfile from "./PublicationProfile";
 import AuthContext from "../../../State/autenticacion/authContext";
 
 const Profile = () => {
+  const rentasContext = useContext(RentasContext);
+
   const authContext = useContext(AuthContext);
-  console.log(authContext);
-  console.log(authContext);
+
+  const { obtenerRentasUsuario, rentasUsuario } = rentasContext;
+
+  useEffect(() => {
+    obtenerRentasUsuario();
+  }, []);
+
   const { usuario, cargando } = authContext;
-  const publicacionesActivas = [];
+
+  const publicacionesActivas = rentasUsuario.filter((renta) => renta.activa);
   const publicacionesInactivas = [];
+  console.log(rentasUsuario);
 
   if (cargando) {
     return null;
   }
   return (
     <Fragment>
+      <ScrollToTopOnMount />
+      <Modal />
       <div className="container min-vh-100 margin-for-nav pb-5">
         <div className="row ">
           <div class="card p-4 mb-3 w-100">
             <div class="row ">
-              <div class="col-sm-1 col-md-4">
+              <div class="col-12 col-md-4 col-lg-2">
                 <img
                   src={img}
                   class="card-img img-thumbnail img-fluid"
@@ -31,8 +45,11 @@ const Profile = () => {
               </div>
               <div class=" col-sm-11 col-md-8 col-lg-8 d-flex align-items-center align-items-center ">
                 <div class="card-body ">
-                  <div className="lead text-muted">
-                    Bienvenido {usuario.name}
+                  <div className="lead text-muted d-flex align-items-center">
+                    <span className="">Bienvenido</span>
+                    <span className="display-4 px-4 text-capitalize">
+                      {usuario.name}
+                    </span>
                   </div>
                   <h5 class="card-title text-center display-4"></h5>
                 </div>

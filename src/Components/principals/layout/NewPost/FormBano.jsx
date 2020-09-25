@@ -1,10 +1,14 @@
-import React, { Fragment } from "react";
 import img from "../../../../img/checklist.svg";
+import { COMPARTIDO, PRIVADO } from "../../../../types";
+import React, { Fragment, useContext } from "react";
 
 import { useRouteMatch } from "react-router-dom";
+import AlertasContext from "../../../../State/alertas/alertasContext";
 
 const Form4 = ({ onDataChange, dataFormulario, route }) => {
   let match = useRouteMatch();
+  const alertasContext = useContext(AlertasContext);
+  const { mostrarAlerta } = alertasContext;
 
   const nextPage = (e) => {
     e.preventDefault();
@@ -16,7 +20,7 @@ const Form4 = ({ onDataChange, dataFormulario, route }) => {
       dataFormulario.soloestudiantes === null ||
       dataFormulario.mascotas === null
     ) {
-      alert("Hay campos vacios");
+      mostrarAlerta("Hay campos vacios", "warning");
       return;
     }
     route.push(`${match.url}/precontra`);
@@ -35,9 +39,12 @@ const Form4 = ({ onDataChange, dataFormulario, route }) => {
                 <input
                   class="form-check-input"
                   type="radio"
-                  id="bc"
+                  id="compartido"
                   name="tipobano"
-                  value="compartido"
+                  value={COMPARTIDO}
+                  checked={
+                    dataFormulario.tipobano === COMPARTIDO ? true : false
+                  }
                   onChange={onDataChange}
                 />
                 <label class="form-check-label" for="bc">
@@ -48,9 +55,10 @@ const Form4 = ({ onDataChange, dataFormulario, route }) => {
                 <input
                   class="form-check-input"
                   type="radio"
-                  id="bp"
+                  id="banoprivado"
                   name="tipobano"
-                  value="privado"
+                  value={PRIVADO}
+                  checked={dataFormulario.tipobano === PRIVADO ? true : false}
                   onChange={onDataChange}
                 />
                 <label class="form-check-label" for="bp">
@@ -66,6 +74,7 @@ const Form4 = ({ onDataChange, dataFormulario, route }) => {
                   type="radio"
                   name="luzincluida"
                   id="luzincluidasi"
+                  checked={dataFormulario.luzincluida === true ? true : false}
                   value={true}
                   onChange={onDataChange}
                 />
@@ -81,6 +90,7 @@ const Form4 = ({ onDataChange, dataFormulario, route }) => {
                   name="luzincluida"
                   value={false}
                   onChange={onDataChange}
+                  checked={dataFormulario.luzincluida === false ? true : false}
                 />
                 <label class="form-check-label" for="luzincluidano">
                   No
@@ -98,6 +108,9 @@ const Form4 = ({ onDataChange, dataFormulario, route }) => {
                   id="soloestudiantessi"
                   value={true}
                   onChange={onDataChange}
+                  checked={
+                    dataFormulario.soloestudiantes === true ? true : false
+                  }
                 />
                 <label class="form-check-label" for="luzincluidasi">
                   Si, solo estudiantes.
@@ -111,6 +124,9 @@ const Form4 = ({ onDataChange, dataFormulario, route }) => {
                   name="soloestudiantes"
                   value={false}
                   onChange={onDataChange}
+                  checked={
+                    dataFormulario.soloestudiantes === false ? true : false
+                  }
                 />
                 <label class="form-check-label" for="luzincluidano">
                   No, también civiles.
@@ -128,6 +144,7 @@ const Form4 = ({ onDataChange, dataFormulario, route }) => {
                   id="mascotassi"
                   value={true}
                   onChange={onDataChange}
+                  checked={dataFormulario.mascotas === true ? true : false}
                 />
                 <label class="form-check-label" for="mascotassi">
                   Si.
@@ -141,6 +158,7 @@ const Form4 = ({ onDataChange, dataFormulario, route }) => {
                   name="mascotas"
                   value={false}
                   onChange={onDataChange}
+                  checked={dataFormulario.mascotas === false ? true : false}
                 />
                 <label class="form-check-label" for="mascotasno">
                   No

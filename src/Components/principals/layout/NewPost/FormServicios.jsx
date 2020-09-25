@@ -1,12 +1,15 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 
 import img from "../../../../img/reading.svg";
+import AlertasContext from "../../../../State/alertas/alertasContext";
 
 import { useRef } from "react";
 import { useRouteMatch } from "react-router-dom";
 
 const Form2 = ({ onDataChange, dataFormulario, route }) => {
   let match = useRouteMatch();
+  const alertasContext = useContext(AlertasContext);
+  const { mostrarAlerta } = alertasContext;
 
   const aguaCRef = useRef();
   const wfRef = useRef();
@@ -27,15 +30,10 @@ const Form2 = ({ onDataChange, dataFormulario, route }) => {
       }
     }
     if (numeroDeServicios === 0) {
-      const respuesta = window.confirm(
-        "¿Estas seguro que no cuentas con ningún servicio? La publicación será colocada como 'Solo la construccion'"
-      );
-      if (respuesta) {
-        route.push(`${match.url}/zonas`);
-      } else {
-        return;
-      }
+      mostrarAlerta("Por favor selecciona al menos un servicio", "warning");
+      return;
     }
+
     route.push(`${match.url}/zonas`);
   };
 

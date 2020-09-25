@@ -1,4 +1,6 @@
 import React, { Fragment } from "react";
+import ScrollToTopOnMount from "../../routes/ScrollToTopOnMount";
+
 import Hero from "../layout/Hero";
 import Slider from "../layout/Slider";
 import Footer from "../layout/Footer";
@@ -11,6 +13,7 @@ import { Link } from "react-router-dom";
 const Inicio = () => {
   return (
     <Fragment>
+      <ScrollToTopOnMount />
       <div className=" min-vh-100">
         <Slider />
         <Hero

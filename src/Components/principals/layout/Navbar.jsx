@@ -1,11 +1,15 @@
 import React, { useContext, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
+import Alert from "../../utilities/Alert";
+
 import Logo from "../../../img/logo.png";
+
 import AuthContext from "../../../State/autenticacion/authContext";
 
 const Navbar = (props) => {
   const authContext = useContext(AuthContext);
   const { autenticado, cerrarSesion } = authContext;
+
   useEffect(() => {}, [autenticado]);
   return (
     <>
@@ -111,6 +115,7 @@ const Navbar = (props) => {
           </ul>
         </div>
       </nav>
+      <Alert />
     </>
   );
 };

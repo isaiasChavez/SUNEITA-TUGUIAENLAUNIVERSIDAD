@@ -1,11 +1,14 @@
 import React, { Fragment, useState, useContext, useEffect } from "react";
 import Footer from "../layout/Footer";
 import AuthContext from "../../../State/autenticacion/authContext";
-
+import AlertasContext from "../../../State/alertas/alertasContext";
 import "react-datepicker/dist/react-datepicker.css";
 
 const Registrarse = (props) => {
   const authContext = useContext(AuthContext);
+  const alertasContext = useContext(AlertasContext);
+
+  const { mostrarAlerta } = alertasContext;
 
   useEffect(() => {
     if (authContext.autenticado) {
@@ -47,15 +50,18 @@ const Registrarse = (props) => {
       password.trim() === "" ||
       passwordConfirmar.trim() === ""
     ) {
-      alert("No puedes dejar campos vacios");
+      mostrarAlerta("Hay campos vacios", "warning");
       return;
     }
     if (password.length < 6) {
-      alert("Password debe ser de al menos 6 caracteres");
+      mostrarAlerta(
+        "La contraseña debe tener al menos 6 caracteres",
+        "warning"
+      );
       return;
     }
     if (password !== passwordConfirmar) {
-      alert("Las contraseñas no coinciden");
+      mostrarAlerta("La contraseñas no coinciden", "warning");
     }
 
     try {

@@ -1,15 +1,27 @@
-import React from "react";
-import { useRef } from "react";
+import React, { useContext } from "react";
+import AlertasContext from "../../../../State/alertas/alertasContext";
+
 const FormDescripcion = ({ onDataChange, dataFormulario, route }) => {
+  const alertasContext = useContext(AlertasContext);
+  const { mostrarAlerta } = alertasContext;
+
   const nextPage = (e) => {
     e.preventDefault();
     //Se evalua cuantas zonas fueron marcadas para no dejar vacio el campo
     //Se da la oportunidad de dejar sola la publicación
-    if (dataFormulario.titulo === "" || dataFormulario.descripcion === "") {
-      alert("Hay campos vacios");
+    if (
+      dataFormulario.titulo === "" ||
+      dataFormulario.descripcion === "" ||
+      dataFormulario.contacto === ""
+    ) {
+      mostrarAlerta("Hay campos vacios");
       return;
     }
-    route.push(`/`);
+    if (dataFormulario.contacto.length > 15) {
+      mostrarAlerta("Coloca un contacto valido");
+      return;
+    }
+    route.push(`/crearPublicacion/confirm`);
   };
 
   return (
@@ -52,25 +64,18 @@ const FormDescripcion = ({ onDataChange, dataFormulario, route }) => {
                 <h2 className="h4 ml-3 ">
                   Coloca el número al que te gustaría que te contactaran
                 </h2>
+                <span className="text-muted mt-2 text-smaller ml-3">
+                  También te podrán llegar mensajes al correo que proporcionaste
+                  en tu registro
+                </span>
               </div>
               <div class="ml-0 mt-3">
                 <input
                   type="number"
+                  name="contacto"
                   class="form-control quitarcontroles"
                   id="exampleFormControlInput1"
-                />
-              </div>
-              <div className="row w-100 pt-4 ">
-                <h2 className="h4 ml-3 ">
-                  Coloca un correo para que te contacten
-                </h2>
-              </div>
-              <div class="ml-0 mt-3">
-                <input
-                  type="email"
-                  class="form-control"
-                  id="exampleFormControlInput1"
-                  placeholder="nombre@ejemplo.com"
+                  onChange={onDataChange}
                 />
               </div>
 

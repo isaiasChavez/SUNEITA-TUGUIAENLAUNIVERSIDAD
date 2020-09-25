@@ -1,5 +1,6 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useContext } from "react";
+import RentasContext from "../../../../State/rentas/rentasContext";
+import AlertasContext from "../../../../State/alertas/alertasContext";
 import { useHistory, Route, useRouteMatch } from "react-router-dom";
 import FormTipoCuarto from "./Form1";
 import FormServicios from "./FormServicios";
@@ -9,16 +10,25 @@ import FormDescripcion from "./FormDescripcion";
 import FormBano from "./FormBano";
 import FormPrecontra from "./FormPrecontra";
 import FormDireccion from "./FormDireccion";
+import FormConfirm from "./FormConfirm";
 
 const FormularioNuevaPublicacion = () => {
   let match = useRouteMatch();
   const route = useHistory();
 
+  const rentasContext = useContext(RentasContext);
+  const alertasContext = useContext(AlertasContext);
+
+  const { mostrarAlerta } = alertasContext;
+
+  const { agregarRenta } = rentasContext;
+
   const [dataFormulario, setdataFormulario] = useState({
     titulo: "",
     descripcion: "",
     activa: true,
-    publicante: "",
+    creador: "",
+    username: "",
     tipoCuarto: "",
     servicios: {
       aguaCRef: false,
@@ -37,20 +47,15 @@ const FormularioNuevaPublicacion = () => {
       cocinaRef: false,
       balconRef: false,
     },
-    reglasedificio: {
-      mascotas: false,
-      fiestas: false,
-    },
-    soloestudiantes: null,
-    mascotas: null,
-    tipobano: "",
+
     medidascuarto: {
-      largo: null,
-      ancho: null,
+      largo: "",
+      ancho: "",
     },
-    seguridad: {
-      camaras: false,
-    },
+
+    mascotas: null,
+    soloestudiantes: null,
+    tipobano: "",
     luzincluida: null,
     precio: null,
     deposito: null,
@@ -63,16 +68,44 @@ const FormularioNuevaPublicacion = () => {
     estado: "",
     referencias: "",
     contacto: "",
-
     codigopostal: "",
   });
 
   const onDataChange = (e) => {
+    if (e.target.value == "false") {
+      setdataFormulario({ ...dataFormulario, [e.target.name]: false });
+      return;
+    } else if (e.target.value == "true") {
+      setdataFormulario({ ...dataFormulario, [e.target.name]: true });
+      return;
+    }
+    if (e.target.type === "number") {
+      setdataFormulario({
+        ...dataFormulario,
+        [e.target.name]: parseInt(e.target.value),
+      });
+      return;
+    }
+
     setdataFormulario({ ...dataFormulario, [e.target.name]: e.target.value });
+  };
+  const publicar = async () => {
+    try {
+      await agregarRenta(dataFormulario);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <>
+      <Route exact path={`${match.url}/confirm`}>
+        <FormConfirm
+          publicar={publicar}
+          dataFormulario={dataFormulario}
+          route={route}
+        />
+      </Route>
       <Route exact path={`${match.url}/`}>
         <FormTipoCuarto
           onDataChange={onDataChange}

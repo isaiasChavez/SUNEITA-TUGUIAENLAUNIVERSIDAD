@@ -1,4 +1,6 @@
 import React, { Fragment, useContext, useEffect } from "react";
+import ScrollToTopOnMount from "../../routes/ScrollToTopOnMount";
+
 import { Link, useRouteMatch, useParams } from "react-router-dom";
 import img from "../../../img/jesus.jpg";
 import img2 from "../../../img/studentBackground.jpg";
@@ -21,29 +23,37 @@ const Publicacion = () => {
 
   if (!rentaSeleccionada) {
     return null;
-  } else {
-    console.log(rentaSeleccionada, "asdfaf");
   }
 
   const {
     titulo,
+    luzincluida,
+    medidascuarto,
+    soloestudiantes,
     username,
-    localizacion,
+    direccion,
+    ciudad,
+    estado,
     descripcion,
+    zonasDelCuarto,
     arrendador,
     tipo,
     zona,
-    datos,
+    tipobano,
+    tipocontrato,
     servicios,
+    numeroexterior,
     precio,
+    mascotas,
+    deposito,
   } = rentaSeleccionada;
-  console.log(rentaSeleccionada);
 
   return (
     <Fragment>
+      <ScrollToTopOnMount />
       <div class="container pt-5">
         <div className="row pt-5">
-          <h2 className="d-block w-100">{titulo}</h2>
+          <h2 className="d-block w-100 text-capitalize my-5">{titulo}</h2>
           <div className=" d-block mb-3">
             <span className="lead  text-muted text-smaller">{zona}</span>
           </div>
@@ -70,7 +80,7 @@ const Publicacion = () => {
               <hr />
               <div className="row">
                 <ul className="list-group w-100">
-                  {datos.banopro ? (
+                  {tipobano == "privado" ? (
                     <li className="list-group-item">
                       Baño propio
                       <p className="text-muted">
@@ -80,12 +90,12 @@ const Publicacion = () => {
                   ) : null}
 
                   <li className="list-group-item">
-                    {datos.medidas.ancho} x {datos.medidas.largo} m2
+                    {medidascuarto.ancho} x {medidascuarto.largo} m2
                     <p className="text-muted">
                       La habitación cuenta con estas medidas de ancho y largo
                     </p>
                   </li>
-                  {datos.soloestudiantes ? (
+                  {soloestudiantes ? (
                     <li className="list-group-item">
                       Solo estudiantes
                       <p className="text-muted">
@@ -93,15 +103,15 @@ const Publicacion = () => {
                       </p>
                     </li>
                   ) : null}
-                  {datos.camaras ? (
+                  {/* {datos.camaras ? 
                     <li className="list-group-item">
                       Camaras de vigilancia
                       <p className="text-muted">
                         El edificio cuenta con esta medida de seguridad
                       </p>
                     </li>
-                  ) : null}
-                  {datos.luzincluida ? (
+                   : null} */}
+                  {luzincluida ? (
                     <li className="list-group-item">
                       Pago de luz incluido
                       <p className="text-muted">
@@ -109,7 +119,7 @@ const Publicacion = () => {
                       </p>
                     </li>
                   ) : null}
-                  {datos.cocina ? (
+                  {zonasDelCuarto.cocinaRef ? (
                     <li className="list-group-item">
                       Cocina Integrada
                       <p className="text-muted">
@@ -124,37 +134,90 @@ const Publicacion = () => {
                 <h2 className="lead font-weight-bolder w-100">Descripcion</h2>
                 <p className="py-3">{descripcion}</p>
               </div>
-              <div className="row">
+              {/* SERVICIOS */}
+              <div className="row mb-5">
                 <h2 className="lead font-weight-bolder">Servicios</h2>
                 <div className=" w-100 row-cols-lg-2 row">
-                  {servicios.wifi ? (
-                    <div className="col ">
-                      <p className="text-muted">Wifi</p>
+                  {servicios.aguaCRef ? (
+                    <div className="col p-2  d-flex justify-content-start">
+                      <span class="material-icons d-inline px-3">hot_tub</span>
+                      <p className="text-muted d-inline">Agua caliente</p>
                     </div>
                   ) : null}
-                  {servicios.cocina ? (
+                  {servicios.wfRef ? (
+                    <div className="col p-2 d-flex justify-content-start">
+                      <span class="material-icons d-inline px-3">wifi</span>
+                      <p className="text-muted d-inline">Wifi</p>
+                    </div>
+                  ) : null}
+                  {servicios.pilCRef ? (
+                    <div className="col p-2 d-flex justify-content-start">
+                      <span class="material-icons  d-inline px-3">
+                        cleaning_services
+                      </span>
+                      <p className="text-muted d-inline">
+                        Productos Iniciales de limpieza
+                      </p>
+                    </div>
+                  ) : null}
+                  {servicios.escCRef ? (
+                    <div className="col d-flex justify-content-start">
+                      <span class="material-icons d-inline px-3">computer</span>
+                      <p className="text-muted d-inline">Mesa para trabajar</p>
+                    </div>
+                  ) : null}
+                  {servicios.ganCRef ? (
+                    <div className="col d-flex justify-content-start">
+                      <span class="material-icons d-inline px-3">house</span>
+                      <p className="text-muted d-inline">Ganchos para ropa</p>
+                    </div>
+                  ) : null}
+                  {servicios.colCRef ? (
+                    <div className="col d-flex justify-content-start">
+                      <span class="material-icons d-inline px-3">
+                        single_bed
+                      </span>
+                      <p className="text-muted d-inline">Colchón</p>
+                    </div>
+                  ) : null}
+                </div>
+              </div>
+              <div className="row">
+                <h2 className="lead font-weight-bolder">Zonas Accesibles</h2>
+                <div className=" w-100 row-cols-lg-2 row">
+                  {zonasDelCuarto.zltRef ? (
+                    <div className="col ">
+                      <p className="text-muted">Zona para lavar trastes</p>
+                    </div>
+                  ) : null}
+                  {zonasDelCuarto.zlrRef ? (
+                    <div className="col">
+                      <p className="text-muted">Zona para lavar ropa</p>
+                    </div>
+                  ) : null}
+                  {zonasDelCuarto.zcRef ? (
+                    <div className="col">
+                      <p className="text-muted">Zonas comunes</p>
+                    </div>
+                  ) : null}
+                  {zonasDelCuarto.ztRef ? (
+                    <div className="col">
+                      <p className="text-muted">Tendedero</p>
+                    </div>
+                  ) : null}
+                  {zonasDelCuarto.cochRef ? (
+                    <div className="col">
+                      <p className="text-muted">Cochera</p>
+                    </div>
+                  ) : null}
+                  {zonasDelCuarto.balconRef ? (
+                    <div className="col">
+                      <p className="text-muted">Balcón</p>
+                    </div>
+                  ) : null}
+                  {zonasDelCuarto.cocinaRef ? (
                     <div className="col">
                       <p className="text-muted">Cocina</p>
-                    </div>
-                  ) : null}
-                  {servicios.banopro ? (
-                    <div className="col">
-                      <p className="text-muted">Baño propio</p>
-                    </div>
-                  ) : null}
-                  {servicios.muebles ? (
-                    <div className="col">
-                      <p className="text-muted">Muebles</p>
-                    </div>
-                  ) : null}
-                  {servicios.ganchos ? (
-                    <div className="col">
-                      <p className="text-muted">Ganchos para ropa</p>
-                    </div>
-                  ) : null}
-                  {servicios.colchon ? (
-                    <div className="col">
-                      <p className="text-muted">Colchón</p>
                     </div>
                   ) : null}
                 </div>
@@ -185,13 +248,12 @@ const Publicacion = () => {
             <div className="row">
               <div className="col  col-lg-4">
                 <p>
-                  Calle: {localizacion.calle} # {localizacion.numero}
+                  Calle: {direccion} # {numeroexterior}
                 </p>
                 <p></p>
-                <p>{localizacion.ciudad}</p>
-                <p>{localizacion.estado}</p>
+                <p>{ciudad}</p>
+                <p>{estado}</p>
               </div>
-              <div className="col bg-primary col-lg-8">algo</div>
             </div>
           </div>
           <div className="row py-5 d-flex flex-column">
@@ -202,13 +264,18 @@ const Publicacion = () => {
                   <li className="list-group-item-dark font-weight-bold mt-3 border-0 list-group-item p-2">
                     Reglas del edificio
                   </li>
-                  <li className="list-group-item p-2">
-                    No se permiten mascotas
-                  </li>
-
-                  <li className="list-group-item p-2">
-                    No se permiten mascotas
-                  </li>
+                  {mascotas ? (
+                    <li className="list-group-item p-2">
+                      <span className="text-uppercase font-weight-bolder">
+                        Si
+                      </span>{" "}
+                      se permiten mascotas
+                    </li>
+                  ) : (
+                    <li className="list-group-item p-2">
+                      No se permiten mascotas
+                    </li>
+                  )}
                   <li className="list-group-item p-2">No se permite fumar</li>
                   <li className="list-group-item p-2">
                     No se admiten fiestas o eventos
@@ -220,10 +287,14 @@ const Publicacion = () => {
                   <li className="list-group-item-dark font-weight-bold mt-3 border-0 list-group-item p-2">
                     Normas de arrendamiento
                   </li>
-                  <li className="list-group-item p-2">Por mes o contrato</li>
 
-                  <li className="list-group-item p-2">Depósito</li>
-                  <li className="list-group-item p-2">Cóbro de daños</li>
+                  <li className="list-group-item p-2">
+                    Tipo de contrato: {tipocontrato}
+                  </li>
+
+                  <li className="list-group-item p-2">
+                    Depósito: {deposito} de renta
+                  </li>
                 </ul>
               </div>
               <div className="col-lg-4 border-0 d-flex flex-column">

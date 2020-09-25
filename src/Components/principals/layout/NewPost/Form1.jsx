@@ -1,13 +1,18 @@
-import React, { Fragment } from "react";
 import img from "../../../../img/great-idea.svg";
+import React, { Fragment, useContext } from "react";
 import { useRouteMatch } from "react-router-dom";
+import { CASA, DEPARTAMENTO, HABITACION } from "../../../../types/";
+import AlertasContext from "../../../../State/alertas/alertasContext";
+
 const Form1 = ({ onDataChange, dataFormulario, route }) => {
   let match = useRouteMatch();
+  const alertasContext = useContext(AlertasContext);
+  const { mostrarAlerta } = alertasContext;
 
   const nextPage = (e) => {
     e.preventDefault();
     if (dataFormulario.tipoCuarto === "") {
-      alert("No puedes avanzar sin seleccionar");
+      mostrarAlerta("No puedes avanzar sin seleccionar", "warning");
     } else {
       route.push(`${match.url}/servicios`);
     }
@@ -34,7 +39,7 @@ const Form1 = ({ onDataChange, dataFormulario, route }) => {
                   type="radio"
                   name="tipoCuarto"
                   id="exampleRadios1"
-                  value="habitacion"
+                  value={HABITACION}
                   onChange={onDataChange}
                 />
                 <label class="form-check-label" for="exampleRadios1">
@@ -47,7 +52,7 @@ const Form1 = ({ onDataChange, dataFormulario, route }) => {
                   type="radio"
                   name="tipoCuarto"
                   id="exampleRadios2"
-                  value="departamento"
+                  value={DEPARTAMENTO}
                   onChange={onDataChange}
                 />
                 <label class="form-check-label" for="exampleRadios2">
@@ -60,7 +65,7 @@ const Form1 = ({ onDataChange, dataFormulario, route }) => {
                   type="radio"
                   name="tipoCuarto"
                   id="exampleRadios3"
-                  value="casa"
+                  value={CASA}
                   onChange={onDataChange}
                 />
                 <label class="form-check-label" for="exampleRadios3">

@@ -1,15 +1,13 @@
-import React, { useState, useRef } from "react";
+import React, { useContext, useRef } from "react";
 import { useRouteMatch } from "react-router-dom";
+import AlertasContext from "../../../../State/alertas/alertasContext";
 import img from "../../../../img/construction.svg";
 
 const FormMedidasCuarto = ({ dataFormulario, route, onDataChange }) => {
   const anchoRef = useRef();
   const largoRef = useRef();
-
-  const [medidas, setmedidas] = useState({
-    largo: 0,
-    ancho: 0,
-  });
+  const alertasContext = useContext(AlertasContext);
+  const { mostrarAlerta } = alertasContext;
 
   let match = useRouteMatch();
   const nextPage = (e) => {
@@ -21,7 +19,7 @@ const FormMedidasCuarto = ({ dataFormulario, route, onDataChange }) => {
       !dataFormulario.medidascuarto.largo ||
       dataFormulario.medidascuarto.largo === ""
     ) {
-      alert("Faltan campos por rellenar");
+      mostrarAlerta("Faltan campos por rellenar", "warning");
       return;
     }
 
@@ -29,7 +27,7 @@ const FormMedidasCuarto = ({ dataFormulario, route, onDataChange }) => {
       dataFormulario.medidascuarto.ancho === 0 ||
       dataFormulario.medidascuarto.largo === 0
     ) {
-      alert("Campos invalidos");
+      mostrarAlerta("Campos invalidos", "warning");
       return;
     }
 
