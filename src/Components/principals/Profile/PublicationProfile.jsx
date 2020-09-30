@@ -1,33 +1,34 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import img from "../../../img/fondo.jpg";
 import RentasContext from "../../../State/rentas/rentasContext";
-
-const PublicationProfile = ({ data }) => {
-  const {
-    guardarRentaActual,
-    pausarRenta,
-    editarRenta,
-    rentaSeleccionada,
-  } = useContext(RentasContext);
-  console.log(guardarRentaActual);
+const PublicationProfile = ({ data, ruta }) => {
+  const { seleccionarRenta, pausarRenta } = useContext(RentasContext);
 
   const editarPublicacion = () => {
-    editarRenta();
+    ruta.push(`/publicacion/${data._id} `);
   };
 
   const eliminarPublicacion = () => {
-    console.log(data);
-    guardarRentaActual(data._id);
-    console.log(rentaSeleccionada);
-
-    console.log("Se ejecuto una accion");
+    seleccionarRenta(data);
   };
   const pausarPublicacion = () => {
-    pausarRenta();
+    const rentaPausada = {
+      ...data,
+      activa: false,
+    };
+    pausarRenta(rentaPausada);
+  };
+  const activarPublicacion = () => {
+    const rentaPausada = {
+      ...data,
+      activa: true,
+    };
+    pausarRenta(rentaPausada);
   };
 
   return (
-    <div class="card">
+    <div class="card col-lg-4">
       <img src={img} class="card-img-top" alt="..." />
       <div class="card-body d-flex flex-column justify-content-between">
         <h5 class="card-title">
@@ -41,24 +42,28 @@ const PublicationProfile = ({ data }) => {
           <small class="text-muted">{data.precio}</small>
         </p>
         <div className="btn-group w-100">
-          <button
-            data-target="#exampleModal"
-            data-toggle="modal"
-            type="button"
-            className="btn btn-outline-dark"
-            onClick={editarPublicacion}
-          >
-            Editar
-          </button>
-          <button
-            data-target="#exampleModal"
-            data-toggle="modal"
-            type="button"
-            className="btn btn-outline-secondary"
-            onClick={pausarPublicacion}
-          >
-            Pausar
-          </button>
+          {data.activa ? (
+            <button
+              data-target="#exampleModal"
+              data-toggle="modal"
+              type="button"
+              className="btn btn-outline-secondary"
+              onClick={pausarPublicacion}
+            >
+              Pausar
+            </button>
+          ) : (
+            <button
+              data-target="#exampleModal"
+              data-toggle="modal"
+              type="button"
+              className="btn btn-outline-primary"
+              onClick={activarPublicacion}
+            >
+              Activar
+            </button>
+          )}
+
           <button
             data-target="#exampleModal"
             data-toggle="modal"

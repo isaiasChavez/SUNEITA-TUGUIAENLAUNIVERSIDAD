@@ -34,41 +34,40 @@ const Rentas = () => {
         principal="Escoje lo que se adapte a ti"
         secondary=" Busca el cuarto que se adapte a tus necesidades, estarás aquí un buen tiempo."
         class={""}
-        textButton="¿No estás seguro?"
-        textButton2="Lee los recomendaciones publicadas"
-        button="Ir a recomendaciones"
+        textButton="¿Buscas muebles?"
+        button="Ir al bazar"
         link="consejos"
       />
 
-      <div className="infoInicio row d-flex justify-content-around text-center p-4 m-5">
+      <div className="infoInicio row d-flex justify-content-around text-center  mx-4 mt-5">
         <button
-          className=" lead col-lg-2 m-4 shadow p-3 mb-5 bg-white rounded-lg"
+          className=" lead col-5 col-lg-2 m-md-4 shadow p-3 mb-2 mb-md-5 bg-white rounded-lg"
           onClick={getCasas}
         >
           <span class="material-icons  text-dark icon">house</span>
-          <p className=" text-dark">Casas completas</p>
+          <p className=" text-dark text-smaller">Casas</p>
         </button>
 
         <button
-          className=" lead col-lg-2 m-4 shadow p-3 mb-5 bg-white rounded-lg"
+          className=" lead col-5 col-lg-2 m-md-4 shadow p-3 mb-2 mb-md-5 bg-white rounded-lg"
           onClick={getDepartamentos}
         >
           <span class="material-icons icon">domain</span>
-          <p>Departamentos</p>
+          <p className="text-smaller text-center">Depas</p>
         </button>
         <button
-          className=" lead col-lg-2 m-4 shadow p-3 mb-5 bg-white rounded-lg"
+          className=" lead col-5 col-lg-2 m-md-4 shadow p-3 mb-2 mb-md-5 bg-white rounded-lg"
           onClick={getHabitaciones}
         >
           <span class="material-icons icon">check_box_outline_blank</span>
-          <p>Habitaciones</p>
+          <p className="text-smaller text-center">Habitaciones</p>
         </button>
         <button
-          className=" lead col-lg-2 m-4 shadow p-3 mb-5 bg-white rounded-lg"
+          className=" lead col-5 col-lg-2 m-md-4 shadow p-3 mb-2 mb-md-5 bg-white rounded-lg"
           onClick={obtenerRentas}
         >
-          <span class="material-icons  text-dark icon">house</span>
-          <p className=" text-dark">Todas</p>
+          <span class="material-icons   text-dark icon">house</span>
+          <p className=" text-dark text-smaller ">Todas</p>
         </button>
       </div>
       <div className="container">
@@ -87,14 +86,13 @@ const Rentas = () => {
           ))}
         </div>
       </div>
-      <div className=" lead text-center py-5">
+      {/* <div className=" lead text-center py-5">
         <p>
           Recuerda que estos son aportes de Utemitas, las condiciones pueden
           variar cuando contactes al locatario.
         </p>
         <p className="">En un futuro tendremos información de primera mano</p>
-      </div>
-      <Footer />
+      </div> */}
     </Fragment>
   );
 };

@@ -3,12 +3,14 @@ import {
   AGREGAR_RENTA,
   ELIMINAR_RENTA,
   FORMULARIO_RENTAS,
+  SELECCIONAR_RENTA,
   LIMPIAR_RENTA,
   OBTENER_RENTAS,
   OBTENER_RENTAS_TIPO,
   RENTA_ACTUAL,
   VALIDAR_RENTA,
   OBTENER_RENTAS_USUARIO,
+  PAUSAR_RENTA,
 } from "../../types/index";
 
 export default (state, action) => {
@@ -49,9 +51,15 @@ export default (state, action) => {
         rentasUsuario: state.rentasUsuario.filter(
           (renta) => renta._id !== action.payload
         ),
+        rentaSeleccionada: null,
+      };
+
+    case SELECCIONAR_RENTA:
+      return {
+        ...state,
+        rentaSeleccionada: action.payload,
       };
     case RENTA_ACTUAL:
-      console.log(state.rentas, "°°°°°");
       const data = {
         ...state,
         rentaSeleccionada: state.rentas.filter((renta) => {
@@ -62,6 +70,13 @@ export default (state, action) => {
         })[0],
       };
       return data;
+    case PAUSAR_RENTA:
+      return {
+        ...state,
+        rentas: state.rentas.map((renta) =>
+          renta._id === action.payload._id ? action.payload : renta
+        ),
+      };
 
     case LIMPIAR_RENTA:
       return { ...state, rentaSeleccionada: null };

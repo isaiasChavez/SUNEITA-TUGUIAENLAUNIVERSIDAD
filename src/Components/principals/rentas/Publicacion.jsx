@@ -27,16 +27,17 @@ const Publicacion = () => {
 
   const {
     titulo,
+    username,
     luzincluida,
     medidascuarto,
     soloestudiantes,
-    username,
+
     direccion,
     ciudad,
     estado,
     descripcion,
     zonasDelCuarto,
-    arrendador,
+
     tipo,
     zona,
     tipobano,
@@ -74,7 +75,7 @@ const Publicacion = () => {
             <div className="col-lg-8">
               <div className="row d-flex flex-column">
                 <h3 className="font-weight-bold pt-5">
-                  {tipo} | Arrendador: {arrendador}
+                  {tipo} | Arrendador: {username}
                 </h3>
               </div>
               <hr />

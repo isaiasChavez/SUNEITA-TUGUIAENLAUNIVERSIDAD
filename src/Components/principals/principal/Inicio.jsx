@@ -19,8 +19,9 @@ const Inicio = () => {
         <Hero
           clase="d-md-none"
           principal="Busca un cuarto"
-          secondary="Recibe una recomendación"
+          secondary="Vende lo que ya no usas"
           button="Buscar un cuarto"
+          link={"rentas"}
         />
         <div className="container">
           <div className="infoInicio row d-flex justify-content-around text-center mt-5">
@@ -80,36 +81,37 @@ const Inicio = () => {
         </div>
         <div className="min-vh-100 py-5 container-fluid px-5">
           <div class="card mb-3 mt-5 pt-5 border-0">
-            <div class="row no-gutters">
+            <div class="row d-flex flex-column flex-md-row">
               <div class="col-md-5">
                 <img
                   src={imgJumbotron}
-                  class="card-img shadow img-thumbnail"
+                  class="card-img shadow img-thumbnail img-fluid"
                   alt="..."
                 />
               </div>
               <div class="col-md-7">
-                <div class="card-body d-flex flex-column align-items-end  h-75 justify-content-around">
-                  <h5 class="card-title display-4 mx-4 text-muted text-right">
+                <div class="card-body d-flex flex-column   h-75 justify-content-around">
+                  <h5 class="card-title d-none d-md-block display-4   mx-4 text-muted text-right">
+                    Vende o dona aquello que ya no usas
+                  </h5>
+                  <h5 class="card-title d-md-none display-5 h2 text-muted text-wrap  text-center">
                     Publica una recomendación para tu Suneita del pasado
                   </h5>
-                  <p class="card-text text-right lead text-muted">
+                  <p class="card-text text-center my.4 lead text-muted">
                     Publica el lugar donde recomiendas vivir, consejos de
                     supervivencia, ¿que hacer después de un examen estresante?
                   </p>
                   <Link
                     to={"/consejos"}
-                    className="btn btn-outline-dark rounded-0 btn-lg w-50 align-self-end font-weight-light  "
+                    className="btn btn-outline-dark rounded-0 btn-lg w-100 align-self-end font-weight-light  "
                   >
-                    Ver recomiendaciones
+                    Ir al bazar
                   </Link>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        <Footer />
       </div>
     </Fragment>
   );

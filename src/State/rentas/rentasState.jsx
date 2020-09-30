@@ -7,7 +7,9 @@ import {
   RENTA_ACTUAL,
   VALIDAR_RENTA,
   OBTENER_RENTAS_TIPO,
+  SELECCIONAR_RENTA,
   OBTENER_RENTAS_USUARIO,
+  PAUSAR_RENTA,
 } from "../../types";
 import clienteAxios from "../../config/axios";
 import RentasContext from "./rentasContext";
@@ -66,11 +68,11 @@ const RentasState = (props) => {
       renta.creador = usuario._id;
       renta.username = usuario.username;
       const resultado = await clienteAxios.post("api/rentas", renta);
-      console.log(resultado);
       dispatch({ type: AGREGAR_RENTA, payload: renta });
+      console.log(resultado.data);
+      mostrarAlerta(resultado.data.msg, "success");
     } catch (error) {
-      console.log("error al ingresar en restas state", error);
-      console.log(error.message);
+      mostrarAlerta(error.data.msg, "error");
     }
   };
 
@@ -78,14 +80,16 @@ const RentasState = (props) => {
     dispatch({ type: VALIDAR_RENTA });
   };
 
+  const seleccionarRenta = (renta) => {
+    dispatch({ type: SELECCIONAR_RENTA, payload: renta });
+  };
   const guardarRentaActual = (id) => {
     console.log(id);
     dispatch({ type: RENTA_ACTUAL, payload: id });
   };
-
   const eliminarRenta = async (rentaId) => {
     try {
-      const response = await clienteAxios.delete(`/api/proyectos/${rentaId}`);
+      const response = await clienteAxios.delete(`/api/rentas/${rentaId}`);
       dispatch({
         type: ELIMINAR_RENTA,
         payload: rentaId,
@@ -102,8 +106,24 @@ const RentasState = (props) => {
   const limpiarRenta = () => {
     dispatch({ type: LIMPIAR_RENTA });
   };
-  const pausarRenta = () => {
-    dispatch({ type: LIMPIAR_RENTA });
+  const pausarRenta = async (renta) => {
+    try {
+      const response = await clienteAxios.put(
+        `/api/rentas/${renta._id}`,
+        renta
+      );
+      console.log(response);
+      dispatch({
+        type: PAUSAR_RENTA,
+        payload: response.data.renta,
+      });
+      mostrarAlerta(response.data.msg, "success");
+    } catch (error) {
+      mostrarAlerta("Ocurrio un error", "error");
+      console.log(error);
+      mostrarAlerta(error.data.msg, "error");
+    }
+    obtenerRentasUsuario();
   };
 
   return (
@@ -122,6 +142,7 @@ const RentasState = (props) => {
         validarRentas,
         eliminarRenta,
         guardarRentaActual,
+        seleccionarRenta,
         limpiarRenta,
         editarRenta,
         pausarRenta,

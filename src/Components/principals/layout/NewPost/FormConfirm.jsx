@@ -1,8 +1,12 @@
 import React from "react";
 
-const FormConfirm = ({ dataFormulario, publicar }) => {
+const FormConfirm = ({ dataFormulario, route, publicar }) => {
   const { servicios, zonasDelCuarto } = dataFormulario;
 
+  const confirmarPublicacion = () => {
+    publicar();
+    route.push("/");
+  };
   return (
     <>
       <div className="container min-vh-100  d-flex flex-column justify-content-center w-100 mt-5 pt-5 ">
@@ -124,7 +128,7 @@ const FormConfirm = ({ dataFormulario, publicar }) => {
         <div className="row my-5 justify-content-center">
           <button
             className="btn btn-outline-dark py-2 btn-block"
-            onClick={publicar}
+            onClick={confirmarPublicacion}
           >
             Todo está bien, publicar
           </button>

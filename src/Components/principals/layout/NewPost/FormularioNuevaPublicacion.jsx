@@ -12,7 +12,7 @@ import FormPrecontra from "./FormPrecontra";
 import FormDireccion from "./FormDireccion";
 import FormConfirm from "./FormConfirm";
 
-const FormularioNuevaPublicacion = () => {
+const FormularioNuevaPublicacion = (props) => {
   let match = useRouteMatch();
   const route = useHistory();
 
@@ -103,7 +103,7 @@ const FormularioNuevaPublicacion = () => {
         <FormConfirm
           publicar={publicar}
           dataFormulario={dataFormulario}
-          route={route}
+          route={props.history}
         />
       </Route>
       <Route exact path={`${match.url}/`}>

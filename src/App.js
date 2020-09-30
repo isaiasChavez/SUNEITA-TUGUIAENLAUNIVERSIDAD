@@ -6,7 +6,7 @@ import { ToastContainer } from "react-toastify";
 import tokenAuth from "./config/token";
 
 import AuthState from "./State/autenticacion/authState";
-import ConsejosState from "./State/consejos/consejosState";
+import BazarState from "./State/bazar/bazarState";
 import RentasState from "./State/rentas/rentasState";
 import AlertasState from "./State/alertas/alertasState";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,12 +20,15 @@ import Registrarse from "./Components/principals/auth/Registrarse";
 import Login from "./Components/principals/auth/Login";
 import About from "./Components/principals/about/About";
 import Navbar from "./Components/principals/layout/Navbar";
-import Consejos from "./Components/principals/consejos/Consejos";
+import ProductosBazar from "./Components/principals/bazar/ProductosBazar";
+import FormularioBazar from "./Components/principals/bazar/FormularioBazar";
+
 import Publicacion from "./Components/principals/rentas/Publicacion";
 import FormularioNuevaPublicacion from "./Components/principals/layout/NewPost/FormularioNuevaPublicacion";
 import Profile from "./Components/principals/Profile/Profile";
 import Contacto from "./Components/principals/rentas/Contacto";
 import RutaPrivada from "./Components/routes/RutaPrivada";
+import Footer from "./Components/principals/layout/Footer";
 function App() {
   const token = localStorage.getItem("token");
 
@@ -47,7 +50,7 @@ function App() {
       />{" "}
       <AlertasState>
         <AuthState>
-          <ConsejosState>
+          <BazarState>
             <RentasState>
               <Root>
                 <Router>
@@ -59,7 +62,13 @@ function App() {
                   <Route exact path="/about" component={About} />
                   <div className="App">
                     <Route exact path="/rentas" component={Rentas} />
-                    <Route exact path="/consejos" component={Consejos} />
+                    <Route exact path="/consejos" component={ProductosBazar} />
+                    <Route
+                      exact
+                      path="/publicarenbazar"
+                      component={FormularioBazar}
+                    />
+
                     <RutaPrivada exact path="/profile" component={Profile} />
 
                     <Route exact path="/registrarse" component={Registrarse} />
@@ -68,7 +77,6 @@ function App() {
                     <Route
                       exact
                       path="/publicacion/:idpublicacion"
-                      name="publicacion"
                       component={Publicacion}
                     />
                     <Route
@@ -86,10 +94,11 @@ function App() {
                       <Redirect to="/" />
                     </Route>
                   </div>
+                  <Footer />
                 </Router>
               </Root>
             </RentasState>
-          </ConsejosState>
+          </BazarState>
         </AuthState>
       </AlertasState>
     </>

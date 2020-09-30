@@ -8,7 +8,8 @@ import RentasContext from "../../../State/rentas/rentasContext";
 import PublicationProfile from "./PublicationProfile";
 import AuthContext from "../../../State/autenticacion/authContext";
 
-const Profile = () => {
+const Profile = (props) => {
+  console.log(props.history, "PROFILE");
   const rentasContext = useContext(RentasContext);
 
   const authContext = useContext(AuthContext);
@@ -22,8 +23,8 @@ const Profile = () => {
   const { usuario, cargando } = authContext;
 
   const publicacionesActivas = rentasUsuario.filter((renta) => renta.activa);
-  const publicacionesInactivas = [];
-  console.log(rentasUsuario);
+  const publicacionesInactivas = rentasUsuario.filter((renta) => !renta.activa);
+  console.log(props.history);
 
   if (cargando) {
     return null;
@@ -66,7 +67,7 @@ const Profile = () => {
             </div>
             <div class="card-deck pt-5">
               {publicacionesActivas.map((publicacion) => (
-                <PublicationProfile data={publicacion} />
+                <PublicationProfile data={publicacion} ruta={props.history} />
               ))}
             </div>
           </Fragment>
@@ -78,7 +79,7 @@ const Profile = () => {
             </div>
             <div class="card-deck pt-5">
               {publicacionesInactivas.map((publicacion) => (
-                <PublicationProfile data={publicacion} />
+                <PublicationProfile data={publicacion} ruta={props.history} />
               ))}
             </div>
           </Fragment>

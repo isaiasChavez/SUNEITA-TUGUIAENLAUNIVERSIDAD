@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useContext, useEffect } from "react";
 import Footer from "../layout/Footer";
-import Alert from "../../utilities/Alert";
 import AuthContext from "../../../State/autenticacion/authContext";
 import AlertasContext from "../../../State/alertas/alertasContext";
 const Login = (props) => {
