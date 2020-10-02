@@ -17,10 +17,18 @@ const FormDescripcion = ({ onDataChange, dataFormulario, route }) => {
       mostrarAlerta("Hay campos vacios");
       return;
     }
-    if (dataFormulario.contacto.length > 15) {
-      mostrarAlerta("Coloca un contacto valido");
+    if (
+      dataFormulario.contacto.length > 15 ||
+      dataFormulario.contacto.length < 10
+    ) {
+      mostrarAlerta("Se requieren al menos 10 digitos", "warning");
       return;
     }
+    if (dataFormulario.descripcion.length > 300) {
+      mostrarAlerta("Solo se admiten hasta 300 caracteres");
+      return;
+    }
+
     route.push(`/crearPublicacion/confirm`);
   };
 

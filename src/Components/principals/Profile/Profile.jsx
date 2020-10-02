@@ -5,27 +5,39 @@ import img from "../../../img/logo.png";
 import Footer from "../layout/Footer";
 import Modal from "../../utilities/Modal";
 import RentasContext from "../../../State/rentas/rentasContext";
-import PublicationProfile from "./PublicationProfile";
+import BazarContext from "../../../State/bazar/bazarContext";
 import AuthContext from "../../../State/autenticacion/authContext";
+import PublicationProfile from "./PublicationProfile";
+import ProductCardProfile from "./ProductCardProfile";
 
 const Profile = (props) => {
-  console.log(props.history, "PROFILE");
   const rentasContext = useContext(RentasContext);
+  const bazarContext = useContext(BazarContext);
 
   const authContext = useContext(AuthContext);
 
   const { obtenerRentasUsuario, rentasUsuario } = rentasContext;
+  const { obtenerProductosUsuario, productosUsuario } = bazarContext;
 
   useEffect(() => {
     obtenerRentasUsuario();
+    obtenerProductosUsuario();
   }, []);
 
   const { usuario, cargando } = authContext;
 
   const publicacionesActivas = rentasUsuario.filter((renta) => renta.activa);
   const publicacionesInactivas = rentasUsuario.filter((renta) => !renta.activa);
-  console.log(props.history);
 
+  const productosActivos = productosUsuario.filter(
+    (producto) => producto.activa
+  );
+
+  const productosInactivos = productosUsuario.filter(
+    (producto) => !producto.activa
+  );
+
+  console.log("ACTIVOS", productosActivos);
   if (cargando) {
     return null;
   }
@@ -62,10 +74,10 @@ const Profile = (props) => {
 
         {publicacionesActivas.length != 0 ? (
           <Fragment>
-            <div className="row">
-              <p className="lead py-4">Publicaciones Activas</p>
+            <div className="row ">
+              <p className=" py-4 h3 text-uppercase">Publicaciones Activas</p>
             </div>
-            <div class="card-deck pt-5">
+            <div class="card-deck pt-5  p-4 ">
               {publicacionesActivas.map((publicacion) => (
                 <PublicationProfile data={publicacion} ruta={props.history} />
               ))}
@@ -75,11 +87,42 @@ const Profile = (props) => {
         {publicacionesInactivas.length != 0 ? (
           <Fragment>
             <div className="row">
-              <p className="lead py-5">Publicaciones Pausadas</p>
+              <p className=" py-5 h3 text-uppercase">Publicaciones Pausadas</p>
             </div>
             <div class="card-deck pt-5">
               {publicacionesInactivas.map((publicacion) => (
                 <PublicationProfile data={publicacion} ruta={props.history} />
+              ))}
+            </div>
+          </Fragment>
+        ) : null}
+
+        {/* //PRODUCTOS DEL BAZAR */}
+
+        {productosActivos.length !== 0 ? (
+          <Fragment>
+            <div className="row">
+              <p className="h3 text-uppercase py-4">
+                Productos del bazar Activos
+              </p>
+            </div>
+            <div class="card-deck pt-5">
+              {productosActivos.map((producto) => (
+                <ProductCardProfile data={producto} ruta={props.history} />
+              ))}
+            </div>
+          </Fragment>
+        ) : null}
+        {productosInactivos.length !== 0 ? (
+          <Fragment>
+            <div className="row">
+              <p className="h3 text-uppercase py-5">
+                Productos del bazar pausados
+              </p>
+            </div>
+            <div class="card-deck pt-5">
+              {productosInactivos.map((producto) => (
+                <ProductCardProfile data={producto} ruta={props.history} />
               ))}
             </div>
           </Fragment>

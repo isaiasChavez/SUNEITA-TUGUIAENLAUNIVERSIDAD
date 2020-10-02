@@ -90,9 +90,9 @@ function App() {
                       name="publicacion"
                       component={FormularioNuevaPublicacion}
                     />
-                    <Route path="*">
+                    {/* <Route path="*">
                       <Redirect to="/" />
-                    </Route>
+                    </Route> */}
                   </div>
                   <Footer />
                 </Router>

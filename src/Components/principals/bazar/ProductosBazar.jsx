@@ -1,13 +1,18 @@
-import React, { useState, useEffect, useContext, Fragment } from "react";
-import Consejo from "./ProductoBazar";
+import React, { useContext, useEffect, Fragment } from "react";
+import ProductoBazar from "./ProductoBazar";
 import Fade from "react-reveal/Fade";
 import bazarContext from "../../../State/bazar/bazarContext";
-
 import Hero from "../layout/Hero";
 
+import { MUEBLES, ELECTRODOMESTICOS, ELECTRONICA, HOGAR } from "../../../types";
+
 const Consejos = () => {
-  const { publicacionesBazar } = useContext(bazarContext);
-  console.log(publicacionesBazar);
+  const { obtenerProductos, productos } = useContext(bazarContext);
+
+  useEffect(() => {
+    obtenerProductos();
+  }, []);
+
   return (
     <Fragment>
       <Hero
@@ -25,33 +30,48 @@ const Consejos = () => {
         </div>
         <div className="row pb-5 ">
           <div
-            class="btn-group col-lg-4 offset-lg-4 p-4 botones-principal"
+            class="btn-group d-flex flex-wrap col-lg-4 offset-lg-4 p-4 botones-principal"
             role="group"
             aria-label="Basic example"
           >
-            <button type="button" class="btn btn-outline-dark">
-              Todo
+            <button
+              name={ELECTRONICA}
+              type="button"
+              class="btn btn-outline-dark m-1"
+            >
+              Electronica
             </button>
-            <button type="button" class="btn btn-outline-dark">
-              Comer
-            </button>
-            <button type="button" class="btn btn-outline-dark">
-              Divertirse
+            <button
+              name={ELECTRODOMESTICOS}
+              type="button"
+              class="btn btn-outline-dark m-1"
+            >
+              Electrodomesticos
             </button>
 
-            <button type="button" class="btn btn-dark ">
-              Rentar
+            <button name={HOGAR} type="button" class="btn btn-outline-dark m-1">
+              Hogar
+            </button>
+            <button
+              name={MUEBLES}
+              type="button"
+              class="btn btn-outline-dark m-1"
+            >
+              Muebles
+            </button>
+            <button name="TODO" type="button" class="btn btn-outline-dark m-1">
+              Todo
             </button>
           </div>
         </div>
         <Fade>
           <div className="row d-flex justify-content-around">
-            {publicacionesBazar.map((datos) => (
-              <Consejo datos={datos} />
+            {productos.map((datos) => (
+              <ProductoBazar datos={datos} key={datos._id} />
             ))}
           </div>
           <div className="row p-5">
-            <button className="btn btn-outline-dark w-50 m-auto btn-lg btn-block">
+            <button className="btn btn-outline-dark  m-auto btn-lg btn-block">
               Publica algo
             </button>
           </div>

@@ -77,7 +77,7 @@ const Rentas = () => {
         </div>
 
         {/* LISTA DE RENTAS */}
-        <div class=" row d-flex">
+        <div class=" row d-flex flex-wrap">
           {rentasSeleccionadas.map((renta) => (
             <>
               {console.log(renta, "Del map")}

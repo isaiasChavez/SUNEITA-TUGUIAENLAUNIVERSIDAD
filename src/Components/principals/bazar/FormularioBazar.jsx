@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import img from "../../../img/great-idea.svg";
 import { NUEVO, SEMINUEVO, BUEN_ESTADO, ACEPTABLE } from "../../../types";
 import { MUEBLES, ELECTRODOMESTICOS, ELECTRONICA, HOGAR } from "../../../types";
 import AlertasContext from "../../../State/alertas/alertasContext";
+import BazarContext from "../../../State/bazar/bazarContext";
 
 const FormularioBazar = () => {
-  const { mostrarAlerta } = AlertasContext;
+  const { mostrarAlerta } = useContext(AlertasContext);
+  const { obtenerProductos, agregarProducto } = useContext(BazarContext);
   const initiaState = {
     titulo: "",
     precio: "",
     descripcion: "",
-    estadobazar: "",
-    categoriabazar: "",
-    imagenportadabazar: null,
+    estado: "",
+    categoria: "",
+    activa: true,
   };
 
   const [stateFormBazar, setStateFormBazar] = useState(initiaState);
@@ -28,12 +30,12 @@ const FormularioBazar = () => {
         stateFormBazar.precio === "" ||
         stateFormBazar.precio === null ||
         stateFormBazar.descripcion === "" ||
-        stateFormBazar.estadobazar === "",
-      stateFormBazar.categoriabazar === "")
+        stateFormBazar.estado === "",
+      stateFormBazar.categoria === "")
     ) {
-      mostrarAlerta("Hay campos no validos");
+      mostrarAlerta("Hay campos no validos", "warning");
     }
-
+    agregarProducto(stateFormBazar);
     setStateFormBazar(initiaState);
   };
 
@@ -90,12 +92,12 @@ const FormularioBazar = () => {
               ></textarea>
             </div>
             <div className="form-group">
-              <label htmlFor="estadobazar">Estado</label>
+              <label htmlFor="estado">Estado</label>
               <select
                 class="form-control"
-                id="estadobazar"
-                name="estadobazar"
-                value={stateFormBazar.estadobazar}
+                id="estado"
+                name="estado"
+                value={stateFormBazar.estado}
                 onChange={onInputFormChange}
               >
                 <option selected>Selecciona</option>
@@ -106,13 +108,13 @@ const FormularioBazar = () => {
               </select>
             </div>
             <div className="form-group">
-              <label htmlFor="categoriabazar">Categoria</label>
+              <label htmlFor="categoria">Categoria</label>
               <select
-                value={stateFormBazar.categoriabazar}
+                value={stateFormBazar.categoria}
                 onChange={onInputFormChange}
-                name="categoriabazar"
+                name="categoria"
                 className="form-control"
-                id="categoriabazar"
+                id="categoria"
               >
                 <option value="" selected>
                   Selecciona
@@ -136,8 +138,6 @@ const FormularioBazar = () => {
                   type="file"
                   class="custom-file-input"
                   id="inputGroupFile01"
-                  onChange={onInputFormChange}
-                  value={stateFormBazar.imagenportada}
                   aria-describedby="inputGroupFileAddon01"
                   name="imagenportadabazar"
                 />

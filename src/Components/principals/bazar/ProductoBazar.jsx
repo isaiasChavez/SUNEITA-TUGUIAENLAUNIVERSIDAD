@@ -1,21 +1,10 @@
 import React from "react";
-
+import img from "../../../img/muebles/mueble1.jpg";
 const Consejo = ({ datos }) => {
-  const {
-    _id,
-    titulo,
-    username,
-    estado,
-    condicion,
-    direccion,
-    precio,
-    descripcion,
-    imagenes,
-    fecha,
-  } = datos;
+  const { _id, titulo, username, estado, precio, descripcion, activa } = datos;
 
-  let background = "bg-secondary";
-  let textColor = "text-white";
+  let background = "bg-white";
+  let textColor = "text-dark";
   let textColorSecondary = "text-muted";
   // switch (tipo) {
   //   case "rentar":
@@ -42,60 +31,23 @@ const Consejo = ({ datos }) => {
 
   return (
     <div
-      class={`card  mt-2 p-3 col-sm-12 col-md-5 col-lg-5 m-3  ${background}`}
+      class={`card  mt-2 p-3 col-sm-6 col-md-4 col-lg-3 m-3  ${background} container shadow-lg rounded-lg`}
     >
       <div class="card-header p-3 pl-3 mt-3 rounded d-flex flex-column">
-        <div className="d-flex justify-content-between">
-          <cite title="" className={`${textColor} lead`}>
+        <div className="d-flex flex-column text-left p-3">
+          <cite title="" className={`${textColor} lead h4`}>
             {titulo}
           </cite>
-          <div className="lead mx-4 text-white">{precio}</div>
+          <div className="text-smaller  text-white h5">{precio}</div>
         </div>
 
-        <p class="card-text ">
-          <small className=" text-white ">{condicion} </small>
-        </p>
-        <p class="card-text ">
-          <small className="text-white lead">{direccion} </small>
-        </p>
+        <span className="  badge-pill badge-info"> {estado}</span>
       </div>
-      <div
-        class={`card-body p-0 ${textColor} justify-content-center d-flex flex-column flex-md-row`}
-      >
-        <div className="publicacionBazar-img col-md-6">
-          <img src={imagenes[0]} className="mx-3 my-3" alt="" />
+      <div class="row">
+        <div className=" img-fluid publicacionBazar-img ">
+          <img src={img} className="mx-3 my-3 rounded-lg" alt="" />
         </div>
         {/* Carrusel */}
-
-        <blockquote class="blockquote mb-0 text-right col-md-6">
-          <ul class="list-group list-group-flush ">
-            <li class={`list-group-item ${background} p-2`}>
-              <p className="card-text font-weight-light text-consejo p-1 pt-3">
-                {descripcion}
-              </p>
-            </li>
-          </ul>
-
-          <footer class="blockquote-footer mb-4">
-            <p class=" text-monospace text-dark">
-              <a
-                href={`https://www.instagram.com/`}
-                className="btn btn-sm btn-outline-light mb-2 ml-3"
-              >
-                <small>Contactar por Instagram </small>
-              </a>
-              <a
-                href={`https://www.instagram.com/`}
-                className="btn btn-sm btn-outline-light mb-2 ml-3"
-              >
-                <small>Contactar por Facebook</small>
-              </a>
-            </p>
-            <p class="card-text">
-              <small class="text-muted">{fecha} </small>
-            </p>
-          </footer>
-        </blockquote>
       </div>
     </div>
   );

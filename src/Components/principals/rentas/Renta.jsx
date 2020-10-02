@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Renta = ({ renta }) => {
   const { _id, titulo, tipoCuarto, asentamiento, precio } = renta;
   return (
-    <div class="col col-lg-4 pb-0 my-3 ">
+    <div class="col col-12 col-md-4 col-lg-4 pb-0 my-3 ">
       <Link to={`/publicacion/${_id}`}>
         <div class="card  border-0">
           <img src={imagen} class="card-img-top  rounded" alt="..." />

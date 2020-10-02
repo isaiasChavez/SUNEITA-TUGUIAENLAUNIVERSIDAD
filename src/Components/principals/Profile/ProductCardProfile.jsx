@@ -1,44 +1,48 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import img from "../../../img/fondo.jpg";
-import RentasContext from "../../../State/rentas/rentasContext";
+import BazarContext from "../../../State/bazar/bazarContext";
 const PublicationProfile = ({ data, ruta }) => {
-  const { seleccionarRenta, pausarRenta } = useContext(RentasContext);
+  const { seleccionarProducto, actualizarProducto } = useContext(BazarContext);
+
+  let bordercolor = "border-dark";
+
+  if (data.activa) {
+    bordercolor = "border-info";
+  }
 
   const editarPublicacion = () => {
     ruta.push(`/publicacion/${data._id} `);
   };
 
   const eliminarPublicacion = () => {
-    seleccionarRenta(data);
+    seleccionarProducto(data);
   };
   const pausarPublicacion = () => {
-    const rentaPausada = {
+    const productoPausado = {
       ...data,
       activa: false,
     };
-    pausarRenta(rentaPausada);
+    actualizarProducto(productoPausado);
   };
   const activarPublicacion = () => {
-    const rentaPausada = {
+    const productoActivado = {
       ...data,
       activa: true,
     };
-    pausarRenta(rentaPausada);
+    actualizarProducto(productoActivado);
   };
 
   return (
-    <div class="card col-lg-4 p-3 shadow">
-      <img
-        src={img}
-        class="card-img-top rounded-lg  img-card-profile"
-        alt="..."
-      />
+    <div class={`card col-lg-4 p-3 shadow border ${bordercolor}`}>
+      <div className="card-img-top d-flex justify-content-center">
+        <img src={img} class="img-card-profile rounded-lg" alt="..." />
+      </div>
       <div class="card-body d-flex flex-column justify-content-between">
         <h5 class="card-title">
           {data.titulo.slice(0, 25).replace(/^\w/, (c) => c.toUpperCase())}...
-          <span className=" text-capitalize d-block py-3 text-secondary">
-            {data.asentamiento} | {data.estado}
+          <span className="d-block py-3 text-secondary text-lowercase">
+            {data.estado}
           </span>
         </h5>
 
@@ -72,6 +76,15 @@ const PublicationProfile = ({ data, ruta }) => {
             onClick={eliminarPublicacion}
           >
             Eliminar
+          </button>
+          <button
+            data-target="#exampleModal"
+            data-toggle="modal"
+            type="button"
+            className="btn btn-outline-primary"
+            onClick={editarPublicacion}
+          >
+            Editar
           </button>
         </div>
       </div>

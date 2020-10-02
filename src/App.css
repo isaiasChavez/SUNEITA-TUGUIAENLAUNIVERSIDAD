@@ -85,9 +85,17 @@ p {
 }
 .publicacionBazar-img > img {
   cursor: pointer;
-  height: 15em;
+
   margin: auto;
 }
+
+/* CSS PARA LOS CARDS DEL PERFIL */
+
+.img-card-profile {
+  width: 100%;
+}
+
+/* //ANIMACIONES */
 
 @media (min-width: 750px) {
   .publicacionBazar-img {
@@ -96,8 +104,7 @@ p {
   }
   .publicacionBazar-img > img {
     cursor: pointer;
-    width: 100%;
-    margin: auto;
+
     border: solid white 2px;
   }
 }

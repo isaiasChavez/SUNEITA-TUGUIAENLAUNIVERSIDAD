@@ -19,9 +19,9 @@ import AlertasContext from "../alertas/alertasContext";
 
 const RentasState = (props) => {
   const authContext = useContext(AuthContext);
-  const rentasContext = useContext(AlertasContext);
+  const alertasContext = useContext(AlertasContext);
   const { usuario } = authContext;
-  const { mostrarAlerta } = rentasContext;
+  const { mostrarAlerta } = alertasContext;
 
   const initialState = {
     rentas: [],
@@ -94,6 +94,7 @@ const RentasState = (props) => {
         type: ELIMINAR_RENTA,
         payload: rentaId,
       });
+
       mostrarAlerta(response.data.msg, "success");
     } catch (error) {
       mostrarAlerta("Ocurrio un error", "error");

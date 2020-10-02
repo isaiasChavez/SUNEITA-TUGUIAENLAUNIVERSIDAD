@@ -187,64 +187,85 @@ const Publicacion = () => {
                 <h2 className="lead font-weight-bolder">Zonas Accesibles</h2>
                 <div className=" w-100 row-cols-lg-2 row">
                   {zonasDelCuarto.zltRef ? (
-                    <div className="col ">
+                    <div className="col d-flex justify-content-start mt-2">
+                      <span class="material-icons d-inline px-3">wash</span>
                       <p className="text-muted">Zona para lavar trastes</p>
                     </div>
                   ) : null}
                   {zonasDelCuarto.zlrRef ? (
-                    <div className="col">
+                    <div className="col d-flex justify-content-start mt-2">
+                      <span class="material-icons d-inline px-3">
+                        local_laundry_service
+                      </span>
                       <p className="text-muted">Zona para lavar ropa</p>
                     </div>
                   ) : null}
                   {zonasDelCuarto.zcRef ? (
-                    <div className="col">
+                    <div className="col d-flex justify-content-start mt-2">
+                      <span class="material-icons d-inline px-3">deck</span>
                       <p className="text-muted">Zonas comunes</p>
                     </div>
                   ) : null}
                   {zonasDelCuarto.ztRef ? (
-                    <div className="col">
+                    <div className="col d-flex justify-content-start mt-2">
+                      <span class="material-icons d-inline px-3">
+                        house_siding
+                      </span>
                       <p className="text-muted">Tendedero</p>
                     </div>
                   ) : null}
                   {zonasDelCuarto.cochRef ? (
-                    <div className="col">
+                    <div className="col d-flex justify-content-start mt-2">
+                      <span class="material-icons d-inline px-3">
+                        drive_eta
+                      </span>
                       <p className="text-muted">Cochera</p>
                     </div>
                   ) : null}
                   {zonasDelCuarto.balconRef ? (
-                    <div className="col">
+                    <div className="col d-flex justify-content-start mt-2">
+                      <span class="material-icons d-inline px-3">house</span>
                       <p className="text-muted">Balcón</p>
                     </div>
                   ) : null}
                   {zonasDelCuarto.cocinaRef ? (
-                    <div className="col">
+                    <div className="col d-flex justify-content-start mt-2">
+                      <span class="material-icons d-inline px-3">kitchen</span>
                       <p className="text-muted">Cocina</p>
                     </div>
                   ) : null}
                 </div>
               </div>
             </div>
-            <div className="col-lg-4 d-flex justify-content-center align-items-lg-start card-publication sticky-top ">
-              <div class="card  text-white text-center shadow h-50 sticky-top p-4 ml-5 w-100 ">
+            <div className=" col-12 col-lg-4 d-flex justify-content-center align-items-lg-start card-publication sticky-top ">
+              <div class="card  text-white text-center shadow  sticky-top p-4 ml-lg-5 w-100 ">
                 <div className="card-header bg-white">
                   <h2 className="font-weight-bolder lead text-dark text-left">
-                    ${precio} /mes{" "}
+                    ${precio} / {tipocontrato}
                   </h2>
                 </div>
 
                 <div class="card-body text-dark">
+                  <a
+                    className="btn btn-outline-success btn-block btn-lg "
+                    href={`${rentaSeleccionada}`}
+                  >
+                    <span className="text-smaller ">
+                      Contactar al arrendador por WhatsApp
+                    </span>
+                  </a>
                   <Link
                     from={`${match.url}/`}
                     to={`${match.url}/contacto/${username}`}
-                    className="btn btn-dark btn-block btn-lg "
+                    className="btn btn-outline-dark btn-block btn-lg "
                   >
-                    Contactar al arrendador
+                    <span className="text-smaller ">Otros métodos</span>
                   </Link>
                 </div>
               </div>
             </div>
           </div>
-          <div className="row d-flex flex-column">
+          <div className="row d-flex flex-column mt-4">
             <h2 className="lead py-4 h1 font-weight-bold">Ubicacion</h2>
             <div className="row">
               <div className="col  col-lg-4">
@@ -257,7 +278,7 @@ const Publicacion = () => {
               </div>
             </div>
           </div>
-          <div className="row py-5 d-flex flex-column">
+          <div className="row py-5 d-flex flex-column my-4">
             <h3 className="lead">Qué debes saber</h3>
             <div className="row">
               <div className="col-lg-4 d-flex flex-column">
