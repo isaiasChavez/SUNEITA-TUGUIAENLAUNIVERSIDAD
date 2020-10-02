@@ -46,8 +46,8 @@ const BazarState = (props) => {
       });
     } catch (error) {
       console.log("error al obtener productos delbazar rs", error);
-      mostrarAlerta(error.response);
-      console.log(error.response.request);
+      // mostrarAlerta(error);
+      console.log(error);
     }
   };
 
@@ -136,6 +136,7 @@ const BazarState = (props) => {
         productos: state.productos,
         productosUsuario: state.productosUsuario,
         productoSeleccionado: state.productoSeleccionado,
+        productosSeleccionados: state.productosSeleccionados,
         obtenerProductos,
         obtenerProductosUsuario,
         obtenerProductosPorCategoria,

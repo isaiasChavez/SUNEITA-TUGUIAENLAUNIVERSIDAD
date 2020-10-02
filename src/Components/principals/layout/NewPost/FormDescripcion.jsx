@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import AlertasContext from "../../../../State/alertas/alertasContext";
-
+import ScrollToTopOnMount from "../../../routes/ScrollToTopOnMount";
 const FormDescripcion = ({ onDataChange, dataFormulario, route }) => {
   const alertasContext = useContext(AlertasContext);
   const { mostrarAlerta } = alertasContext;
@@ -14,18 +14,15 @@ const FormDescripcion = ({ onDataChange, dataFormulario, route }) => {
       dataFormulario.descripcion === "" ||
       dataFormulario.contacto === ""
     ) {
-      mostrarAlerta("Hay campos vacios");
+      mostrarAlerta("Hay campos vacios", "warning");
       return;
     }
-    if (
-      dataFormulario.contacto.length > 15 ||
-      dataFormulario.contacto.length < 10
-    ) {
+    if (dataFormulario.contacto < 999999999) {
       mostrarAlerta("Se requieren al menos 10 digitos", "warning");
       return;
     }
-    if (dataFormulario.descripcion.length > 300) {
-      mostrarAlerta("Solo se admiten hasta 300 caracteres");
+    if (dataFormulario.descripcion.length > 600) {
+      mostrarAlerta("Solo se admiten hasta 600 caracteres", "warning");
       return;
     }
 
@@ -34,11 +31,16 @@ const FormDescripcion = ({ onDataChange, dataFormulario, route }) => {
 
   return (
     <>
-      <div className="container min-vh-100  d-flex flex-column justify-content-center w-100 ">
+      <div className="container min-vh-100  d-flex flex-column justify-content-center w-100 pt-3  mt-md-2 ">
+        <ScrollToTopOnMount />
         <div className="row mt-5 pt-5 ">
-          <div className="col-lg-8 ">
+          <div className="col-lg-8 mx-4 mb-4 ">
             <form action="" onSubmit={nextPage}>
               <div className="row w-100">
+                <span className="badge badge-dark rounded-0 my-4">
+                  {" "}
+                  paso 8 de 9{" "}
+                </span>
                 <h2 className="h4 ml-3">
                   Coloca un título para tu publicación
                 </h2>
@@ -89,7 +91,7 @@ const FormDescripcion = ({ onDataChange, dataFormulario, route }) => {
 
               <div className="form-group pt-5">
                 <button type="submit" className="btn btn-outline-dark">
-                  Terminar
+                  Continuar
                 </button>
               </div>
             </form>

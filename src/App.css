@@ -90,6 +90,10 @@ p {
 }
 
 /* CSS PARA LOS CARDS DEL PERFIL */
+.img-avatar-profile {
+  width: 10em;
+  margin: auto;
+}
 
 .img-card-profile {
   width: 100%;

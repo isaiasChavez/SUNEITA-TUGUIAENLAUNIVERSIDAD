@@ -7,11 +7,24 @@ import Hero from "../layout/Hero";
 import { MUEBLES, ELECTRODOMESTICOS, ELECTRONICA, HOGAR } from "../../../types";
 
 const Consejos = () => {
-  const { obtenerProductos, productos } = useContext(bazarContext);
+  const {
+    obtenerProductos,
+    productosSeleccionados,
+    obtenerProductosPorCategoria,
+  } = useContext(bazarContext);
 
   useEffect(() => {
     obtenerProductos();
   }, []);
+
+  const onClickCategoria = (e) => {
+    if (e.target.name === "TODO") {
+      obtenerProductos();
+      return;
+    }
+
+    obtenerProductosPorCategoria(e.target.name);
+  };
 
   return (
     <Fragment>
@@ -38,6 +51,7 @@ const Consejos = () => {
               name={ELECTRONICA}
               type="button"
               class="btn btn-outline-dark m-1"
+              onClick={onClickCategoria}
             >
               Electronica
             </button>
@@ -45,6 +59,7 @@ const Consejos = () => {
               name={ELECTRODOMESTICOS}
               type="button"
               class="btn btn-outline-dark m-1"
+              onClick={onClickCategoria}
             >
               Electrodomesticos
             </button>
@@ -56,17 +71,23 @@ const Consejos = () => {
               name={MUEBLES}
               type="button"
               class="btn btn-outline-dark m-1"
+              onClick={onClickCategoria}
             >
               Muebles
             </button>
-            <button name="TODO" type="button" class="btn btn-outline-dark m-1">
+            <button
+              name="TODO"
+              type="button"
+              class="btn btn-outline-dark m-1"
+              onClick={onClickCategoria}
+            >
               Todo
             </button>
           </div>
         </div>
         <Fade>
           <div className="row d-flex justify-content-around">
-            {productos.map((datos) => (
+            {productosSeleccionados.map((datos) => (
               <ProductoBazar datos={datos} key={datos._id} />
             ))}
           </div>

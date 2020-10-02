@@ -45,7 +45,7 @@ const Consejo = ({ datos }) => {
       </div>
       <div class="row">
         <div className=" img-fluid publicacionBazar-img ">
-          <img src={img} className="mx-3 my-3 rounded-lg" alt="" />
+          <img src={img} className="mx-3 my-3 rounded-lg img-fluid" alt="" />
         </div>
         {/* Carrusel */}
       </div>

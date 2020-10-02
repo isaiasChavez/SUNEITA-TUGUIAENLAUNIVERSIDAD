@@ -1,6 +1,7 @@
 import React, { Fragment, useRef, useContext } from "react";
 import { useRouteMatch } from "react-router-dom";
 import AlertasContext from "../../../../State/alertas/alertasContext";
+import ScrollToTopOnMount from "../../../routes/ScrollToTopOnMount";
 
 import img from "../../../../img/innovation_.svg";
 
@@ -58,10 +59,15 @@ const Form3 = ({ onDataChange, dataFormulario, route }) => {
 
   return (
     <Fragment>
-      <div className="container min-vh-100  d-flex flex-column justify-content-center w-100 ">
+      <div className="container min-vh-100  d-flex flex-column justify-content-center w-100 pt-5 mt-5 mt-md-2 ">
+        <ScrollToTopOnMount />
         <div className="row ">
-          <div className="col-lg-7 ">
+          <div className="col-lg-7 mx-4 mb-4 ">
             <div className="row w-100">
+              <span className="badge badge-dark rounded-0 my-4">
+                {" "}
+                paso 3 de 9{" "}
+              </span>
               <h2>¿Con que zonas cuenta?</h2>
             </div>
             <div className="row">
@@ -178,7 +184,7 @@ const Form3 = ({ onDataChange, dataFormulario, route }) => {
               </div>
             </form>
           </div>
-          <div className="col-lg-5">
+          <div className="col-lg-5 my-4">
             <img src={img} alt="" className="img-fluid" />
           </div>
         </div>

@@ -1,4 +1,5 @@
 import React, { Fragment, useContext } from "react";
+import ScrollToTopOnMount from "../../../routes/ScrollToTopOnMount";
 
 import img from "../../../../img/reading.svg";
 import AlertasContext from "../../../../State/alertas/alertasContext";
@@ -57,14 +58,18 @@ const Form2 = ({ onDataChange, dataFormulario, route }) => {
 
   return (
     <Fragment>
-      <div className="container min-vh-100  d-flex flex-column justify-content-center w-100 ">
+      <div className="container min-vh-100  d-flex flex-column justify-content-center w-100 pt-5 mt-5 mt-md-2 ">
+        <ScrollToTopOnMount />
         <div className="row ">
-          <div className="col-lg-7 ">
+          <div className="col-lg-7 mx-4 mb-4 ">
             <div className="row w-100">
+              <span className="badge badge-dark rounded-0 my-4">
+                {" "}
+                paso 2 de 9{" "}
+              </span>
               <h2>¿Qué servicios ofreces?</h2>
             </div>
             <div className="row">
-              <span className="badge badge-light rounded-0"> paso 2 </span>
               <p className="lead d-block w-100 pt-4">
                 ¿Con que puede contar un estudiante al rentar contigo?
               </p>

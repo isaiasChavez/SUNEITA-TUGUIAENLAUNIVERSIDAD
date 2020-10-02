@@ -21,8 +21,8 @@ export default (state, action) => {
     case OBTENER_PRODUCTOS_CATEGORIA:
       return {
         ...state,
-        productosSeleccionados: state.rentas.filter(
-          (renta) => renta.tipoCuarto === action.payload
+        productosSeleccionados: state.productos.filter(
+          (producto) => producto.categoria === action.payload
         ),
       };
     case OBTENER_PRODUCTOS_BAZAR_USUARIO:

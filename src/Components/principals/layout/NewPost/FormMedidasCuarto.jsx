@@ -2,6 +2,7 @@ import React, { useContext, useRef } from "react";
 import { useRouteMatch } from "react-router-dom";
 import AlertasContext from "../../../../State/alertas/alertasContext";
 import img from "../../../../img/construction.svg";
+import ScrollToTopOnMount from "../../../routes/ScrollToTopOnMount";
 
 const FormMedidasCuarto = ({ dataFormulario, route, onDataChange }) => {
   const anchoRef = useRef();
@@ -51,11 +52,16 @@ const FormMedidasCuarto = ({ dataFormulario, route, onDataChange }) => {
 
   return (
     <>
-      <div className="container min-vh-100  d-flex flex-column justify-content-center w-100 ">
+      <div className="container min-vh-100  d-flex flex-column justify-content-center w-100  mt-5 mt-md-2 ">
+        <ScrollToTopOnMount />
         <div className="row ">
-          <div className="col-lg-7 ">
+          <div className="col-lg-7 mx-4 mb-4  ">
             <form className="pt-5">
               <div className="row w-100 py-4 ">
+                <span className="badge badge-dark rounded-0 my-4">
+                  {" "}
+                  paso 4 de 9{" "}
+                </span>
                 <h2 className="lead">¿Cuáles son las medidas del cuarto?</h2>
               </div>
               <form action="" onSubmit={nextPage}>

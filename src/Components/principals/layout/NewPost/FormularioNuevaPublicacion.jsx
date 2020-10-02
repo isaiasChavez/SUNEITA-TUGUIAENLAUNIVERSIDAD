@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import RentasContext from "../../../../State/rentas/rentasContext";
 import AlertasContext from "../../../../State/alertas/alertasContext";
+
 import { useHistory, Route, useRouteMatch } from "react-router-dom";
 import FormTipoCuarto from "./Form1";
 import FormServicios from "./FormServicios";

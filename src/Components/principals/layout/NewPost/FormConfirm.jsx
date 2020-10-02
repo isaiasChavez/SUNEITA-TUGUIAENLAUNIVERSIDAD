@@ -1,4 +1,5 @@
 import React from "react";
+import ScrollToTopOnMount from "../../../routes/ScrollToTopOnMount";
 
 const FormConfirm = ({ dataFormulario, route, publicar }) => {
   const { servicios, zonasDelCuarto } = dataFormulario;
@@ -10,11 +11,16 @@ const FormConfirm = ({ dataFormulario, route, publicar }) => {
   return (
     <>
       <div className="container min-vh-100  d-flex flex-column justify-content-center w-100 mt-5 pt-5 ">
-        <div className="row w-100">
-          <h2>¿Esta información es correcta?</h2>
+        <ScrollToTopOnMount />
+        <div className="row w-100 ">
+          <span className="badge badge-dark rounded-0 my-4 mx-3">
+            {" "}
+            paso 9 de 9{" "}
+          </span>
+          <h2 className="text-center ">¿Esta información es correcta?</h2>
         </div>
-        <div className="row">
-          <ul class="list-group list-group-flush">
+        <div className="row px-2">
+          <ul class="list-group list-group-flush mx-4 mb-4">
             <li class="list-group-item">
               <span className="lead text-secondary d-block">Titulo</span>
               {dataFormulario.titulo}
@@ -40,7 +46,7 @@ const FormConfirm = ({ dataFormulario, route, publicar }) => {
             </li>
           </ul>
         </div>
-        <div className="row mt-5">
+        <div className="row mt-5 px-3">
           <h2 className="lead text-secondary">Servicios</h2>
           <div className=" w-100 row-cols-lg-2 row">
             {servicios.aguaCRef ? (
@@ -85,7 +91,7 @@ const FormConfirm = ({ dataFormulario, route, publicar }) => {
             ) : null}
           </div>
         </div>
-        <div className="row mt-5">
+        <div className="row mt-5 px-3">
           <h2 className="lead text-secondary">Zonas Accesibles</h2>
           <div className=" w-100 row-cols-lg-2 row">
             {zonasDelCuarto.zltRef ? (
@@ -125,7 +131,7 @@ const FormConfirm = ({ dataFormulario, route, publicar }) => {
             ) : null}
           </div>
         </div>
-        <div className="row my-5 justify-content-center">
+        <div className="row my-5 justify-content-center px-4">
           <button
             className="btn btn-outline-dark py-2 btn-block"
             onClick={confirmarPublicacion}

@@ -63,7 +63,7 @@ function App() {
                   <div className="App">
                     <Route exact path="/rentas" component={Rentas} />
                     <Route exact path="/consejos" component={ProductosBazar} />
-                    <Route
+                    <RutaPrivada
                       exact
                       path="/publicarenbazar"
                       component={FormularioBazar}

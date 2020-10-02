@@ -1,5 +1,7 @@
 import img from "../../../../img/great-idea.svg";
 import React, { Fragment, useContext } from "react";
+import ScrollToTopOnMount from "../../../routes/ScrollToTopOnMount";
+
 import { useRouteMatch } from "react-router-dom";
 import { CASA, DEPARTAMENTO, HABITACION } from "../../../../types/";
 import AlertasContext from "../../../../State/alertas/alertasContext";
@@ -20,14 +22,17 @@ const Form1 = ({ onDataChange, dataFormulario, route }) => {
 
   return (
     <Fragment>
-      <div className="container min-vh-100  d-flex flex-column justify-content-center w-100 ">
+      <div className="container min-vh-100  d-flex flex-column justify-content-center w-100  pt-5 mt-5 mt-md-2">
+        <ScrollToTopOnMount />
         <div className="row ">
-          <div className="col-lg-7 ">
+          <div className="col-lg-7 mx-4 mb-4">
             <div className="row w-100">
+              <span className="badge badge-dark rounded-0 my-3">
+                paso 1 de 9
+              </span>
               <h2>Hola, vamos a crear el anuncio</h2>
             </div>
             <div className="row ">
-              <span className="badge badge-dark rounded-0"> paso 1 </span>
               <p className="lead d-block w-100 pt-4">
                 ¿Qué tipo de cuartos rentas?
               </p>
@@ -79,7 +84,7 @@ const Form1 = ({ onDataChange, dataFormulario, route }) => {
               </div>
             </form>
           </div>
-          <div className="col-lg-5">
+          <div className="col-lg-5 my-4 my-lg-0">
             <img src={img} alt="" />
           </div>
         </div>

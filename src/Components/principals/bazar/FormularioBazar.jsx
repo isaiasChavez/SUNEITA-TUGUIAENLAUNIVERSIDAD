@@ -40,8 +40,8 @@ const FormularioBazar = () => {
   };
 
   return (
-    <div className="container min-vh-100  d-flex flex-column justify-content-center w-100 mt-5 pt-5">
-      <div className="row  my-5">
+    <div className="container min-vh-100  d-flex flex-column justify-content-center w-100 mt-4 mb-5 pt-5">
+      <div className="row  my-5 mx-1">
         <div className="col-lg-7 ">
           <div className="row w-100 my-4">
             <h2>Hola, vamos a crear el anuncio</h2>
@@ -130,7 +130,7 @@ const FormularioBazar = () => {
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroupFileAddon01">
-                  Selecciona la imagen de portada
+                  imagen 1
                 </span>
               </div>
               <div class="custom-file">
@@ -149,7 +149,7 @@ const FormularioBazar = () => {
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroupFileAddon01">
-                  Selecciona una imagen
+                  imagen 2
                 </span>
               </div>
               <div class="custom-file">
@@ -167,7 +167,7 @@ const FormularioBazar = () => {
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroupFileAddon01">
-                  Selecciona una imagen
+                  imagen 3
                 </span>
               </div>
               <div class="custom-file">
@@ -190,7 +190,7 @@ const FormularioBazar = () => {
             </div>
           </form>
         </div>
-        <div className="col-lg-5">
+        <div className="col-lg-5 my-5">
           <img src={img} alt="" />
         </div>
       </div>

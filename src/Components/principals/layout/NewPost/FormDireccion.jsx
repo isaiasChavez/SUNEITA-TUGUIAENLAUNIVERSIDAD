@@ -1,5 +1,6 @@
 import React, { Fragment, useContext } from "react";
 import AlertasContext from "../../../../State/alertas/alertasContext";
+import ScrollToTopOnMount from "../../../routes/ScrollToTopOnMount";
 
 import { useRouteMatch } from "react-router-dom";
 import img from "../../../../img/city.svg";
@@ -47,10 +48,15 @@ const Form4 = ({ onDataChange, dataFormulario, route, setdataFormulario }) => {
 
   return (
     <Fragment>
-      <div className="container min-vh-100  d-flex flex-column justify-content-center w-100 ">
+      <div className="container min-vh-100  d-flex flex-column justify-content-center w-100 pt-5 mt-5 mt-md-2 ">
+        <ScrollToTopOnMount />
         <div className="row ">
-          <div className="col-lg-8 pr-5 ">
+          <div className="col-lg-8 pr-5 mx-4 mb-4 ">
             <div className="row w-100">
+              <span className="badge badge-dark rounded-0 my-4">
+                {" "}
+                paso 7 de 9{" "}
+              </span>
               <h2>¿Dónde está ubicado?</h2>
             </div>
 
@@ -158,7 +164,7 @@ const Form4 = ({ onDataChange, dataFormulario, route, setdataFormulario }) => {
                   onClick={nextPage}
                   className="btn btn-outline-dark"
                 >
-                  Terminar
+                  Continuar
                 </button>
               </div>
             </form>

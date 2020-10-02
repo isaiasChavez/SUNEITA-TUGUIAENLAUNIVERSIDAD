@@ -42,7 +42,7 @@ const Inicio = () => {
           </div>
         </div>
 
-        <div className="container-fluid pt-5 contenerdor-principal ">
+        <div className="container-fluid pt-5 contenerdor-principal px-5 ">
           <div className="row d-flex justify-content-around my-5 ">
             <div class="card  text-white col-12 mt-3 col-lg-4 text-center shadow p-2">
               <Link to={"/consejos"}>
@@ -95,15 +95,15 @@ const Inicio = () => {
                     Vende o dona aquello que ya no usas
                   </h5>
                   <h5 class="card-title d-md-none display-5 h2 text-muted text-wrap  text-center">
-                    Publica una recomendación para tu Suneita del pasado
+                    Vende algo para tu suneita del pasado
                   </h5>
                   <p class="card-text text-center my.4 lead text-muted">
-                    Publica el lugar donde recomiendas vivir, consejos de
-                    supervivencia, ¿que hacer después de un examen estresante?
+                    Quizá tienes algún mueble que ya no usarás después de tu
+                    carrera o buscas uno para comenzar estos grandiosos años
                   </p>
                   <Link
                     to={"/consejos"}
-                    className="btn btn-outline-dark rounded-0 btn-lg w-100 align-self-end font-weight-light  "
+                    className="btn btn-outline-dark rounded-0 btn-lg w-100 align-self-end font-weight-light mt-4 "
                   >
                     Ir al bazar
                   </Link>

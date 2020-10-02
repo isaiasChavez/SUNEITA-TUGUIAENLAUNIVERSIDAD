@@ -39,7 +39,7 @@ const Navbar = (props) => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse " id="navbarNav">
-          <ul className="navbar-nav ml-auto">
+          <ul className="navbar-nav ml-auto d-sm-flex">
             <li className="px-1">
               <NavLink
                 to={"/rentas"}
@@ -60,7 +60,7 @@ const Navbar = (props) => {
               </NavLink>
             </li>
             {autenticado ? (
-              <div className="d-flex">
+              <div className="d-flex flex-column flex-lg-row">
                 <li class="px-1">
                   <NavLink
                     to={"/profile"}
