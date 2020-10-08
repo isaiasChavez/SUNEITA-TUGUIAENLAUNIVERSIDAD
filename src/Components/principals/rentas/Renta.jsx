@@ -8,15 +8,15 @@ const Renta = ({ renta }) => {
       <Link to={`/publicacion/${_id}`}>
         <div class="card  border-0">
           <img src={imagen} class="card-img-top  rounded" alt="..." />
-          <div class="card-body font-weight-light h6 text-muted text-smaller text-rent">
-            <p class="text-rent">
-              <span className="text-capitalize font-weight-bolder text-dark">
+          <div class="card-body font-weight-light h6 text-muted text-rent">
+            <p class="text-rent py-3">
+              <span className="text-capitalize font-weight-bolder  font-weight-bold text-primary">
                 {tipoCuarto}
               </span>{" "}
               | {asentamiento}
             </p>
             <p className="text-rent">{titulo.slice(0, 50)}...</p>
-            <p class="font-weight-bold text-rent">{precio} al mes</p>
+            <p class="font-weight-bold text-rent my-3">{precio} al mes</p>
           </div>
         </div>
       </Link>

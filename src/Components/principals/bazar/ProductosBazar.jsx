@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, Fragment } from "react";
 import ProductoBazar from "./ProductoBazar";
+import ModalImagen from "../../utilities/ModalImagen";
 import Fade from "react-reveal/Fade";
 import bazarContext from "../../../State/bazar/bazarContext";
 import Hero from "../layout/Hero";
 
 import { MUEBLES, ELECTRODOMESTICOS, ELECTRONICA, HOGAR } from "../../../types";
 
-const Consejos = () => {
+const ProductosBazar = () => {
   const {
     obtenerProductos,
     productosSeleccionados,
@@ -28,6 +29,7 @@ const Consejos = () => {
 
   return (
     <Fragment>
+      <ModalImagen />
       <Hero
         principal="Vende algo que ya no ocupas"
         secondary="Quizá le sea util a alguien que aún está en el camino"
@@ -91,10 +93,12 @@ const Consejos = () => {
               <ProductoBazar datos={datos} key={datos._id} />
             ))}
           </div>
-          <div className="row p-5">
-            <button className="btn btn-outline-dark  m-auto btn-lg btn-block">
-              Publica algo
-            </button>
+          <div className="row p-5 my-5">
+            <div className="col col-lg-6 offset-3">
+              <button className="btn btn-outline-dark  m-auto btn-lg btn-block">
+                Publica algo
+              </button>
+            </div>
           </div>
         </Fade>
       </div>
@@ -102,4 +106,4 @@ const Consejos = () => {
   );
 };
 
-export default Consejos;
+export default ProductosBazar;

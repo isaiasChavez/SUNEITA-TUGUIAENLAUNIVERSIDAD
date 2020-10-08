@@ -81,11 +81,13 @@ p {
 
 .publicacionBazar-img {
   display: flex;
+  width: 20em;
+  margin: auto;
   justify-content: center;
 }
 .publicacionBazar-img > img {
   cursor: pointer;
-
+  object-fit: contain;
   margin: auto;
 }
 

@@ -34,7 +34,6 @@ const Profile = (props) => {
     (producto) => !producto.activa
   );
 
-  console.log("ACTIVOS", productosActivos);
   if (cargando) {
     return null;
   }

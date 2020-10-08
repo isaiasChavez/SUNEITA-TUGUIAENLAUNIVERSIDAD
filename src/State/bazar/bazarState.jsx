@@ -70,10 +70,29 @@ const BazarState = (props) => {
 
   const agregarProducto = async (producto) => {
     try {
-      console.log(producto);
-      producto.creador = usuario._id;
-      producto.username = usuario.username;
-      const resultado = await clienteAxios.post("api/bazar", producto);
+      let formData = new FormData();
+
+      for (const file of producto.imagenes) {
+        formData.append("imagenes", file);
+      }
+
+      formData.append("titulo", producto.titulo);
+      formData.append("creador", usuario._id);
+      formData.append("username", usuario.username);
+      formData.append("precio", producto.precio);
+      formData.append("descripcion", producto.descripcion);
+      formData.append("estado", producto.estado);
+      formData.append("categoria", producto.categoria);
+      formData.append("activa", producto.activa);
+      const config = {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "multipart/form-data",
+        },
+      };
+      const resultado = await clienteAxios.post("api/bazar", formData);
+
+      console.log(resultado);
       dispatch({ type: AGREGAR_BAZAR, payload: producto });
       console.log(resultado.data);
       mostrarAlerta(resultado.data.msg, "success");

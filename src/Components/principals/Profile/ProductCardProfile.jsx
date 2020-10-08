@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import img from "../../../img/fondo.jpg";
+import Loading from "../../utilities/Loading";
 import BazarContext from "../../../State/bazar/bazarContext";
 const PublicationProfile = ({ data, ruta }) => {
   const { seleccionarProducto, actualizarProducto } = useContext(BazarContext);
@@ -36,7 +36,19 @@ const PublicationProfile = ({ data, ruta }) => {
   return (
     <div class={`card col-lg-4 p-3 shadow border ${bordercolor}`}>
       <div className="card-img-top d-flex justify-content-center">
-        <img src={img} class="img-card-profile rounded-lg" alt="..." />
+        {data.imagenes[0] ? (
+          <div className=" img-fluid publicacionBazar-img ">
+            <img
+              src={data.imagenes[0].imageUrl}
+              className="mx-3 my-3 rounded-lg img-fluid"
+              alt=""
+            />
+          </div>
+        ) : (
+          <div className="container d-flex justify-content-center align-items-center w-100 ">
+            <Loading />
+          </div>
+        )}
       </div>
       <div class="card-body d-flex flex-column justify-content-between">
         <h5 class="card-title">

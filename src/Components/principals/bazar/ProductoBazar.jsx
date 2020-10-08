@@ -1,7 +1,22 @@
-import React from "react";
-import img from "../../../img/muebles/mueble1.jpg";
-const Consejo = ({ datos }) => {
-  const { _id, titulo, username, estado, precio, descripcion, activa } = datos;
+import { data } from "jquery";
+import React, { useContext } from "react";
+import BazarContext from "../../../State/bazar/bazarContext";
+
+import Loading from "../../utilities/Loading";
+const ProductoBazar = ({ datos }) => {
+  const { seleccionarProducto } = useContext(BazarContext);
+
+  const {
+    _id,
+    titulo,
+    username,
+    estado,
+    precio,
+    descripcion,
+    activa,
+    imagenes,
+  } = datos;
+  console.log(imagenes);
 
   let background = "bg-white";
   let textColor = "text-dark";
@@ -31,26 +46,39 @@ const Consejo = ({ datos }) => {
 
   return (
     <div
-      class={`card  mt-2 p-3 col-sm-6 col-md-4 col-lg-3 m-3  ${background} container shadow-lg rounded-lg`}
+      class={`card  mt-2  col-sm-6 col-md-4 col-lg-3 m-3 border border-secondary  ${background} container shadow rounded-lg`}
     >
-      <div class="card-header p-3 pl-3 mt-3 rounded d-flex flex-column">
+      <div class="card-header   mt-3 rounded d-flex flex-column  text-dark">
         <div className="d-flex flex-column text-left p-3">
-          <cite title="" className={`${textColor} lead h4`}>
+          <cite title="" className={`text-dark h4`}>
             {titulo}
           </cite>
-          <div className="text-smaller  text-white h5">{precio}</div>
+          <div className=" text-right text-dark h5">{precio}</div>
         </div>
 
-        <span className="  badge-pill badge-info"> {estado}</span>
+        <span className="text-right  "> {estado}</span>
       </div>
       <div class="row">
-        <div className=" img-fluid publicacionBazar-img ">
-          <img src={img} className="mx-3 my-3 rounded-lg img-fluid" alt="" />
-        </div>
-        {/* Carrusel */}
+        {imagenes[0] ? (
+          <div className="  publicacionBazar-img ">
+            <img
+              data-target="#modalImagen"
+              data-toggle="modal"
+              src={imagenes[0].imageUrl}
+              onClick={() => seleccionarProducto(datos)}
+              className="mx-3 my-3 rounded-lg "
+              alt=""
+            />
+          </div>
+        ) : (
+          <div className="container d-flex justify-content-center align-items-center w-100 ">
+            <Loading />
+          </div>
+        )}
       </div>
+      {/* Carrusel */}
     </div>
   );
 };
 
-export default Consejo;
+export default ProductoBazar;

@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import img from "../../../img/fondo.jpg";
+import Loading from "../../utilities/Loading";
 import RentasContext from "../../../State/rentas/rentasContext";
 const PublicationProfile = ({ data, ruta }) => {
   const { seleccionarRenta, pausarRenta } = useContext(RentasContext);
@@ -28,12 +29,20 @@ const PublicationProfile = ({ data, ruta }) => {
   };
 
   return (
-    <div class="card col-lg-4 p-3 shadow">
-      <img
-        src={img}
-        class="card-img-top rounded-lg  img-card-profile"
-        alt="..."
-      />
+    <div class="card col-lg-4 p-3 shadow border-secondary">
+      {data.imagenes ? (
+        <div className=" img-fluid publicacionBazar-img ">
+          <img
+            src={data.imagenes[0].imageUrl}
+            className="mx-3 my-3 rounded-lg img-fluid"
+            alt=""
+          />
+        </div>
+      ) : (
+        <div className="container d-flex justify-content-center align-items-center w-100 ">
+          <Loading />
+        </div>
+      )}
       <div class="card-body d-flex flex-column justify-content-between">
         <h5 class="card-title">
           {data.titulo.slice(0, 25).replace(/^\w/, (c) => c.toUpperCase())}...

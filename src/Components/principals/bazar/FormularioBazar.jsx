@@ -15,11 +15,20 @@ const FormularioBazar = () => {
     estado: "",
     categoria: "",
     activa: true,
+    imagenes: null,
   };
 
   const [stateFormBazar, setStateFormBazar] = useState(initiaState);
 
   const onInputFormChange = (e) => {
+    if (e.target.name === "imagenes") {
+      setStateFormBazar({
+        ...stateFormBazar,
+        [e.target.name]: e.target.files,
+      });
+
+      return;
+    }
     setStateFormBazar({ ...stateFormBazar, [e.target.name]: e.target.value });
   };
 
@@ -35,6 +44,12 @@ const FormularioBazar = () => {
     ) {
       mostrarAlerta("Hay campos no validos", "warning");
     }
+    if (stateFormBazar.imagenes.length > 3) {
+      mostrarAlerta("No se pueden subir más de 3 imagenes");
+    }
+    if (stateFormBazar.imagenes.length <= 0) {
+      mostrarAlerta("Debes seleccionar al menos una imagen");
+    }
     agregarProducto(stateFormBazar);
     setStateFormBazar(initiaState);
   };
@@ -47,7 +62,7 @@ const FormularioBazar = () => {
             <h2>Hola, vamos a crear el anuncio</h2>
           </div>
 
-          <form action="" onSubmit={onSubmitForm}>
+          <form action="" onSubmit={onSubmitForm} encType="multipart/form-data">
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-default">
@@ -127,58 +142,35 @@ const FormularioBazar = () => {
             </div>
 
             {/* Seleccionar el archivo */}
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroupFileAddon01">
-                  imagen 1
-                </span>
-              </div>
+            <div class="input-group my-5 ">
               <div class="custom-file">
                 <input
                   type="file"
+                  accept="image/gif, image/png, image/jpeg"
                   class="custom-file-input"
                   id="inputGroupFile01"
                   aria-describedby="inputGroupFileAddon01"
-                  name="imagenportadabazar"
+                  name="imagenes"
+                  onChange={onInputFormChange}
+                  multiple
                 />
                 <label class="custom-file-label" for="inputGroupFile01">
-                  Seleccionar
-                </label>
-              </div>
-            </div>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroupFileAddon01">
-                  imagen 2
-                </span>
-              </div>
-              <div class="custom-file">
-                <input
-                  type="file"
-                  class="custom-file-input"
-                  id="inputGroupFile01"
-                  aria-describedby="inputGroupFileAddon01"
-                />
-                <label class="custom-file-label" for="inputGroupFile01">
-                  Seleccionar
-                </label>
-              </div>
-            </div>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroupFileAddon01">
-                  imagen 3
-                </span>
-              </div>
-              <div class="custom-file">
-                <input
-                  type="file"
-                  class="custom-file-input"
-                  id="inputGroupFile01"
-                  aria-describedby="inputGroupFileAddon01"
-                />
-                <label class="custom-file-label" for="inputGroupFile01">
-                  Seleccionar
+                  {stateFormBazar.imagenes ? (
+                    <div className="">
+                      {stateFormBazar.imagenes.length > 3 ? (
+                        <p className="text-danger">
+                          No puedes seleccionar mas de 3 imagenes
+                        </p>
+                      ) : (
+                        <p>
+                          {stateFormBazar.imagenes.length} de 3 imagenes
+                          seleccionadas
+                        </p>
+                      )}
+                    </div>
+                  ) : (
+                    "seleccione 3 imagenes"
+                  )}
                 </label>
               </div>
             </div>

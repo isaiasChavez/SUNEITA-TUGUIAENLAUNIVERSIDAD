@@ -16,7 +16,7 @@ const RutaPrivada = ({ component: Component, ...props }) => {
       {...props}
       render={(props) =>
         !autenticado && !cargando ? (
-          <Redirect to="/" />
+          <Redirect to="/ingresar" />
         ) : (
           <Component {...props} />
         )
