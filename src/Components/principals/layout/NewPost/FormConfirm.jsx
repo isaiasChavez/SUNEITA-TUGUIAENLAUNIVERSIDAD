@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ScrollToTopOnMount from "../../../routes/ScrollToTopOnMount";
 
-const FormConfirm = ({ dataFormulario, route, publicar }) => {
+const FormConfirm = ({ dataFormulario, route, publicar, setProgreso }) => {
+  useEffect(() => {
+    setProgreso(99);
+  }, []);
   const { servicios, zonasDelCuarto } = dataFormulario;
+
+  if (dataFormulario.titulo === "") {
+    route.push("/crearPublicacion");
+  }
 
   const confirmarPublicacion = () => {
     publicar();
@@ -13,10 +20,6 @@ const FormConfirm = ({ dataFormulario, route, publicar }) => {
       <div className="container min-vh-100  d-flex flex-column justify-content-center w-100 mt-5 pt-5 ">
         <ScrollToTopOnMount />
         <div className="row w-100 ">
-          <span className="badge badge-dark rounded-0 my-4 mx-3">
-            {" "}
-            paso 9 de 9{" "}
-          </span>
           <h2 className="text-center ">¿Esta información es correcta?</h2>
         </div>
         <div className="row px-2">

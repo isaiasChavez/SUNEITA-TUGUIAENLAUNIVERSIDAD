@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import ScrollToTopOnMount from "../../../routes/ScrollToTopOnMount";
 
 import img from "../../../../img/reading.svg";
@@ -7,10 +7,14 @@ import AlertasContext from "../../../../State/alertas/alertasContext";
 import { useRef } from "react";
 import { useRouteMatch } from "react-router-dom";
 
-const Form2 = ({ onDataChange, dataFormulario, route }) => {
+const Form2 = ({ onDataChange, dataFormulario, route, setProgreso }) => {
   let match = useRouteMatch();
   const alertasContext = useContext(AlertasContext);
   const { mostrarAlerta } = alertasContext;
+
+  useEffect(() => {
+    setProgreso(20);
+  }, []);
 
   const aguaCRef = useRef();
   const wfRef = useRef();
@@ -60,14 +64,10 @@ const Form2 = ({ onDataChange, dataFormulario, route }) => {
     <Fragment>
       <div className="container min-vh-100  d-flex flex-column justify-content-center w-100 pt-5 mt-5 mt-md-2 ">
         <ScrollToTopOnMount />
-        <div className="row ">
+        <div className="row  pt-5">
           <div className="col-lg-7 mx-4 mb-4 ">
             <div className="row w-100">
-              <span className="badge badge-dark rounded-0 my-4">
-                {" "}
-                paso 2 de 9{" "}
-              </span>
-              <h2>¿Qué servicios ofreces?</h2>
+              <h2 className="mx-3">¿Qué servicios ofreces?</h2>
             </div>
             <div className="row">
               <p className="lead d-block w-100 pt-4">
@@ -164,7 +164,7 @@ const Form2 = ({ onDataChange, dataFormulario, route }) => {
               </div>
             </form>
           </div>
-          <div className="col-lg-5">
+          <div className="col-lg-4">
             <img src={img} alt="" className="img-fluid" />
           </div>
         </div>

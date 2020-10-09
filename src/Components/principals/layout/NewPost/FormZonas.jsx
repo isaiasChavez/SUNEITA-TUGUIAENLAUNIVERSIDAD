@@ -1,11 +1,14 @@
-import React, { Fragment, useRef, useContext } from "react";
+import React, { Fragment, useRef, useContext, useEffect } from "react";
 import { useRouteMatch } from "react-router-dom";
 import AlertasContext from "../../../../State/alertas/alertasContext";
 import ScrollToTopOnMount from "../../../routes/ScrollToTopOnMount";
 
 import img from "../../../../img/innovation_.svg";
 
-const Form3 = ({ onDataChange, dataFormulario, route }) => {
+const Form3 = ({ onDataChange, dataFormulario, route, setProgreso }) => {
+  useEffect(() => {
+    setProgreso(30);
+  }, []);
   let match = useRouteMatch();
   const alertasContext = useContext(AlertasContext);
   const { mostrarAlerta } = alertasContext;
@@ -61,17 +64,12 @@ const Form3 = ({ onDataChange, dataFormulario, route }) => {
     <Fragment>
       <div className="container min-vh-100  d-flex flex-column justify-content-center w-100 pt-5 mt-5 mt-md-2 ">
         <ScrollToTopOnMount />
-        <div className="row ">
-          <div className="col-lg-7 mx-4 mb-4 ">
+        <div className="row pt-4 mt-4">
+          <div className="col-lg-6 mx-4 mb-4 ">
             <div className="row w-100">
-              <span className="badge badge-dark rounded-0 my-4">
-                {" "}
-                paso 3 de 9{" "}
-              </span>
-              <h2>¿Con que zonas cuenta?</h2>
+              <h2 className="mx-3 my-5">¿Con que zonas cuenta?</h2>
             </div>
             <div className="row">
-              <span className="badge badge-light rounded-0"> paso 2 </span>
               <p className="lead d-block w-100 pt-4">
                 ¿A que zonas puede acceder el estudiante al rentar?
               </p>

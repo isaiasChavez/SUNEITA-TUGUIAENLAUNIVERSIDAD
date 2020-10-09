@@ -1,12 +1,15 @@
 import img from "../../../../img/checklist.svg";
 import { COMPARTIDO, PRIVADO } from "../../../../types";
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import ScrollToTopOnMount from "../../../routes/ScrollToTopOnMount";
 
 import { useRouteMatch } from "react-router-dom";
 import AlertasContext from "../../../../State/alertas/alertasContext";
 
-const Form4 = ({ onDataChange, dataFormulario, route }) => {
+const Form4 = ({ onDataChange, dataFormulario, route, setProgreso }) => {
+  useEffect(() => {
+    setProgreso(50);
+  }, []);
   let match = useRouteMatch();
   const alertasContext = useContext(AlertasContext);
   const { mostrarAlerta } = alertasContext;
@@ -35,10 +38,6 @@ const Form4 = ({ onDataChange, dataFormulario, route }) => {
           <div className="col-lg-6 mx-4 mb-4">
             <form action="" onSubmit={nextPage}>
               <div className="row w-100">
-                <span className="badge badge-dark rounded-0 my-4">
-                  {" "}
-                  paso 5 de 9{" "}
-                </span>
                 <h2 className="h4">¿Qué tipo de baño hay?</h2>
               </div>
               <div class="custom-control custom-checkbox mr-sm-2 mt-2">

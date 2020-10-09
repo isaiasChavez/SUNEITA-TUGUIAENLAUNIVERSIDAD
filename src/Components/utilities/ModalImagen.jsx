@@ -59,7 +59,7 @@ const ModalBazar = () => {
                     return;
                   }
                   return (
-                    <div class="carousel-item ">
+                    <div class="carousel-item overflow-hidden">
                       <img
                         src={imagen.imageUrl}
                         class="d-block w-100 publicacionBazar-img  "

@@ -5,8 +5,12 @@ import ScrollToTopOnMount from "../../../routes/ScrollToTopOnMount";
 import { useRouteMatch } from "react-router-dom";
 import { CASA, DEPARTAMENTO, HABITACION } from "../../../../types/";
 import AlertasContext from "../../../../State/alertas/alertasContext";
+import { useEffect } from "react";
 
-const Form1 = ({ onDataChange, dataFormulario, route }) => {
+const Form1 = ({ onDataChange, dataFormulario, route, setProgreso }) => {
+  useEffect(() => {
+    setProgreso(10);
+  }, []);
   let match = useRouteMatch();
   const alertasContext = useContext(AlertasContext);
   const { mostrarAlerta } = alertasContext;
@@ -24,12 +28,9 @@ const Form1 = ({ onDataChange, dataFormulario, route }) => {
     <Fragment>
       <div className="container min-vh-100  d-flex flex-column justify-content-center w-100  pt-5 mt-5 mt-md-2">
         <ScrollToTopOnMount />
-        <div className="row ">
-          <div className="col-lg-7 mx-4 mb-4">
+        <div className="row  ">
+          <div className="col-lg-6 mx-4 mb-4">
             <div className="row w-100">
-              <span className="badge badge-dark rounded-0 my-3">
-                paso 1 de 9
-              </span>
               <h2>Hola, vamos a crear el anuncio</h2>
             </div>
             <div className="row ">

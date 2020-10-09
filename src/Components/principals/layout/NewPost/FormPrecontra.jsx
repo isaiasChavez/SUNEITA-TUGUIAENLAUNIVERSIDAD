@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import { useRouteMatch } from "react-router-dom";
 import ScrollToTopOnMount from "../../../routes/ScrollToTopOnMount";
 
@@ -17,7 +17,11 @@ import AlertasContext from "../../../../State/alertas/alertasContext";
 
 import img from "../../../../img/great-idea.svg";
 
-const Form4 = ({ onDataChange, dataFormulario, route }) => {
+const Form4 = ({ onDataChange, dataFormulario, route, setProgreso }) => {
+  useEffect(() => {
+    setProgreso(60);
+  }, []);
+
   let match = useRouteMatch();
   const alertasContext = useContext(AlertasContext);
   const { mostrarAlerta } = alertasContext;
@@ -53,13 +57,9 @@ const Form4 = ({ onDataChange, dataFormulario, route }) => {
     <Fragment>
       <div className="container min-vh-100  d-flex flex-column justify-content-center w-100  pt-5 mt-5 mt-md-2">
         <ScrollToTopOnMount />
-        <div className="row ">
+        <div className="row mt-5 mt-4">
           <div className="col-lg-6 mx-4 mb-4">
             <div className="row w-100 py-4">
-              <span className="badge badge-dark rounded-0 my-4">
-                {" "}
-                paso 6 de 9{" "}
-              </span>
               <h2 className="">¿Cuál es el precio?</h2>
             </div>
 

@@ -1,7 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import AlertasContext from "../../../../State/alertas/alertasContext";
 import ScrollToTopOnMount from "../../../routes/ScrollToTopOnMount";
-const FormDescripcion = ({ onDataChange, dataFormulario, route }) => {
+import { useRouteMatch } from "react-router-dom";
+
+const FormDescripcion = ({
+  onDataChange,
+  dataFormulario,
+  route,
+  setProgreso,
+}) => {
+  useEffect(() => {
+    setProgreso(80);
+  }, []);
+  let match = useRouteMatch();
+
   const alertasContext = useContext(AlertasContext);
   const { mostrarAlerta } = alertasContext;
 
@@ -26,7 +38,7 @@ const FormDescripcion = ({ onDataChange, dataFormulario, route }) => {
       return;
     }
 
-    route.push(`/crearPublicacion/confirm`);
+    route.push(`${match.url}/imagenes`);
   };
 
   return (
@@ -37,10 +49,6 @@ const FormDescripcion = ({ onDataChange, dataFormulario, route }) => {
           <div className="col-lg-8 mx-4 mb-4 ">
             <form action="" onSubmit={nextPage}>
               <div className="row w-100">
-                <span className="badge badge-dark rounded-0 my-4">
-                  {" "}
-                  paso 8 de 9{" "}
-                </span>
                 <h2 className="h4 ml-3">
                   Coloca un título para tu publicación
                 </h2>
@@ -59,6 +67,9 @@ const FormDescripcion = ({ onDataChange, dataFormulario, route }) => {
               <div className="row w-100 pt-4 ">
                 <h2 className="h4 ml-3 ">Coloca una descripción</h2>
               </div>
+              <p className="text-muted">
+                Descripciones de más de 40 caracteres reciben más visitas
+              </p>
               <div class="ml-0 mt-3">
                 <textarea
                   placeholder="El cuarto se encuentra en... tiene... lo cual permite..."

@@ -1,5 +1,6 @@
 import { data } from "jquery";
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import BazarContext from "../../../State/bazar/bazarContext";
 
 import Loading from "../../utilities/Loading";
@@ -46,37 +47,40 @@ const ProductoBazar = ({ datos }) => {
 
   return (
     <div
-      class={`card  mt-2  col-sm-6 col-md-4 col-lg-3 m-3 border border-secondary  ${background} container shadow rounded-lg`}
+      class={`card  mt-2  col-sm-6 col-md-3 col-lg-3 m-3 border border-secondary  ${background} container shadow rounded-lg`}
     >
-      <div class="card-header   mt-3 rounded d-flex flex-column  text-dark">
-        <div className="d-flex flex-column text-left p-3">
-          <cite title="" className={`text-dark h4`}>
-            {titulo}
-          </cite>
-          <div className=" text-right text-dark h5">{precio}</div>
+      <Link>
+        <div class="card-header   mt-3 rounded d-flex flex-column  text-dark">
+          <div className="d-flex flex-column text-left ">
+            <cite title="" className={`text-dark h4`}>
+              {titulo}
+            </cite>
+            <div className=" text-right text-dark h5">{precio}</div>
+          </div>
+
+          <span className="text-right  "> {estado}</span>
+        </div>
+        <div class="row">
+          {imagenes[0] ? (
+            <div className="  publicacionBazar-img ">
+              <img
+                data-target="#modalImagen"
+                data-toggle="modal"
+                src={imagenes[0].imageUrl}
+                onClick={() => seleccionarProducto(datos)}
+                className="mx-3 my-3 rounded-lg "
+                alt=""
+              />
+            </div>
+          ) : (
+            <div className="container d-flex justify-content-center align-items-center w-100 ">
+              <Loading />
+            </div>
+          )}
         </div>
 
-        <span className="text-right  "> {estado}</span>
-      </div>
-      <div class="row">
-        {imagenes[0] ? (
-          <div className="  publicacionBazar-img ">
-            <img
-              data-target="#modalImagen"
-              data-toggle="modal"
-              src={imagenes[0].imageUrl}
-              onClick={() => seleccionarProducto(datos)}
-              className="mx-3 my-3 rounded-lg "
-              alt=""
-            />
-          </div>
-        ) : (
-          <div className="container d-flex justify-content-center align-items-center w-100 ">
-            <Loading />
-          </div>
-        )}
-      </div>
-      {/* Carrusel */}
+        {/* Carrusel */}
+      </Link>
     </div>
   );
 };

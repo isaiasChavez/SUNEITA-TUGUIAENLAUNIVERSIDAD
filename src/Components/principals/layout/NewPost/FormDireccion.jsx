@@ -1,11 +1,20 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import AlertasContext from "../../../../State/alertas/alertasContext";
 import ScrollToTopOnMount from "../../../routes/ScrollToTopOnMount";
 
 import { useRouteMatch } from "react-router-dom";
 import img from "../../../../img/city.svg";
 import axios from "axios";
-const Form4 = ({ onDataChange, dataFormulario, route, setdataFormulario }) => {
+const Form4 = ({
+  onDataChange,
+  dataFormulario,
+  route,
+  setdataFormulario,
+  setProgreso,
+}) => {
+  useEffect(() => {
+    setProgreso(70);
+  }, []);
   let match = useRouteMatch();
   const alertasContext = useContext(AlertasContext);
   const { mostrarAlerta } = alertasContext;
@@ -50,13 +59,9 @@ const Form4 = ({ onDataChange, dataFormulario, route, setdataFormulario }) => {
     <Fragment>
       <div className="container min-vh-100  d-flex flex-column justify-content-center w-100 pt-5 mt-5 mt-md-2 ">
         <ScrollToTopOnMount />
-        <div className="row ">
+        <div className="row mt-5 pt-5 ">
           <div className="col-lg-8 pr-5 mx-4 mb-4 ">
             <div className="row w-100">
-              <span className="badge badge-dark rounded-0 my-4">
-                {" "}
-                paso 7 de 9{" "}
-              </span>
               <h2>¿Dónde está ubicado?</h2>
             </div>
 
