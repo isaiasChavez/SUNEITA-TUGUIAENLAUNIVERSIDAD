@@ -58,7 +58,7 @@ const FormImagenes = ({ onDataChange, dataFormulario, route, setProgreso }) => {
     e.preventDefault();
     const medidasc = {
       target: {
-        name: "imagenes",
+        name: "imagenesrentas",
         value: e.target[0].files,
       },
     };
@@ -82,7 +82,7 @@ const FormImagenes = ({ onDataChange, dataFormulario, route, setProgreso }) => {
                 accept="image/gif, image/png, image/jpeg"
                 class="custom-file-input"
                 id="customFile"
-                name="imagenes"
+                name="imagenesrentas"
                 onChange={onInputFormChange}
                 multiple
               />

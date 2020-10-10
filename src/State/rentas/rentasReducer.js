@@ -11,6 +11,7 @@ import {
   VALIDAR_RENTA,
   OBTENER_RENTAS_USUARIO,
   PAUSAR_RENTA,
+  OBTENER_IMAGENES_RENTA,
 } from "../../types/index";
 
 export default (state, action) => {
@@ -42,6 +43,36 @@ export default (state, action) => {
         //falta jalarlos al state de todas las rentas
         rentas: [...state.rentas, action.payload],
         errortarea: false,
+      };
+    case OBTENER_IMAGENES_RENTA:
+      let rentaS = [];
+      if (state.rentaSeleccionada) {
+        if (state.rentaSeleccionada._id === action.payload[0].renta_id) {
+          rentaS = state.rentaSeleccionada;
+          rentaS.imagenes = action.payload[0];
+        }
+      }
+
+      return {
+        ...state,
+        rentas: state.rentas.map((renta) => {
+          console.log(renta._id, action.payload, "ESTO QUIERO VER");
+          if (renta._id === action.payload[0].renta_id) {
+            renta.imagenes = action.payload[0];
+            console.log(renta, "La que se supone");
+            return renta;
+          }
+          return renta;
+        }),
+        rentasSeleccionadas: state.rentasSeleccionadas.map((renta) => {
+          if (renta._id === action.payload[0].renta_id) {
+            renta.imagenes = action.payload[0];
+            console.log(renta, "La que se supone");
+            return renta;
+          }
+          return renta;
+        }),
+        rentaSeleccionada: rentaS,
       };
     case VALIDAR_RENTA:
       return { ...state, errorRenta: true };

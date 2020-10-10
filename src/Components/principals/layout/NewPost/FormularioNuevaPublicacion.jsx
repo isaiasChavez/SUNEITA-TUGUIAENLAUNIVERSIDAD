@@ -74,12 +74,14 @@ const FormularioNuevaPublicacion = (props) => {
     referencias: "",
     contacto: "",
     codigopostal: "",
-    imagenes: null,
+    imagenesrentas: null,
   });
 
+  //Modifica la barra de progreso
   const setProgreso = (porcentaje) => {
     setdataFormulario({ ...dataFormulario, progreso: porcentaje });
   };
+
   const onDataChange = (e) => {
     //Convierte los valores falsos en string a falsos en boolean
     if (e.target.value == "false") {
@@ -99,12 +101,8 @@ const FormularioNuevaPublicacion = (props) => {
 
     setdataFormulario({ ...dataFormulario, [e.target.name]: e.target.value });
   };
-  const publicar = async () => {
-    try {
-      await agregarRenta(dataFormulario);
-    } catch (error) {
-      console.log(error);
-    }
+  const publicar = () => {
+    agregarRenta(dataFormulario);
   };
 
   return (

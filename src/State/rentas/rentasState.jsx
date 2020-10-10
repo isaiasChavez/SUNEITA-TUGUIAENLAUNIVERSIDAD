@@ -10,6 +10,7 @@ import {
   SELECCIONAR_RENTA,
   OBTENER_RENTAS_USUARIO,
   PAUSAR_RENTA,
+  OBTENER_IMAGENES_RENTA,
 } from "../../types";
 import clienteAxios from "../../config/axios";
 import RentasContext from "./rentasContext";
@@ -36,6 +37,7 @@ const RentasState = (props) => {
   const obtenerRentas = async () => {
     try {
       const resultado = await clienteAxios.get("/api/rentas");
+
       dispatch({
         type: OBTENER_RENTAS,
         payload: resultado.data.rentas,
@@ -46,9 +48,21 @@ const RentasState = (props) => {
       console.log(error.response.request);
     }
   };
+  const obtenerImagenesRenta = async (id) => {
+    try {
+      const resultado = await clienteAxios.get(`/api/rentas/getimages/${id}`);
+      console.log(resultado.data.imagenes[0]);
+      return resultado.data.imagenes[0];
+    } catch (error) {
+      console.error(error, "ERRORR AL OBTENER IMAGENES");
+    }
+  };
+
+  //////////////////////
   const obtenerRentasUsuario = async () => {
     try {
       const resultado = await clienteAxios.get(`/api/rentas/user`);
+
       dispatch({
         type: OBTENER_RENTAS_USUARIO,
         payload: resultado.data.rentas,
@@ -61,18 +75,42 @@ const RentasState = (props) => {
   const obtenerRentasPorTipo = (tipo) => {
     dispatch({ type: OBTENER_RENTAS_TIPO, payload: tipo });
   };
-
+  /////////////
   const agregarRenta = async (renta) => {
     try {
-      console.log(renta);
-      renta.creador = usuario._id;
       renta.username = usuario.username;
-      const resultado = await clienteAxios.post("api/rentas", renta);
-      dispatch({ type: AGREGAR_RENTA, payload: renta });
+      renta.creador = usuario._id;
+
+      const { imagenesrentas, progreso, ...rest } = renta;
+
+      console.log(imagenesrentas, "iMAGENES RENTAS");
+      console.log(rest);
+
+      const resultado = await clienteAxios.post("api/rentas", rest);
+
+      let formData = new FormData();
+
+      for (const file of imagenesrentas) {
+        formData.append("imagenesrentas", file);
+      }
+      formData.append("renta_id", resultado.data.renta._id);
+      formData.append("creador_id", usuario._id);
+      formData.append("titulo", renta.titulo);
+
+      const resultadoImagenes = await clienteAxios.post(
+        "api/rentas/uploadimages",
+        formData
+      );
+
+      resultado.data.renta.imagenes = resultadoImagenes.data.imagenes;
+
+      dispatch({ type: AGREGAR_RENTA, payload: resultado.data.renta });
+
       console.log(resultado.data);
       mostrarAlerta(resultado.data.msg, "success");
     } catch (error) {
-      mostrarAlerta(error.data.msg, "error");
+      console.error(error);
+      // mostrarAlerta(error);
     }
   };
 
@@ -84,7 +122,6 @@ const RentasState = (props) => {
     dispatch({ type: SELECCIONAR_RENTA, payload: renta });
   };
   const guardarRentaActual = (id) => {
-    console.log(id);
     dispatch({ type: RENTA_ACTUAL, payload: id });
   };
   const eliminarRenta = async (rentaId) => {
@@ -135,7 +172,7 @@ const RentasState = (props) => {
         errorRenta: state.errorRenta,
         rentaSeleccionada: state.rentaSeleccionada,
         rentasSeleccionadas: state.rentasSeleccionadas,
-
+        obtenerImagenesRenta,
         obtenerRentas,
         obtenerRentasPorTipo,
         obtenerRentasUsuario,

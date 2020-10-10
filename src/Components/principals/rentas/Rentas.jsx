@@ -2,10 +2,10 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 import ScrollToTopOnMount from "../../routes/ScrollToTopOnMount";
 import { CASA, DEPARTAMENTO, HABITACION } from "../../../types";
 import Renta from "./Renta";
-import Footer from "../layout/Footer";
 import Hero from "../layout/Hero";
 import rentasContext from "../../../State/rentas/rentasContext";
-
+import note_taking from "../../../img/note_taking.svg";
+import { Link } from "react-router-dom";
 const Rentas = () => {
   useEffect(() => {
     obtenerRentas();
@@ -71,10 +71,12 @@ const Rentas = () => {
         </button>
       </div>
       <div className="container">
-        <div className="h3 lead py-5 justify-content-around">
-          {" "}
-          Ultimos lugares publicados
-        </div>
+        {rentasSeleccionadas.length > 0 ? (
+          <div className="h3 lead py-5 justify-content-around">
+            {" "}
+            Ultimos lugares publicados
+          </div>
+        ) : null}
 
         {/* LISTA DE RENTAS */}
         <div class=" row d-flex flex-wrap">
@@ -84,6 +86,20 @@ const Rentas = () => {
               <Renta renta={renta} />
             </>
           ))}
+          {rentasSeleccionadas.length === 0 ? (
+            <div className=" min-vh-100 w-100 justify-content-center align-items-center d-flex flex-column">
+              <p className="text-center lead">
+                Parece que no hay rentas publicadas
+                <img src={note_taking} alt="" />
+              </p>
+              <Link
+                to="/crearPublicacion"
+                className="btn btn-outline-dark w-50 btn-block my-5 py-2"
+              >
+                Publicar
+              </Link>
+            </div>
+          ) : null}
         </div>
       </div>
       {/* <div className=" lead text-center py-5">

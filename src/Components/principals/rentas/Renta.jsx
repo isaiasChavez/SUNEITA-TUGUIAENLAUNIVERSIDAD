@@ -1,13 +1,26 @@
 import React from "react";
-import imagen from "../../../img/jesus.jpg";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useState } from "react";
+import { useContext } from "react";
+import RentasContext from "../../../State/rentas/rentasContext";
 const Renta = ({ renta }) => {
+  const { obtenerImagenesRenta } = useContext(RentasContext);
+  const [imagen, setimagen] = useState(null);
+
   const { _id, titulo, tipoCuarto, asentamiento, precio } = renta;
   return (
     <div class="col col-12 col-md-4 col-lg-4 pb-0 my-3 ">
       <Link to={`/publicacion/${_id}`}>
         <div class="card  border-0">
-          <img src={imagen} class="card-img-top  rounded" alt="..." />
+          {imagen ? (
+            <img
+              src={imagen[0].imageUrl}
+              class="card-img-top  rounded"
+              alt="..."
+            />
+          ) : null}
+
           <div class="card-body font-weight-light h6 text-muted text-rent">
             <p class="text-rent py-3">
               <span className="text-capitalize font-weight-bolder  font-weight-bold text-primary">

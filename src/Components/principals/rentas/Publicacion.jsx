@@ -8,12 +8,12 @@ import img3 from "../../../img/studentBackground2.jpg";
 import img4 from "../../../img/info.jpg";
 import img5 from "../../../img/studentBackground3.jpg";
 import Footer from "../layout/Footer";
-import rentasContext from "../../../State/rentas/rentasContext";
+import RentasContext from "../../../State/rentas/rentasContext";
 
 const Publicacion = () => {
   let match = useRouteMatch();
 
-  const { rentaSeleccionada, guardarRentaActual } = useContext(rentasContext);
+  const { rentaSeleccionada, guardarRentaActual } = useContext(RentasContext);
 
   const { idpublicacion } = useParams();
 
@@ -59,17 +59,7 @@ const Publicacion = () => {
             <span className="lead  text-muted text-smaller">{zona}</span>
           </div>
         </div>
-        <div className="row">
-          <div className="col col-lg-7 d-flex flex-wrap p-0">
-            <img src={img} class="  img-fluid w-50 rounded-lg" />
-            <img src={img2} class=" img-fluid w-50 rounded-lg" />
-            <img src={img3} class=" img-fluid w-50 rounded-lg" />
-            <img src={img4} class=" img-fluid w-50 rounded-lg" />
-          </div>
-          <div className="col-lg-5 p-0 img-fluid ">
-            <img src={img5} class=" mt-5 img-fluid rounded-lg" />
-          </div>
-        </div>
+        <div className="row"></div>
         <div className="container">
           <div className="row">
             <div className="col-lg-8">

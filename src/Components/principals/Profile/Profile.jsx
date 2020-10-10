@@ -78,7 +78,7 @@ const Profile = (props) => {
                 Publicaciones Activas
               </p>
             </div>
-            <div class="card-deck pt-5  p-4 ">
+            <div class="row justify-content-around pt-5  p-4 ">
               {publicacionesActivas.map((publicacion) => (
                 <PublicationProfile data={publicacion} ruta={props.history} />
               ))}

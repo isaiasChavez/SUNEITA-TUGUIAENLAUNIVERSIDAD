@@ -1,4 +1,6 @@
 import React, { Fragment, useState, useContext, useEffect } from "react";
+import ScrollToTopOnMount from "../../routes/ScrollToTopOnMount";
+
 import Footer from "../layout/Footer";
 import AuthContext from "../../../State/autenticacion/authContext";
 import AlertasContext from "../../../State/alertas/alertasContext";
@@ -78,6 +80,8 @@ const Registrarse = (props) => {
 
   return (
     <Fragment>
+      <ScrollToTopOnMount />
+
       <div className="container  min-vh-100 d-flex align-items-center justify-content-center flex-column">
         <p className=" lead h1 text-uppercase pt-5 mt-5  mb-5 text-secondary">
           Registrate para comenzar a publicar

@@ -92,6 +92,9 @@ const ProductosBazar = () => {
             {productosSeleccionados.map((datos) => (
               <ProductoBazar datos={datos} key={datos._id} />
             ))}
+            {productosSeleccionados.length === 0 ? (
+              <h4>Parece que no hay ningún producto relacionado</h4>
+            ) : null}
           </div>
           <div className="row p-5 my-5">
             <div className="col col-lg-6 offset-3">
