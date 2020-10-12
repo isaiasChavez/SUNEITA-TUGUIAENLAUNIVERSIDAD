@@ -1,7 +1,6 @@
 import React from "react";
-import img from "../../../img/fondo.jpg";
 import { Link } from "react-router-dom";
-const CarrouselItem = ({ texto, boton, link }) => {
+const CarrouselItem = ({ texto, boton, link, img }) => {
   return (
     <div class="carousel-item isSlider" data-interval="5000">
       <img src={img} class="d-block w-100 border-bottom" alt="..." />

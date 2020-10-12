@@ -6,11 +6,6 @@ import BazarContext from "./bazarContext";
 import BazarReducer from "./bazarReducer";
 import AlertasContext from "../alertas/alertasContext";
 
-import mueble1 from "../../img/muebles/mueble1.jpg";
-import mueble2 from "../../img/muebles/mueble2.jpg";
-import mueble3 from "../../img/muebles/mueble3.jpg";
-import mueble4 from "../../img/muebles/mueble4.jpg";
-
 import {
   AGREGAR_BAZAR,
   ELIMINAR_PRODUCTO_BAZAR,
@@ -84,12 +79,7 @@ const BazarState = (props) => {
       formData.append("estado", producto.estado);
       formData.append("categoria", producto.categoria);
       formData.append("activa", producto.activa);
-      const config = {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "multipart/form-data",
-        },
-      };
+
       const resultado = await clienteAxios.post("api/bazar", formData);
 
       console.log(resultado);

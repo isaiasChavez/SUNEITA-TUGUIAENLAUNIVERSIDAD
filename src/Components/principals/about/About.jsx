@@ -1,5 +1,5 @@
 import React from "react";
-import img from "../../../img/info.jpg";
+import img from "../../../img/fondo2.svg";
 const About = ({ handleDejarConsejo }) => {
   return (
     <div class="jumbotron">

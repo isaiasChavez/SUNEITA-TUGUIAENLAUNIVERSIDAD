@@ -3,10 +3,8 @@ import ScrollToTopOnMount from "../../routes/ScrollToTopOnMount";
 
 import Hero from "../layout/Hero";
 import Slider from "../layout/Slider";
-import imgJumbotron from "../../../img/studentBackground.jpg";
 
 import studentBackground from "../../../img/shopping.svg";
-
 import studentBackground2 from "../../../img/buildings.svg";
 import BazarImage from "../../../img/team.svg";
 import { Link } from "react-router-dom";

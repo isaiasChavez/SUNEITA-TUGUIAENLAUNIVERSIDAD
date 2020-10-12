@@ -1,7 +1,7 @@
 import "./App.css";
 
 import React from "react";
-import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import tokenAuth from "./config/token";
 

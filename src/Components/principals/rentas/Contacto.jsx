@@ -6,10 +6,12 @@ const Contacto = () => {
 
   return (
     <div className="min-vh-100 d-flex flex-column justify-content-center align-items-center">
-      <h1>Puedes contactar al arrendatario de las siguientes formas</h1>
+      <h1>Puedes contactar a {username} de las siguientes formas</h1>
       <div className="container">
         <div className="row mt-5">
-          <h2 className="lead col-lg-12 m-0 p-0">Escribe un correo </h2>
+          <h2 className="lead col-lg-12 m-0 p-0">
+            Escribe un correo a {username}{" "}
+          </h2>
           <form className="col-lg-8 offset-2 mt-5">
             <div class="form-group">
               <label for="exampleFormControlTextarea1">Mensaje</label>

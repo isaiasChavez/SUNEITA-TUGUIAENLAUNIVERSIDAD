@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import RentasContext from "../../../../State/rentas/rentasContext";
 import AlertasContext from "../../../../State/alertas/alertasContext";
 
-import { useHistory, Route, useRouteMatch, Switch } from "react-router-dom";
+import { useHistory, Route, useRouteMatch } from "react-router-dom";
 import Progress from "../../../utilities/Progress";
 import FormTipoCuarto from "./Form1";
 import FormServicios from "./FormServicios";
@@ -12,7 +12,6 @@ import FormDescripcion from "./FormDescripcion";
 import FormBano from "./FormBano";
 import FormPrecontra from "./FormPrecontra";
 import FormDireccion from "./FormDireccion";
-
 import FormImagenes from "./FormImagenes";
 import FormConfirm from "./FormConfirm";
 

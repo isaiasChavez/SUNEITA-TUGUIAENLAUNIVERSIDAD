@@ -24,21 +24,23 @@ const Renta = ({ renta }) => {
   const { _id, titulo, tipoCuarto, asentamiento, precio, created_at } = renta;
 
   return (
-    <div class="col col-12 col-md-4 col-lg-4 pb-0 my-3 ">
+    <div class="col col-12 col-md-4 col-lg-4 pb-0 my-3 shadow rounded-lg p-3 ">
       <Link to={`/publicacion/${_id}`}>
         <div className="card-header">
           <p className="text-dark">{format(created_at)}</p>
         </div>
         <div class="card  border-0">
-          {imagenesRenta ? (
-            <img
-              src={imagenesRenta[0].imageUrl}
-              class="card-img-top  rounded"
-              alt="..."
-            />
-          ) : (
-            <Loading />
-          )}
+          <div className="">
+            {imagenesRenta ? (
+              <img
+                src={imagenesRenta[0].imageUrl}
+                class="img-fluid fit  rounded"
+                alt="..."
+              />
+            ) : (
+              <Loading />
+            )}
+          </div>
 
           <div class="card-body font-weight-light h6 text-muted text-rent">
             <p class="text-rent py-3">

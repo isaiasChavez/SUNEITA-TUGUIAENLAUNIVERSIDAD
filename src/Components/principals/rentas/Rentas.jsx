@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import ScrollToTopOnMount from "../../routes/ScrollToTopOnMount";
 import { CASA, DEPARTAMENTO, HABITACION } from "../../../types";
 import Renta from "./Renta";
@@ -79,7 +79,7 @@ const Rentas = () => {
         ) : null}
 
         {/* LISTA DE RENTAS */}
-        <div class=" row d-flex flex-wrap">
+        <div class=" row d-flex flex-wrap mb-5 pb-5">
           {rentasSeleccionadas.map((renta) => (
             <>
               <Renta renta={renta} />

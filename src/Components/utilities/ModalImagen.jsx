@@ -55,7 +55,7 @@ const ModalBazar = () => {
                 </div>
 
                 {productoSeleccionado.imagenes.map((imagen, index) => {
-                  if (index == 0) {
+                  if (index === 0) {
                     return;
                   }
                   return (

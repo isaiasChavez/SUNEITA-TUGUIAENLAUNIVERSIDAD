@@ -36,6 +36,14 @@ input[type="number"] {
   width: 45px;
   height: 45px;
 }
+.slider {
+}
+.text-shadow {
+  text-shadow: 1px 1px 1px black;
+}
+.img-opacity {
+  opacity: 0.8;
+}
 
 .card-inicio {
   min-height: 18em;
@@ -76,7 +84,7 @@ p {
 }
 
 .isSlider {
-  height: 110vh;
+  height: 95vh;
 }
 
 .img-preview {
