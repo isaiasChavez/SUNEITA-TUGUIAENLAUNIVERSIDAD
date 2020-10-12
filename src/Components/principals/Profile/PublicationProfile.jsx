@@ -1,14 +1,23 @@
-import React, { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
-import img from "../../../img/fondo.jpg";
+import React, { useContext, useEffect, useState } from "react";
 import Loading from "../../utilities/Loading";
 import RentasContext from "../../../State/rentas/rentasContext";
-import { useState } from "react";
 const PublicationProfile = ({ data, ruta }) => {
   const { seleccionarRenta, pausarRenta, obtenerImagenesRenta } = useContext(
     RentasContext
   );
-  const [imagenes, setimagenes] = useState(null);
+
+  const [imagenesRenta, setImagenesRenta] = useState(null);
+
+  useEffect(() => {
+    obtenerImagenesRenta(data._id)
+      .then((respuesta) => {
+        const { images } = respuesta.data.imagenes[0];
+        setImagenesRenta(images);
+      })
+      .catch((error) => {
+        console.log("Hubo un error al obtener la data ", error);
+      });
+  }, []);
 
   const editarPublicacion = () => {
     ruta.push(`/publicacion/${data._id} `);
@@ -34,10 +43,10 @@ const PublicationProfile = ({ data, ruta }) => {
 
   return (
     <div class="card col col-lg-3 m-3 shadow border-secondary">
-      {imagenes ? (
+      {imagenesRenta ? (
         <div className=" img-fluid publicacionBazar-img ">
           <img
-            src={imagenes[0].imageUrl}
+            src={imagenesRenta[0].imageUrl}
             className="mx-3 my-3 rounded-lg img-fluid"
             alt=""
           />

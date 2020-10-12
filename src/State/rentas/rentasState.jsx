@@ -51,8 +51,8 @@ const RentasState = (props) => {
   const obtenerImagenesRenta = async (id) => {
     try {
       const resultado = await clienteAxios.get(`/api/rentas/getimages/${id}`);
-      console.log(resultado.data.imagenes[0]);
-      return resultado.data.imagenes[0];
+      console.log("Esto debería", resultado);
+      return resultado;
     } catch (error) {
       console.error(error, "ERRORR AL OBTENER IMAGENES");
     }

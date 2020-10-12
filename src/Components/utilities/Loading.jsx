@@ -2,7 +2,6 @@ import React from "react";
 import "./Loading.css";
 
 const Loading = () => {
-  console.log("LOADING");
   return (
     <div class="sk-cube-grid">
       <div class="sk-cube sk-cube1"></div>

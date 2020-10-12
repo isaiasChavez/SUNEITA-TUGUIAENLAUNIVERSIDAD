@@ -1,25 +1,44 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
-import { useState } from "react";
-import { useContext } from "react";
 import RentasContext from "../../../State/rentas/rentasContext";
+import Loading from "../../utilities/Loading";
+import { format } from "timeago.js";
 const Renta = ({ renta }) => {
+  //Contexts
   const { obtenerImagenesRenta } = useContext(RentasContext);
-  const [imagen, setimagen] = useState(null);
+  //State
+  const [imagenesRenta, setImagenesRenta] = useState(null);
 
-  const { _id, titulo, tipoCuarto, asentamiento, precio } = renta;
+  //UseEfects
+  useEffect(() => {
+    obtenerImagenesRenta(renta._id)
+      .then((data) => {
+        const { images } = data.data.imagenes[0];
+        setImagenesRenta(images);
+      })
+      .catch((error) => {
+        console.log("Hubo un error al obtener la data ", error);
+      });
+  }, []);
+
+  const { _id, titulo, tipoCuarto, asentamiento, precio, created_at } = renta;
+
   return (
     <div class="col col-12 col-md-4 col-lg-4 pb-0 my-3 ">
       <Link to={`/publicacion/${_id}`}>
+        <div className="card-header">
+          <p className="text-dark">{format(created_at)}</p>
+        </div>
         <div class="card  border-0">
-          {imagen ? (
+          {imagenesRenta ? (
             <img
-              src={imagen[0].imageUrl}
+              src={imagenesRenta[0].imageUrl}
               class="card-img-top  rounded"
               alt="..."
             />
-          ) : null}
+          ) : (
+            <Loading />
+          )}
 
           <div class="card-body font-weight-light h6 text-muted text-rent">
             <p class="text-rent py-3">

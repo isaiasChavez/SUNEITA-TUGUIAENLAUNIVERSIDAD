@@ -1,4 +1,3 @@
-import { data } from "jquery";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import BazarContext from "../../../State/bazar/bazarContext";

@@ -1,24 +1,34 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment, useState, useContext, useEffect } from "react";
+
+import Mapa from "../../utilities/Maps/Mapa";
 import ScrollToTopOnMount from "../../routes/ScrollToTopOnMount";
 
+import Loading from "../../utilities/Loading";
 import { Link, useRouteMatch, useParams } from "react-router-dom";
-import img from "../../../img/jesus.jpg";
-import img2 from "../../../img/studentBackground.jpg";
-import img3 from "../../../img/studentBackground2.jpg";
-import img4 from "../../../img/info.jpg";
-import img5 from "../../../img/studentBackground3.jpg";
-import Footer from "../layout/Footer";
+
 import RentasContext from "../../../State/rentas/rentasContext";
 
 const Publicacion = () => {
   let match = useRouteMatch();
+  const {
+    rentaSeleccionada,
+    guardarRentaActual,
+    obtenerImagenesRenta,
+  } = useContext(RentasContext);
 
-  const { rentaSeleccionada, guardarRentaActual } = useContext(RentasContext);
+  const [imagenesRenta, setImagenesRenta] = useState(null);
 
   const { idpublicacion } = useParams();
-
   useEffect(() => {
     guardarRentaActual(idpublicacion);
+    obtenerImagenesRenta(idpublicacion)
+      .then((data) => {
+        const { images } = data.data.imagenes[0];
+        setImagenesRenta(images);
+      })
+      .catch((error) => {
+        console.log("Hubo un error al obtener la data ", error);
+      });
   }, [idpublicacion]);
 
   if (!rentaSeleccionada) {
@@ -31,13 +41,11 @@ const Publicacion = () => {
     luzincluida,
     medidascuarto,
     soloestudiantes,
-
     direccion,
     ciudad,
     estado,
     descripcion,
     zonasDelCuarto,
-
     tipo,
     zona,
     tipobano,
@@ -49,6 +57,8 @@ const Publicacion = () => {
     deposito,
   } = rentaSeleccionada;
 
+  const linkAWhatsapp = `https://api.whatsapp.com/send?phone=519511212436&text=Hola%20Me%20me%20interesa%20esta%20publicacion%20|%20${titulo}%20|`;
+
   return (
     <Fragment>
       <ScrollToTopOnMount />
@@ -59,7 +69,21 @@ const Publicacion = () => {
             <span className="lead  text-muted text-smaller">{zona}</span>
           </div>
         </div>
-        <div className="row"></div>
+        <div className="row">
+          {imagenesRenta ? (
+            imagenesRenta.map((imagen) => (
+              <div className=" col col-lg-4 ">
+                <img
+                  src={imagen.imageUrl}
+                  class="img-fluid fit rounded"
+                  alt="..."
+                />
+              </div>
+            ))
+          ) : (
+            <Loading />
+          )}
+        </div>
         <div className="container">
           <div className="row">
             <div className="col-lg-8">
@@ -241,7 +265,9 @@ const Publicacion = () => {
                     href={`${rentaSeleccionada}`}
                   >
                     <span className="text-smaller ">
-                      Contactar al arrendador por WhatsApp
+                      <a href={linkAWhatsapp}>
+                        Contactar al arrendador por WhatsApp
+                      </a>
                     </span>
                   </a>
                   <Link
@@ -255,16 +281,19 @@ const Publicacion = () => {
               </div>
             </div>
           </div>
-          <div className="row d-flex flex-column mt-4">
-            <h2 className="lead py-4 h1 font-weight-bold">Ubicacion</h2>
-            <div className="row">
-              <div className="col  col-lg-4">
+          <div className="row d-flex flex-column mt-4 mx-3">
+            <h2 className=" py-4 h1 font-weight-bold">Ubicacion</h2>
+            <div className="row d-flex flex-column h5">
+              <div className="">
                 <p>
                   Calle: {direccion} # {numeroexterior}
                 </p>
                 <p></p>
                 <p>{ciudad}</p>
                 <p>{estado}</p>
+              </div>
+              <div className="mapa-contenedor my-4">
+                <Mapa />
               </div>
             </div>
           </div>
@@ -328,7 +357,6 @@ const Publicacion = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </Fragment>
   );
 };

@@ -82,7 +82,6 @@ const Rentas = () => {
         <div class=" row d-flex flex-wrap">
           {rentasSeleccionadas.map((renta) => (
             <>
-              {console.log(renta, "Del map")}
               <Renta renta={renta} />
             </>
           ))}
