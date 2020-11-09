@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import AlertasContext from "../../../../State/alertas/alertasContext";
 import ScrollToTopOnMount from "../../../routes/ScrollToTopOnMount";
 
@@ -15,6 +15,29 @@ const Form4 = ({
   useEffect(() => {
     setProgreso(70);
   }, []);
+
+  const [direccion, seDireccion] = useState({});
+
+  const handleAdress = async (e) => {
+    console.log(e.target.value);
+    seDireccion(e.target.value);
+    onDataChange(e);
+    fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${e.target.value}&components=country:MX&key=AIzaSyDirw9kMal3-8B22jSurVO3rh54BnlMNlw`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.results);
+
+        // setdataFormulario({
+        //   ...dataFormulario,
+        //   ciudad: dataApi.ciudad,
+        //   estado: dataApi.estado,
+        //   asentamiento: dataApi.asentamiento,
+        // });
+      });
+  };
+
   let match = useRouteMatch();
   const alertasContext = useContext(AlertasContext);
   const { mostrarAlerta } = alertasContext;
@@ -75,7 +98,7 @@ const Form4 = ({
                   placeholder="Ejemplo: Calle nardos esquina pensamientos"
                   name="direccion"
                   value={dataFormulario.direccion}
-                  onChange={onDataChange}
+                  onChange={handleAdress}
                 />
               </div>
               <div className="form-row">

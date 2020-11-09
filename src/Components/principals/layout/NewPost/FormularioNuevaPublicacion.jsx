@@ -74,6 +74,12 @@ const FormularioNuevaPublicacion = (props) => {
     contacto: "",
     codigopostal: "",
     imagenesrentas: null,
+    coordenadas: {
+      latitud: 0,
+      longitud: 0,
+    },
+    votos: 0,
+    comentarios: [],
   });
 
   //Modifica la barra de progreso

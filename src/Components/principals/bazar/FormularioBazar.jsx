@@ -1,7 +1,13 @@
 import React, { useState, useContext } from "react";
 import img from "../../../img/great-idea.svg";
 import { NUEVO, SEMINUEVO, BUEN_ESTADO, ACEPTABLE } from "../../../types";
-import { MUEBLES, ELECTRODOMESTICOS, ELECTRONICA, HOGAR } from "../../../types";
+import {
+  MUEBLES,
+  ELECTRODOMESTICOS,
+  ELECTRONICA,
+  HOGAR,
+  MATERIAL_ESCOLAR,
+} from "../../../types";
 import AlertasContext from "../../../State/alertas/alertasContext";
 import BazarContext from "../../../State/bazar/bazarContext";
 
@@ -138,6 +144,7 @@ const FormularioBazar = () => {
                 <option value={ELECTRONICA}>Electronica e informatica</option>
                 <option value={ELECTRODOMESTICOS}>Electrodomesticos</option>
                 <option value={HOGAR}>Hogar</option>
+                <option value={MATERIAL_ESCOLAR}>Material escolar</option>
               </select>
             </div>
 

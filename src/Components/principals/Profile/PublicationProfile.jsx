@@ -42,7 +42,7 @@ const PublicationProfile = ({ data, ruta }) => {
   };
 
   return (
-    <div class="card col col-lg-3 m-3 shadow border-secondary">
+    <div class="card col col-lg-4 m-3 shadow border-secondary">
       {imagenesRenta ? (
         <div className=" img-fluid publicacionBazar-img ">
           <img

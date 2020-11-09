@@ -26,8 +26,7 @@ input[type="number"] {
   padding-top: 5em;
   height: 100%;
 }
-.navigation {
-}
+
 .icon {
   font-size: 2em;
   padding: 0.8em;
@@ -36,8 +35,7 @@ input[type="number"] {
   width: 45px;
   height: 45px;
 }
-.slider {
-}
+
 .text-shadow {
   text-shadow: 1px 1px 1px black;
 }
@@ -66,10 +64,11 @@ p {
   padding-top: 0;
 }
 .hero {
-  height: 75vh;
-
-  background-image: url("./img/fondo2.jpg");
+  height: 85vh;
+  background-image: url("./img/principals/backpack.jpg");
   background-size: cover;
+  background-position-y: top;
+  background-position-x: center;
 }
 .hero-message {
   padding-top: 5em;
@@ -93,15 +92,34 @@ p {
   height: 15em;
   margin: auto;
 }
+.imagenes-publicacion-contenedor {
+  min-height: 45em;
+  height: 45em;
+  max-height: 45em;
+  overflow: hidden;
+}
+.imagenes-publicacion-imagen {
+  max-height: 23em;
+  min-height: 23em;
+  max-width: 23em;
+  min-width: 23em;
+  object-fit: cover;
+}
+
+.imagenes-publicacion-imagenPrincipal-2 {
+  min-height: 100%;
+  object-fit: cover;
+}
 .publicacionBazar-img {
   display: flex;
-  width: 15em;
+  width: 20em;
+  height: 20em;
   margin: auto;
   justify-content: center;
 }
 .publicacionBazar-img > img {
   cursor: pointer;
-  object-fit: contain;
+  object-fit: cover;
   margin: auto;
 }
 
@@ -204,7 +222,7 @@ p {
       rgba(149, 165, 166, 0.3142390745360645) 100%
     );
   }
-  84 {
+  84% {
     background: rgb(149, 165, 166);
     background: linear-gradient(
       90deg,

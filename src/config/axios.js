@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const clienteAxios = axios.create({
-  baseURL: "https://suneitaapp.herokuapp.com",
+  baseURL: "http://localhost:3500",
 });
 
 export default clienteAxios;

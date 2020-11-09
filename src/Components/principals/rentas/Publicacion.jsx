@@ -2,8 +2,8 @@ import React, { Fragment, useState, useContext, useEffect } from "react";
 
 import Mapa from "../../utilities/Maps/Mapa";
 import ScrollToTopOnMount from "../../routes/ScrollToTopOnMount";
-
 import Loading from "../../utilities/Loading";
+import Carrusel from "./Carrusel";
 import { Link, useRouteMatch, useParams } from "react-router-dom";
 
 import RentasContext from "../../../State/rentas/rentasContext";
@@ -55,9 +55,10 @@ const Publicacion = () => {
     precio,
     mascotas,
     deposito,
+    contacto,
   } = rentaSeleccionada;
 
-  const linkAWhatsapp = `https://api.whatsapp.com/send?phone=519511212436&text=Hola%20Me%20me%20interesa%20esta%20publicacion%20|%20${titulo}%20|`;
+  const linkAWhatsapp = `https://api.whatsapp.com/send?phone=52${contacto}&text=Hola%20Me%20me%20interesa%20esta%20publicacion%20|%20${titulo}%20|`;
 
   return (
     <Fragment>
@@ -70,19 +71,7 @@ const Publicacion = () => {
           </div>
         </div>
         <div className="row">
-          {imagenesRenta ? (
-            imagenesRenta.map((imagen) => (
-              <div className=" col col-lg-4 ">
-                <img
-                  src={imagen.imageUrl}
-                  class="img-fluid fit rounded"
-                  alt="..."
-                />
-              </div>
-            ))
-          ) : (
-            <Loading />
-          )}
+          <Carrusel arrayImagenes={imagenesRenta} />
         </div>
         <div className="container">
           <div className="row">

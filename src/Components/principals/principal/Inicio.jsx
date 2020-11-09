@@ -8,6 +8,7 @@ import studentBackground from "../../../img/shopping.svg";
 import studentBackground2 from "../../../img/buildings.svg";
 import BazarImage from "../../../img/team.svg";
 import { Link } from "react-router-dom";
+import Carrusel from "../../principals/rentas/Carrusel";
 const Inicio = () => {
   return (
     <Fragment>
@@ -15,7 +16,7 @@ const Inicio = () => {
       <div className=" min-vh-100">
         <Slider />
         <Hero
-          clase="d-md-none"
+          clase="d-lg-none"
           principal="Busca un cuarto"
           secondary="Vende lo que ya no usas"
           button="Buscar un cuarto"

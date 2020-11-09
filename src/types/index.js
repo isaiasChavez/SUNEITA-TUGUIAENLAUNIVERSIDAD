@@ -66,6 +66,7 @@ export const ACEPTABLE = "ACEPTABLE";
 export const MUEBLES = "MUEBLES";
 export const ELECTRONICA = "ELECTRONICA";
 export const ELECTRODOMESTICOS = "ELECTRODOMESTICOS";
+export const MATERIAL_ESCOLAR = "MATERIAL ESCOLAR";
 export const HOGAR = "HOGAR";
 
 // ALERTAS

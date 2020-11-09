@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import BazarContext from "../../../State/bazar/bazarContext";
-
+import { format } from "timeago.js";
 import Loading from "../../utilities/Loading";
 const ProductoBazar = ({ datos }) => {
   const { seleccionarProducto } = useContext(BazarContext);
@@ -14,6 +14,7 @@ const ProductoBazar = ({ datos }) => {
     precio,
     descripcion,
     activa,
+    created_at,
     imagenes,
   } = datos;
   console.log(imagenes);
@@ -51,13 +52,14 @@ const ProductoBazar = ({ datos }) => {
       <Link>
         <div class="card-header   mt-3 rounded d-flex flex-column  text-dark">
           <div className="d-flex flex-column text-left ">
-            <cite title="" className={`text-dark h4`}>
-              {titulo}
-            </cite>
-            <div className=" text-right text-dark h5">{precio}</div>
+            <span className="lead text-shadow">{titulo}</span>{" "}
+            <time className="text-muted">{format(created_at)}</time>
           </div>
+          <span className=" text-right text-dark text-shadow h5">{precio}</span>
 
-          <span className="text-right  "> {estado}</span>
+          <span className="text-right  badge-dark badge-pill text-center  ">
+            {estado}
+          </span>
         </div>
         <div class="row">
           {imagenes[0] ? (
@@ -67,7 +69,7 @@ const ProductoBazar = ({ datos }) => {
                 data-toggle="modal"
                 src={imagenes[0].imageUrl}
                 onClick={() => seleccionarProducto(datos)}
-                className="mx-3 my-3 rounded-lg "
+                className="mx-3 my-3 rounded-lg fit  w-100 "
                 alt=""
               />
             </div>

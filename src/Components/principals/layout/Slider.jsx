@@ -17,7 +17,7 @@ const Slider = () => {
         <div class="carousel-item active isSlider bg-dark" data-interval="5000">
           <img
             src={img}
-            class="d-block w-100 img-fluid  border-bottom img-opacity"
+            class="d-block w-100 img-fluid  border-bottom img-opacity "
             alt="..."
           />
           <div class="carousel-caption d-none d-md-block  d-flex h-50 ">

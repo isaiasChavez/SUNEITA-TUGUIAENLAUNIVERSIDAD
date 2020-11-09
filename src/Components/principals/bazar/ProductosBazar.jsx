@@ -5,7 +5,14 @@ import Fade from "react-reveal/Fade";
 import bazarContext from "../../../State/bazar/bazarContext";
 import Hero from "../layout/Hero";
 
-import { MUEBLES, ELECTRODOMESTICOS, ELECTRONICA, HOGAR } from "../../../types";
+import {
+  MUEBLES,
+  ELECTRODOMESTICOS,
+  ELECTRONICA,
+  HOGAR,
+  MATERIAL_ESCOLAR,
+} from "../../../types";
+import { Link } from "react-router-dom";
 
 const ProductosBazar = () => {
   const {
@@ -45,7 +52,7 @@ const ProductosBazar = () => {
         </div>
         <div className="row pb-5 ">
           <div
-            class="btn-group d-flex flex-wrap col-lg-4 offset-lg-4 p-4 botones-principal"
+            class="btn-group d-flex flex-wrap col-lg-4 offset-lg-4 pt-4 botones-principal"
             role="group"
             aria-label="Basic example"
           >
@@ -77,6 +84,20 @@ const ProductosBazar = () => {
             >
               Muebles
             </button>
+          </div>
+          <div
+            class="btn-group d-flex flex-wrap col-lg-4 offset-lg-4  botones-principal"
+            role="group"
+            aria-label="Basic example"
+          >
+            <button
+              name={MATERIAL_ESCOLAR}
+              type="button"
+              class="btn btn-outline-dark m-1"
+              onClick={onClickCategoria}
+            >
+              Material escolar
+            </button>
             <button
               name="TODO"
               type="button"
@@ -97,10 +118,13 @@ const ProductosBazar = () => {
             ) : null}
           </div>
           <div className="row p-5 my-5">
-            <div className="col col-lg-6 offset-3">
-              <button className="btn btn-outline-dark  m-auto btn-lg btn-block">
+            <div className="col justify-content-center ">
+              <Link
+                to="/publicarenbazar"
+                className="btn btn-outline-dark  m-auto btn-lg btn-block"
+              >
                 Publica algo
-              </button>
+              </Link>
             </div>
           </div>
         </Fade>

@@ -1,6 +1,6 @@
 import React, { Fragment, useContext, useEffect } from "react";
 import ScrollToTopOnMount from "../../routes/ScrollToTopOnMount";
-
+import Loading from "../../utilities/Loading";
 import img from "../../../img/logo.png";
 import Modal from "../../utilities/Modal";
 import RentasContext from "../../../State/rentas/rentasContext";
@@ -22,7 +22,11 @@ const Profile = (props) => {
     obtenerProductosUsuario();
   }, []);
 
-  const { usuario, cargando } = authContext;
+  const { usuario } = authContext;
+
+  if (!usuario) {
+    return <Loading />;
+  }
 
   const publicacionesActivas = rentasUsuario.filter((renta) => renta.activa);
   const publicacionesInactivas = rentasUsuario.filter((renta) => !renta.activa);
@@ -34,9 +38,6 @@ const Profile = (props) => {
     (producto) => !producto.activa
   );
 
-  if (cargando) {
-    return null;
-  }
   return (
     <Fragment>
       <ScrollToTopOnMount />
@@ -49,7 +50,7 @@ const Profile = (props) => {
                 <img
                   src={img}
                   class="img-card-profile img-fluid ml-2"
-                  alt="..."
+                  alt="imagen de perfil"
                 />
               </div>
               <div class=" col-9 col-md-8 col-lg-8 d-flex align-items-center align-items-center ">
